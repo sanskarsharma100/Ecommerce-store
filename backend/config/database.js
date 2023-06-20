@@ -8,9 +8,6 @@ const connectDatabase = () => {
     })
     .then((data) => {
       console.log(`Mongodb connected with server: ${data.connection.host}`);
-    })
-    .catch((err) => {
-      console.log("MongoDB Error", err);
     });
 };
 
