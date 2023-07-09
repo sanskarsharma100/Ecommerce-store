@@ -4,6 +4,7 @@ export default {
     hoverOnlyWhenSupported: true,
   },
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+
   theme: {
     extend: {
       fontSize: {
@@ -23,7 +24,11 @@ export default {
           "0 0 5px rgb(255, 0, 0)",
         ],
       },
+      boxShadow: {
+        custom: "6px 6px 0px 0px rgba(0,0,0,0.75)",
+      },
       colors: {
+        darkShade: "hsla(0, 0%, 0%, 0.755)",
         darkBg: "#121212",
         darkBg2: "#1e1e1e",
         lightText: "#ffffffde",
@@ -39,8 +44,7 @@ export default {
       },
     },
     fontFamily: {
-      content: ["Roboto", "sans-serif"],
-      heading: ["Ubuntu", "sans-serif"],
+      inter: ["Inter", "sans-serif"],
     },
     screens: {
       xs: "480px",

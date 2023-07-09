@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+deleted {
+  dark: hsla(0, 0%, 0%, 0.755);
+
+}
+
+.button-1 {
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+.button-1:hover {
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.75);
+  top: 2px;
+  left: 2px;
+}
+
+.button-1:active {
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+  top: 5px;
+  left: 5px;
+}
+
+.dark-overlay {
+  box-shadow: 400px 400px 50px 0px rgba(0, 0, 0, 0.75);
+}
