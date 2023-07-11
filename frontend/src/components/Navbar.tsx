@@ -9,7 +9,11 @@ export const Navbar: FC = () => {
   console.log("loginAuth", isLoggedIn);
   const location = useLocation();
 
-  if (location.pathname === "/login") {
+  if (
+    location.pathname === "/login" ||
+    location.pathname === "/password/forgot" ||
+    location.pathname.includes("/password/reset")
+  ) {
     return null;
   }
 
@@ -17,7 +21,7 @@ export const Navbar: FC = () => {
     <div>
       <div className="flex items-center justify-between">
         <img
-          className="h-fit max-w-[15rem]"
+          className="h-9 max-w-[10rem]"
           src={ShopeeFastLogo}
           alt="ShopeeFast Logo"
         />

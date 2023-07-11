@@ -26,6 +26,7 @@ export default {
       },
       boxShadow: {
         custom: "6px 6px 0px 0px rgba(0,0,0,0.75)",
+        cardShadow: "0px 0px 35px 5px rgba(0,0,0,0.9)",
       },
       colors: {
         darkShade: "hsla(0, 0%, 0%, 0.755)",

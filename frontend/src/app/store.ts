@@ -5,7 +5,7 @@ import { loginAuthApi } from './../services/loginAuthApi';
 export const store = configureStore({
   reducer: {
     loginAuth: loginReducer,
-    [loginAuthApi.reducerPath]: loginAuthApi.reducer
+    [loginAuthApi.reducerPath]: loginAuthApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(loginAuthApi.middleware),

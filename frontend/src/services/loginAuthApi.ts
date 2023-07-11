@@ -1,22 +1,40 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-interface Credentials{
-  "email": string,
-  "password":string
+interface StringObject {
+  [key: string]: string;
+}
+
+type resetArg={
+  token:string | undefined,
+  passwords:StringObject
 }
 
 export const loginAuthApi = createApi({
   reducerPath: 'loginAuthApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:4000/api/v1/' }),
   endpoints: (builder) => ({
-    loginAuth: builder.mutation<void,Credentials>({
+    loginAuth: builder.mutation<void,StringObject>({
       query: (credential) => ({
         url:"/login",
         method:"POST",
         body: credential
       }),
     }),
+    forgotPassword: builder.mutation<void,StringObject>({
+      query:(email) => ({
+        url:"/password/forgot",
+        method:"POST",
+        body: email
+      })
+    }),
+    resetPassword: builder.mutation<void,resetArg>({
+      query:({token,passwords}) => ({
+        url:`/password/reset/${token}`,
+        method:"PUT",
+        body: passwords
+      })
+    })
   }),
 })
 
-export const { useLoginAuthMutation } = loginAuthApi
+export const { useLoginAuthMutation, useForgotPasswordMutation,useResetPasswordMutation } = loginAuthApi
