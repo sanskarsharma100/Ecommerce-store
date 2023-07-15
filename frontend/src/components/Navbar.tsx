@@ -11,6 +11,7 @@ export const Navbar: FC = () => {
 
   if (
     location.pathname === "/login" ||
+    location.pathname === "/signup" ||
     location.pathname === "/password/forgot" ||
     location.pathname.includes("/password/reset")
   ) {

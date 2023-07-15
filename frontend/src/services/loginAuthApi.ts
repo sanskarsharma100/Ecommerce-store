@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 interface StringObject {
-  [key: string]: string;
+  [key: string]: string | ArrayBuffer | null;
+  
 }
 
 type resetArg={
@@ -20,6 +21,14 @@ export const loginAuthApi = createApi({
         body: credential
       }),
     }),
+    registerUser: builder.mutation<void,StringObject>({
+      query:(userData) => ({
+        url:"/register",
+        method:"POST",
+        body: userData,
+        // headers: {"Content-Type": "multipart/form-data"}
+      })
+    }),
     forgotPassword: builder.mutation<void,StringObject>({
       query:(email) => ({
         url:"/password/forgot",
@@ -31,10 +40,10 @@ export const loginAuthApi = createApi({
       query:({token,passwords}) => ({
         url:`/password/reset/${token}`,
         method:"PUT",
-        body: passwords
+        body: passwords,
       })
     })
   }),
 })
 
-export const { useLoginAuthMutation, useForgotPasswordMutation,useResetPasswordMutation } = loginAuthApi
+export const { useLoginAuthMutation, useRegisterUserMutation, useForgotPasswordMutation,useResetPasswordMutation } = loginAuthApi

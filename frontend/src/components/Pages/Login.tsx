@@ -14,7 +14,7 @@ export const Login: FC = () => {
     navigate("/");
   }
 
-  const submitLoginInfo = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const credential = {
       email: email,
@@ -29,7 +29,13 @@ export const Login: FC = () => {
         <h1 className="mb-3 text-center text-5xl font-bold xs:text-6xl ">
           Login
         </h1>
-        <form onSubmit={submitLoginInfo} className="flex flex-col gap-6">
+        <p className="text-center">
+          Don't have a account?{" "}
+          <span className="italic text-blue-950 hover:underline">
+            <Link to="/signup">Sign Up</Link>
+          </span>
+        </p>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
             <label htmlFor="email" className="text-xl font-medium xs:text-2xl">
               Email
@@ -88,7 +94,7 @@ export const Login: FC = () => {
             )}
           </div>
         </form>
-        <p className="mt-2 italic hover:cursor-pointer hover:underline">
+        <p className="mt-4 italic hover:cursor-pointer hover:underline">
           <Link to="/password/forgot">Forgot Password?</Link>
         </p>
       </section>
