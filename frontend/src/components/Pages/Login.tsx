@@ -5,7 +5,6 @@ import { isErrorWithData, isErrorWithMessage } from "./../../services/helpers";
 import { TextInputField } from "../Inputs/TextInputField";
 import { SubmitButton } from "../Inputs/SubmitButton";
 import { SpinningAnim } from "./../Loaders/SpinningAnim";
-
 interface StringObject {
   [key: string]: string;
 }
@@ -39,8 +38,8 @@ export const Login: FC = () => {
   }, [isSuccess, navigate]);
 
   return (
-    <div className="flex h-screen bg-green-200">
-      <section className="relative m-auto w-11/12 max-w-xl rounded-lg bg-green-600 p-4 font-inter text-white shadow-cardShadow xs:w-3/4 sm:w-2/4">
+    <div className="flex h-screen bg-shopBg">
+      <section className="relative m-auto w-11/12 max-w-xl rounded-lg bg-green-600 p-4 font-inter text-white shadow-cardShadow brightness-90 xs:w-3/4 sm:w-2/4">
         <h1 className="mb-3 text-center text-5xl font-bold xs:text-6xl ">
           Login
         </h1>

@@ -16,6 +16,8 @@ export default {
       backgroundImage: {
         blackGradient:
           "linear-gradient(-45deg, #000000, #080808, #101010, #151515, #1a1a1a);",
+        shopBg:
+          "linear-gradient( rgba(134, 239, 172,0.6), rgba(134, 239, 172,0.6) ),url('./src/assets/shopping-bg.jpg')",
       },
       dropShadow: {
         "4xl": [
