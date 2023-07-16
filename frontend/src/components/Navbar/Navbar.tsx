@@ -1,12 +1,10 @@
 import { FC } from "react";
-import ShopeeFastLogo from "../assets/ShopeeFastLogo.png";
+import ShopeeFastLogo from "../../assets/ShopeeFastLogo.png";
 import { Link, useLocation } from "react-router-dom";
 
-import { useAppSelector } from "../app/hooks";
-
 export const Navbar: FC = () => {
-  const isLoggedIn = useAppSelector((state) => state.loginAuth.value);
-  console.log("loginAuth", isLoggedIn);
+  // const isLoggedIn = useAppSelector((state) => state.isAuth.value);
+  // console.log("isAuth", isLoggedIn);
   const location = useLocation();
 
   if (

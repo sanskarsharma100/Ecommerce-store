@@ -1,5 +1,5 @@
-import * as React from "react";
+import { FC } from "react";
 
-export default function Home() {
+export const Home: FC = () => {
   return <section className="text-6xl">Home</section>;
-}
+};

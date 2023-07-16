@@ -1,8 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 interface StringObject {
-  [key: string]: string | ArrayBuffer | null;
-  
+  [key: string]: string;
+}
+
+interface signUpTypes {
+  name: string;
+  email: string;
+  password: string;
+  avatar: string | ArrayBuffer | null;
 }
 
 type resetArg={
@@ -10,8 +16,8 @@ type resetArg={
   passwords:StringObject
 }
 
-export const loginAuthApi = createApi({
-  reducerPath: 'loginAuthApi',
+export const userAuthApi = createApi({
+  reducerPath: 'userAuthApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:4000/api/v1/' }),
   endpoints: (builder) => ({
     loginAuth: builder.mutation<void,StringObject>({
@@ -21,12 +27,11 @@ export const loginAuthApi = createApi({
         body: credential
       }),
     }),
-    registerUser: builder.mutation<void,StringObject>({
+    registerUser: builder.mutation<void,signUpTypes>({
       query:(userData) => ({
         url:"/register",
         method:"POST",
         body: userData,
-        // headers: {"Content-Type": "multipart/form-data"}
       })
     }),
     forgotPassword: builder.mutation<void,StringObject>({
@@ -46,4 +51,4 @@ export const loginAuthApi = createApi({
   }),
 })
 
-export const { useLoginAuthMutation, useRegisterUserMutation, useForgotPasswordMutation,useResetPasswordMutation } = loginAuthApi
+export const { useLoginAuthMutation, useRegisterUserMutation, useForgotPasswordMutation,useResetPasswordMutation } = userAuthApi
