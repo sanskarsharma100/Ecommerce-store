@@ -6,6 +6,7 @@ import NoAvatar from "../../assets/NoAvatar.jpg";
 import { TextInputField } from "../Inputs/TextInputField";
 import { SubmitButton } from "../Inputs/SubmitButton";
 import { SpinningAnim } from "../Loaders/SpinningAnim";
+import { AuthBgWrapper } from "../Wrappers/AuthBgWrapper";
 
 interface userData {
   name: string;
@@ -65,94 +66,90 @@ export const SignUp: FC = () => {
   }, [isSuccess, navigate]);
 
   return (
-    <div className="flex h-screen bg-green-200">
-      <section className="relative m-auto w-11/12 max-w-xl rounded-lg bg-green-600 p-4 font-inter text-white  shadow-cardShadow xs:w-3/4 sm:w-2/4">
-        <h1 className="mb-3 text-center text-5xl font-bold xs:text-6xl ">
-          Sign Up
-        </h1>
-        <p className="text-center">
-          Already has an account?{" "}
-          <span className="italic text-blue-950 hover:underline">
-            <Link to="/login">Login</Link>
-          </span>
-        </p>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          <div className="flex flex-col gap-1">
-            <TextInputField
-              fieldLabel={"Name"}
-              fieldType={"text"}
-              fieldValue={userData.name}
-              fieldName={"name"}
-              placeholder={"Full Name"}
-              isRequired={true}
-              isDisabled={isLoading}
-              handleChange={handleChange}
+    <AuthBgWrapper>
+      <h1 className="mb-3 text-center text-3xl font-bold xs:text-6xl">
+        Sign Up
+      </h1>
+      <p className="mb-1 text-center text-sm xs:text-base">
+        Already has an account?{" "}
+        <span className="italic text-blue-950 hover:underline">
+          <Link to="/login">Login</Link>
+        </span>
+      </p>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3 xs:gap-5">
+        <div className="flex flex-col gap-1">
+          <TextInputField
+            fieldLabel={"Name"}
+            fieldType={"text"}
+            fieldValue={userData.name}
+            fieldName={"name"}
+            placeholder={"Full Name"}
+            isRequired={true}
+            isDisabled={isLoading}
+            handleChange={handleChange}
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <TextInputField
+            fieldLabel={"Email"}
+            fieldType={"email"}
+            fieldValue={userData.email}
+            fieldName={"email"}
+            placeholder={"Email"}
+            isRequired={true}
+            isDisabled={isLoading}
+            handleChange={handleChange}
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <TextInputField
+            fieldLabel={"Password"}
+            fieldType={"password"}
+            fieldValue={userData.password}
+            fieldName={"password"}
+            placeholder={"Password"}
+            isRequired={true}
+            isDisabled={isLoading}
+            handleChange={handleChange}
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="avatar" className="text-base font-medium xs:text-2xl">
+            Profile Photo
+          </label>
+          <div className="flex gap-1 xs:gap-4">
+            <img
+              className="aspect-square max-h-full w-1/4 rounded-md"
+              src={previewAvatar}
+              alt="Picture Photo"
+            />
+            <input
+              className="block w-full rounded-md text-base text-black file:h-full file:w-full file:border-none file:bg-green-300 file:font-medium hover:border-4 hover:border-green-900 hover:file:cursor-pointer focus:outline focus:outline-4 focus:outline-green-900 xs:text-2xl"
+              id="avatar"
+              type="file"
+              name="avatar"
+              required
+              accept="image/*"
+              onChange={onImageChange}
+              placeholder="Password"
+              disabled={isLoading}
             />
           </div>
-          <div className="flex flex-col gap-1">
-            <TextInputField
-              fieldLabel={"Email"}
-              fieldType={"email"}
-              fieldValue={userData.email}
-              fieldName={"email"}
-              placeholder={"Email"}
-              isRequired={true}
-              isDisabled={isLoading}
-              handleChange={handleChange}
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <TextInputField
-              fieldLabel={"Password"}
-              fieldType={"password"}
-              fieldValue={userData.password}
-              fieldName={"password"}
-              placeholder={"Password"}
-              isRequired={true}
-              isDisabled={isLoading}
-              handleChange={handleChange}
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="avatar" className="text-xl font-medium xs:text-2xl">
-              Profile Photo
-            </label>
-            <div className="flex gap-4">
-              <img
-                className="aspect-square max-h-full w-1/4 rounded-md"
-                src={previewAvatar}
-                alt="Picture Photo"
-              />
-              <input
-                className="block w-full rounded-md text-xl text-black file:h-full file:w-full file:border-none file:bg-green-300 file:font-medium hover:border-4 hover:border-green-900 hover:file:cursor-pointer focus:outline focus:outline-4 focus:outline-green-900 xs:text-2xl"
-                id="avatar"
-                type="file"
-                name="avatar"
-                required
-                accept="image/*"
-                onChange={onImageChange}
-                placeholder="Password"
-                disabled={isLoading}
-              />
-            </div>
-          </div>
-          <div className="relative mt-3 w-full gap-1">
-            {isError &&
-              isErrorWithData(error) &&
-              isErrorWithMessage(error.data) && (
-                <p className="font-semibold text-red-700">
-                  {error?.data.message}
-                </p>
-              )}
-            <SubmitButton fieldValue={"Sign Up"} isDisabled={isLoading} />
-            {isLoading && (
-              <div className="absolute left-1/2 top-2/4 -translate-x-1/2 -translate-y-1/2">
-                <SpinningAnim />
-              </div>
+        </div>
+        <div className="relative mt-3 w-full gap-1">
+          {isError &&
+            isErrorWithData(error) &&
+            isErrorWithMessage(error.data) && (
+              <p className="font-semibold text-error">{error?.data.message}</p>
             )}
-          </div>
-        </form>
-      </section>
-    </div>
+          <SubmitButton fieldValue={"Sign Up"} isDisabled={isLoading} />
+          {isLoading && (
+            <div className="absolute left-1/2 top-2/4 -translate-x-1/2 -translate-y-1/2">
+              <SpinningAnim />
+            </div>
+          )}
+        </div>
+      </form>
+    </AuthBgWrapper>
   );
 };

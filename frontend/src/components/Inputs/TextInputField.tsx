@@ -25,11 +25,11 @@ export const TextInputField: FC<Props> = ({
 
   return (
     <>
-      <label htmlFor={id} className="text-xl font-medium xs:text-2xl">
+      <label htmlFor={id} className="text-base font-medium xs:text-2xl">
         {fieldLabel}
       </label>
       <input
-        className="rounded-md border-none bg-green-300 p-2 text-xl text-black focus:outline focus:outline-4 focus:outline-green-900 xs:text-2xl"
+        className="rounded-md border-none bg-green-300 p-2 text-sm text-black focus:outline focus:outline-4 focus:outline-green-900 xs:text-2xl"
         id={id}
         type={fieldType}
         value={fieldValue}

@@ -16,8 +16,10 @@ export default {
       backgroundImage: {
         blackGradient:
           "linear-gradient(-45deg, #000000, #080808, #101010, #151515, #1a1a1a);",
+        // shopBg:
+        //   "linear-gradient( rgba(134, 239, 172,0.6), rgba(134, 239, 172,0.6) ),url('./src/assets/shopping-bg.jpg')",
         shopBg:
-          "linear-gradient( rgba(134, 239, 172,0.6), rgba(134, 239, 172,0.6) ),url('./src/assets/shopping-bg.jpg')",
+          "linear-gradient( rgba(134, 239, 172,0.6), rgba(134, 239, 172,0.6) ),url('../public/shopping-bg.jpg')",
       },
       dropShadow: {
         "4xl": [
@@ -41,9 +43,7 @@ export default {
         semiDarker: "rgba(0, 0, 0, 0.8)",
         semiDark: "rgba(0, 0, 0, 0.4)",
         success: "#4CAF50",
-        best: "#2E7D32",
-        bad: "#FF9800",
-        worst: "#C62828",
+        error: "#C62828",
       },
     },
     fontFamily: {
