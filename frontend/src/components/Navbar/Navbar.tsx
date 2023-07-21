@@ -3,8 +3,6 @@ import ShopeeFastLogo from "../../assets/ShopeeFastLogo.png";
 import { Link, useLocation } from "react-router-dom";
 
 export const Navbar: FC = () => {
-  // const isLoggedIn = useAppSelector((state) => state.isAuth.value);
-  // console.log("isAuth", isLoggedIn);
   const location = useLocation();
 
   if (

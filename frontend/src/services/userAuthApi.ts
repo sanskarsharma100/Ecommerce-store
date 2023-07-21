@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { assignCurrentUser } from '../features/User/userSlice';
 
 interface StringObject {
   [key: string]: string;
@@ -26,6 +27,20 @@ export const userAuthApi = createApi({
         method:"POST",
         body: credential
       }),
+      async onQueryStarted(credential, { dispatch, queryFulfilled }) {
+        console.log("starting!");
+        try {
+          const { data }: {data:any}= await queryFulfilled;
+          console.log("success!", data);
+          const res = {
+            isAuthenticated: true,
+            user: data.user
+          }
+            dispatch(assignCurrentUser(res))
+        } catch (err) {
+          console.log("error... ", err);
+        }
+      }
     }),
     registerUser: builder.mutation<void,signUpTypes>({
       query:(userData) => ({
