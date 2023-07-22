@@ -1,9 +1,19 @@
 import { FC } from "react";
 import ShopeeFastLogo from "../../assets/ShopeeFastLogo.png";
 import { Link, useLocation } from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
+import { selectCurrentUser } from "../../features/User/userSlice";
+import { useLazyLogoutUserQuery } from "../../services/userAuthApi";
 
 export const Navbar: FC = () => {
+  const { isAuthenticated } = useAppSelector(selectCurrentUser);
   const location = useLocation();
+
+  const [logoutUser] = useLazyLogoutUserQuery();
+
+  const logoutCurrentUser = () => {
+    logoutUser();
+  };
 
   if (
     location.pathname === "/login" ||
@@ -32,13 +42,19 @@ export const Navbar: FC = () => {
           </div>
         </button>
       </div>
-      <ul>
+      <ul className="ml-auto w-fit">
+        <li>
+          {isAuthenticated ? (
+            <button onClick={logoutCurrentUser} role="button">
+              Logout
+            </button>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
+        </li>
         <li>Home</li>
         <li>Products</li>
         <li>About</li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
       </ul>
     </div>
   );
