@@ -29,8 +29,7 @@ export const userSlice = createSlice({
     assignCurrentUser: (state, action: PayloadAction<any>) => {
       Object.assign(state, action.payload);
     },
-    removeCurrentUser: (state) => {
-      console.log("removeCurrentUser");
+    removeCurrentUser: () => {
       return {
         isAuthenticated: false,
         user: {} as User,

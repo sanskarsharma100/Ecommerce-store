@@ -30,7 +30,7 @@ export const userAuthApi = createApi({
         method: "POST",
         body: credential,
       }),
-      async onQueryStarted(credential, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_credential, { dispatch, queryFulfilled }) {
         try {
           const { data }: { data: any } = await queryFulfilled;
           const res = {
@@ -45,10 +45,8 @@ export const userAuthApi = createApi({
     }),
     logoutUser: builder.query<void, void>({
       query: () => "/logout",
-      async onQueryStarted(_body, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_body, { dispatch }) {
         try {
-          // const { data }: {data:any}= await queryFulfilled;
-          console.log("logout working");
           dispatch(removeCurrentUser());
         } catch (err) {
           console.log("error... ", err);
