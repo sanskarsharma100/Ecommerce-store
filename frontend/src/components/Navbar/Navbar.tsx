@@ -55,6 +55,9 @@ export const Navbar: FC = () => {
 
   return (
     <header className="sticky top-0 bg-background font-inter">
+      {isOpen && (
+        <div className="fixed z-30 min-h-screen w-screen bg-semiDarkOverlay md:hidden"></div>
+      )}
       <img className="h-9 max-w-[10rem] p-2" src={logo} alt="ShopeeFast Logo" />
       <HamBtn hamBtnHandler={hamBtnHandler} ref={menuBtnRef} />
       <Menubar isOpen={isOpen} ref={menubarRef} />

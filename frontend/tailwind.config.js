@@ -40,6 +40,7 @@ export default {
         accent: "hsl(338, 80%, 65%)",
         linkColor: "hsl(222, 100%, 58%)",
         warning: "#cc3300",
+        semiDarkOverlay: "rgba(0, 0, 0, 0.4)",
       },
       borderWidth: {
         3: "3px",
