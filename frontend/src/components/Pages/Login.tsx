@@ -44,7 +44,7 @@ export const Login: FC = () => {
       <h1 className="mb-3 text-center text-3xl font-bold xs:text-6xl">Login</h1>
       <p className="mb-1 text-center text-sm xs:text-base">
         Don't have a account?{" "}
-        <span className="italic text-blue-950 hover:underline">
+        <span className="italic text-linkColor hover:underline">
           <Link to="/signup">Sign Up</Link>
         </span>
       </p>
@@ -77,7 +77,7 @@ export const Login: FC = () => {
           {isError &&
             isErrorWithData(error) &&
             isErrorWithMessage(error.data) && (
-              <p className="font-semibold text-error">{error?.data.message}</p>
+              <p className="text-error font-semibold">{error?.data.message}</p>
             )}
           <SubmitButton fieldValue={"Login"} isDisabled={isLoading} />
           {isLoading && (
@@ -87,7 +87,7 @@ export const Login: FC = () => {
           )}
         </div>
       </form>
-      <p className="mt-4 text-sm italic hover:cursor-pointer hover:underline xs:text-base">
+      <p className="mt-4 text-sm italic text-linkColor hover:cursor-pointer hover:underline xs:text-base">
         <Link to="/password/forgot">Forgot Password?</Link>
       </p>
     </AuthBgWrapper>

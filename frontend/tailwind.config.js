@@ -19,7 +19,7 @@ export default {
         // shopBg:
         //   "linear-gradient( rgba(134, 239, 172,0.6), rgba(134, 239, 172,0.6) ),url('./src/assets/shopping-bg.jpg')",
         shopBg:
-          "linear-gradient( rgba(134, 239, 172,0.6), rgba(134, 239, 172,0.6) ),url('../public/shopping-bg.jpg')",
+          "linear-gradient( rgba(255, 255, 255,0.5), rgba(255, 255, 255,0.5) ),url('../public/shopping-bg.jpg')",
       },
       dropShadow: {
         "4xl": [
@@ -30,15 +30,19 @@ export default {
       },
       boxShadow: {
         custom: "6px 6px 0px 0px rgba(0,0,0,0.75)",
-        cardShadow: "0px 0px 35px 5px rgba(0,0,0,0.9)",
+        cardShadow: "0px 0px 500px 50px rgba(0,0,0,0.9)",
       },
       colors: {
-        textColor: "#050505",
-        background: "#eefcde",
-        primary: "#6ec011",
-        secondary: "#e7fbd0",
-        accent: "#87eb14",
+        textColor: "hsl(0, 0%, 0%)",
+        background: "hsl(0, 0%, 95%)",
+        primary: "hsl(0, 0%, 100%)",
+        secondary: "hsl(0, 0%, 0%)",
+        accent: "hsl(338, 80%, 65%)",
+        linkColor: "hsl(222, 100%, 58%)",
         warning: "#cc3300",
+      },
+      borderWidth: {
+        3: "3px",
       },
     },
     fontFamily: {

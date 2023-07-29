@@ -8,7 +8,7 @@ import { SignUp } from "./components/Pages/SignUp";
 
 function App() {
   return (
-    <main>
+    <main className="bg-background">
       <Navbar />
 
       <Routes>

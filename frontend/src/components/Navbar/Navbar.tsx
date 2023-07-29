@@ -1,5 +1,5 @@
-import { FC, useRef, useState } from "react";
-import logo from "../../assets/ShopeeFastLogo.png";
+import { FC, useEffect, useRef, useState } from "react";
+import logo from "../../assets/logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { selectCurrentUser } from "../../features/User/userSlice";
@@ -10,11 +10,12 @@ export const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { isAuthenticated, user } = useAppSelector(selectCurrentUser);
   const location = useLocation();
-  const menuBtnRef = useRef(null);
-
-  const [logoutUser] = useLazyLogoutUserQuery();
+  const menuBarRef = useRef<HTMLElement>(null);
+  const menuBtnRef = useRef<HTMLInputElement>(null);
 
   console.log("isOpen", isOpen);
+
+  const [logoutUser] = useLazyLogoutUserQuery();
 
   const logoutCurrentUser = () => {
     logoutUser();
@@ -22,9 +23,37 @@ export const Navbar: FC = () => {
 
   const menubarHandler = (e: React.FormEvent) => {
     const target = e.target as HTMLInputElement;
-    console.log("target.checked", target.checked);
     setIsOpen(target.checked);
   };
+
+  const handleOutsideClick = (e: Event) => {
+    const target = e.target as HTMLElement;
+
+    if (
+      menuBarRef.current &&
+      !menuBarRef.current.contains(target) &&
+      menuBtnRef.current != target &&
+      menuBtnRef.current?.checked
+    ) {
+      setIsOpen(false);
+      menuBtnRef.current.checked = false;
+    }
+  };
+
+  useEffect(() => {
+    if (menuBtnRef.current) {
+      if (isOpen != menuBtnRef.current.checked) {
+        setIsOpen(menuBtnRef.current?.checked);
+      }
+    }
+    if (isOpen) {
+      document.addEventListener("click", handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, menuBtnRef.current]);
 
   if (
     location.pathname === "/login" ||
@@ -36,49 +65,49 @@ export const Navbar: FC = () => {
   }
 
   return (
-    <header className="sticky top-0 font-inter">
-      <img className="h-9 max-w-[10rem]" src={logo} alt="ShopeeFast Logo" />
+    <header className="sticky top-0 bg-background font-inter">
+      <img className="h-9 max-w-[10rem] p-2" src={logo} alt="ShopeeFast Logo" />
       <label
-        className="absolute right-0 top-0 z-[99999]"
+        className="absolute right-0 top-0 z-[99999] hover:cursor-pointer"
         htmlFor="menuBtn"
         onClick={menubarHandler}
       >
         <span className="sr-only">Menubar Button</span>
-        <div className="relative flex h-[50px] w-[50px] transform items-center justify-center overflow-hidden transition-all duration-200">
-          <div className="ham-btn flex h-[30px] w-[25px] origin-center transform flex-col justify-between overflow-hidden transition-all duration-300">
+        <div className="relative flex h-[32px] w-[32px] transform items-center justify-center overflow-hidden transition-all duration-200">
+          <div className="ham-btn flex h-[24px] w-[20px] transform flex-col items-center justify-between overflow-hidden p-1 transition-all duration-300">
             <input
               className="peer hidden"
               type="checkbox"
               id="menuBtn"
               ref={menuBtnRef}
             />
-            <div className="h-[3px] w-7 origin-left transform bg-black transition-all duration-300 peer-checked:translate-x-1 peer-checked:translate-y-1 peer-checked:rotate-[45deg]"></div>
-            <div className="h-[3px] w-1/2 transform rounded bg-black transition-all duration-300 peer-checked:-translate-x-10"></div>
-            <div className="h-[3px] w-7 origin-left transform bg-black transition-all duration-300  peer-checked:-translate-y-0.5 peer-checked:translate-x-1 peer-checked:-rotate-[45deg]"></div>
+            <div className="peer-checked:translate-y-0.3 peer-checked:translate-x-0.6 h-[3px] w-4 origin-left transform bg-black transition-all duration-300 peer-checked:rotate-[45deg]"></div>
+            <div className="h-[3px] w-4 transform rounded bg-black transition-all duration-300 peer-checked:-translate-x-10"></div>
+            <div className="peer-checked:translate-x-0.6 h-[3px] w-4 origin-left transform bg-black transition-all  duration-300 peer-checked:-translate-y-0.5 peer-checked:-rotate-[45deg]"></div>
           </div>
         </div>
       </label>
       <aside
-        className={`absolute right-0 top-0 z-[9999] h-[100vh] w-10/12 overflow-y-hidden bg-[rgb(0,100,0,0.25)] backdrop-blur-lg ${
-          !isOpen && "hidden"
+        className={`absolute right-0 top-0 z-[9999] h-[100vh] w-10/12 overflow-y-hidden border-l-2 border-secondary bg-accent shadow-cardShadow duration-500 ${
+          !isOpen ? "clip-circle-none" : "clip-circle-full"
         }`}
+        ref={menuBarRef}
       >
-        <ul className="m-4 mt-20 overflow-x-hidden text-center">
+        <ul className="m-4 mt-20 flex flex-col gap-4 overflow-x-hidden text-left">
           {isAuthenticated && (
-            <li className="w-full bg-green-300 p-2">
-              <div className="flex max-w-full flex-wrap items-center gap-2">
+            <li className="w-full rounded-lg bg-primary">
+              <div className="flex max-w-full items-center gap-2 rounded-lg bg-background p-2">
                 <img
-                  className="m-auto w-16 max-w-fit rounded-full"
+                  className="w-12 max-w-fit rounded-full"
                   src={user.avatar.url ? user.avatar.url : NoAvatar}
                   alt="User Photo"
                 />
-                <div className="ml-2 text-ellipsis text-left text-base">
+                <div className="w-fit text-ellipsis text-left text-sm font-medium text-textColor">
                   <p>{user.name}</p>
-                  <p>{user.email}</p>
                 </div>
               </div>
               <button
-                className="w-full overflow-hidden rounded-lg bg-green-500 p-2 text-base font-medium tracking-wider text-white hover:bg-green-600"
+                className="hover:bg-secondary2 w-full overflow-hidden rounded-b-lg border border-secondary bg-background p-1 text-sm font-medium tracking-wider text-accent"
                 onClick={logoutCurrentUser}
                 role="button"
               >
@@ -86,19 +115,25 @@ export const Navbar: FC = () => {
               </button>
             </li>
           )}
-          <li className="m-auto h-fit max-w-xs">
-            {!isAuthenticated && (
+          {!isAuthenticated && (
+            <li className="m-auto h-fit w-full max-w-xs">
               <Link
                 to="/login"
-                className="inline-block w-full overflow-hidden rounded-lg bg-green-700 p-2 text-base font-medium tracking-wider text-white"
+                className="inline-block w-full max-w-xl overflow-hidden border-2 border-textColor p-2 text-center text-base font-medium tracking-wider text-textColor duration-300 hover:border-secondary hover:bg-secondary hover:text-white"
               >
                 Login/Signup
               </Link>
-            )}
+            </li>
+          )}
+          <li className="font-semibold hover:cursor-pointer hover:underline">
+            Home
           </li>
-          <li>Home</li>
-          <li>Products</li>
-          <li>About</li>
+          <li className="font-semibold hover:cursor-pointer hover:underline">
+            Products
+          </li>
+          <li className="font-semibold hover:cursor-pointer hover:underline">
+            About
+          </li>
         </ul>
       </aside>
     </header>

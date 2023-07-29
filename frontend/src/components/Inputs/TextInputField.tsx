@@ -29,7 +29,7 @@ export const TextInputField: FC<Props> = ({
         {fieldLabel}
       </label>
       <input
-        className="rounded-md border-none bg-green-300 p-2 text-sm text-black focus:outline focus:outline-4 focus:outline-green-900 xs:text-2xl"
+        className="border border-secondary bg-background p-2 text-sm text-textColor focus:outline focus:outline-2 xs:text-2xl"
         id={id}
         type={fieldType}
         value={fieldValue}

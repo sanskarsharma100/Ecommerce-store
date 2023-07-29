@@ -30,3 +30,12 @@ a {
 .dark-overlay {
   box-shadow: 400px 400px 50px 0px rgba(0, 0, 0, 0.75);
 }
+
+.clip-circle-none {
+  clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+}
+
+.clip-circle-full {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+
+}

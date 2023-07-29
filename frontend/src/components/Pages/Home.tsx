@@ -1,5 +1,5 @@
 import { FC } from "react";
 
 export const Home: FC = () => {
-  return <section className="text-6xl">Home</section>;
+  return <section className="h-[100vh] text-6xl">Home</section>;
 };
