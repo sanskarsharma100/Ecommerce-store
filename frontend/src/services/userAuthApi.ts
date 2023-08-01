@@ -4,6 +4,7 @@ import {
   removeCurrentUser,
 } from "../features/User/userSlice";
 import { RootState } from "../app/store";
+import { apiSlice } from "./apiSlice";
 
 interface StringObject {
   [key: string]: string;
@@ -21,12 +22,7 @@ type resetArg = {
   passwords: StringObject;
 };
 
-export const userAuthApi = createApi({
-  reducerPath: "userAuthApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://127.0.0.1:4000/api/v1/",
-    credentials: "include",
-  }),
+export const userAuthApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     loginAuth: builder.mutation<void, StringObject>({
       query: (credential) => ({
@@ -91,7 +87,6 @@ export const userAuthApi = createApi({
             isAuthenticated: true,
             user: data.user,
           };
-          console.log("data", data);
           dispatch(assignCurrentUser(res));
         } catch (err) {
           console.log("error... ", err);
