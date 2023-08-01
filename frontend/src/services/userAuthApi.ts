@@ -3,6 +3,7 @@ import {
   assignCurrentUser,
   removeCurrentUser,
 } from "../features/User/userSlice";
+import { RootState } from "../app/store";
 
 interface StringObject {
   [key: string]: string;
@@ -22,7 +23,10 @@ type resetArg = {
 
 export const userAuthApi = createApi({
   reducerPath: "userAuthApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://127.0.0.1:4000/api/v1/" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://127.0.0.1:4000/api/v1/",
+    credentials: "include",
+  }),
   endpoints: (builder) => ({
     loginAuth: builder.mutation<void, StringObject>({
       query: (credential) => ({
@@ -35,6 +39,7 @@ export const userAuthApi = createApi({
           const { data }: { data: any } = await queryFulfilled;
           const res = {
             isAuthenticated: true,
+            token: data.token,
             user: data.user,
           };
           dispatch(assignCurrentUser(res));
@@ -74,6 +79,25 @@ export const userAuthApi = createApi({
         body: passwords,
       }),
     }),
+    loadUser: builder.query<void, void>({
+      query: () => ({
+        url: "/me",
+        method: "GET",
+      }),
+      async onQueryStarted(_body, { dispatch, queryFulfilled }) {
+        try {
+          const { data }: { data: any } = await queryFulfilled;
+          const res = {
+            isAuthenticated: true,
+            user: data.user,
+          };
+          console.log("data", data);
+          dispatch(assignCurrentUser(res));
+        } catch (err) {
+          console.log("error... ", err);
+        }
+      },
+    }),
   }),
 });
 
@@ -83,4 +107,5 @@ export const {
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useLazyLogoutUserQuery,
+  useLazyLoadUserQuery,
 } = userAuthApi;
