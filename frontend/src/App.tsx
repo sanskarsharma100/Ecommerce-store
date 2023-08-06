@@ -5,8 +5,6 @@ import { Home } from "./components/Pages/Home";
 import { ForgotPassword } from "./components/Pages/ForgotPassword";
 import { ResetPassword } from "./components/Pages/ResetPassword";
 import { SignUp } from "./components/Pages/SignUp";
-import { useEffect } from "react";
-import { useLazyLoadUserQuery } from "./services/userAuthApi";
 import { UserAccount } from "./components/Pages/UserAccount";
 import RequireAuth from "./components/Routes/RequireAuth";
 

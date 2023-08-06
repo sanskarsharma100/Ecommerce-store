@@ -5,19 +5,18 @@ import { StringObject } from "../../utils/types";
 import {
   useLazyLoadUserQuery,
   useUpdateUserDetailsMutation,
-} from "../../services/userAuthApi";
+} from "../../services/userApi";
 
 export const UserAccount: FC = () => {
   const { user } = useAppSelector(selectCurrentUser);
   const [updateUserDetails, { isLoading, isSuccess }] =
     useUpdateUserDetailsMutation();
 
-  const [loadUser, { isSuccess: isLoadUserSuccess }] = useLazyLoadUserQuery();
+  const [loadUser] = useLazyLoadUserQuery();
 
   const [updatedUser, setUpdatedUser] = useState<StringObject>({
     name: user.name,
     email: user.email,
-    avatar: user.avatar.url,
   });
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
@@ -52,55 +51,42 @@ export const UserAccount: FC = () => {
   useEffect(() => {
     if (!isLoading && isSuccess) {
       loadUser();
-    }
-    if (isLoadUserSuccess) {
       toggleEdit();
     }
-  }, [isLoading, isSuccess, isLoadUserSuccess]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, isSuccess]);
+
+  const userInfo = Object.keys(updatedUser).map(function (key) {
+    return (
+      <div className="flex items-center gap-1" key={key}>
+        <p className="font-semibold capitalize">{[key]}:</p>
+        {!isEdit ? (
+          <>
+            <p>{updatedUser[key]}</p>
+          </>
+        ) : (
+          <input
+            className="border border-secondary px-1 py-0.5"
+            type="text"
+            value={updatedUser[key]}
+            onChange={changeUserInfo}
+            name={key}
+          />
+        )}
+      </div>
+    );
+  });
 
   return (
     <div className="h-[100dvh] font-inter">
       <section className="m-1 border-2 border-secondary p-2">
         <img
-          src={updatedUser.avatar}
+          src={user.avatar.url}
           alt="Profile Photo"
           className="m-auto aspect-square rounded-full"
         />
         <div className="mt-4 flex flex-col gap-2">
-          <div className="flex items-center gap-1">
-            <p className="font-semibold">Name:</p>
-            {!isEdit ? (
-              <>
-                <p>{updatedUser.name}</p>
-              </>
-            ) : (
-              <input
-                className="border border-secondary px-1 py-0.5"
-                type="text"
-                value={updatedUser.name}
-                onChange={changeUserInfo}
-                name="name"
-              />
-            )}
-          </div>
-          <div className="flex items-center gap-1">
-            <p className="font-semibold">Email:</p>
-            {!isEdit ? (
-              <>
-                <p>{updatedUser.email}</p>
-              </>
-            ) : (
-              <>
-                <input
-                  className="border border-secondary px-1 py-0.5"
-                  type="text"
-                  value={updatedUser.email}
-                  onChange={changeUserInfo}
-                  name="email"
-                />
-              </>
-            )}
-          </div>
+          {userInfo}
           {!isEdit && (
             <button
               className="mt-2 border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-accent"

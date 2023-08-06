@@ -68,37 +68,6 @@ export const userAuthApi = apiSlice.injectEndpoints({
         body: passwords,
       }),
     }),
-    loadUser: builder.query<void, void>({
-      query: () => ({
-        url: "/me",
-        method: "GET",
-      }),
-      async onQueryStarted(_body, { dispatch, queryFulfilled }) {
-        try {
-          const { data }: { data: any } = await queryFulfilled;
-          const res = {
-            isAuthenticated: true,
-            user: data.user,
-          };
-          localStorage.setItem(
-            "isAuthenticated",
-            JSON.stringify(res.isAuthenticated)
-          );
-          localStorage.setItem("user", JSON.stringify(res.user));
-          console.log("Loader User working");
-          dispatch(assignCurrentUser(res));
-        } catch (err) {
-          console.log("error... ", err);
-        }
-      },
-    }),
-    updateUserDetails: builder.mutation<void, StringObject>({
-      query: (userData) => ({
-        url: "/me/update",
-        method: "PUT",
-        body: userData,
-      }),
-    }),
   }),
 });
 
@@ -108,6 +77,4 @@ export const {
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useLazyLogoutUserQuery,
-  useLazyLoadUserQuery,
-  useUpdateUserDetailsMutation,
 } = userAuthApi;
