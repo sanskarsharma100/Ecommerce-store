@@ -1,8 +1,8 @@
 import { Ref, forwardRef } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { selectCurrentUser } from "../../features/User/userSlice";
-import NoAvatar from "../../assets/NoAvatar.jpg";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import NoAvatar from "../../assets/images/NoAvatar.jpg";
+import { Link, useNavigate } from "react-router-dom";
 import { useLazyLogoutUserQuery } from "../../services/userAuthApi";
 
 type Props = {

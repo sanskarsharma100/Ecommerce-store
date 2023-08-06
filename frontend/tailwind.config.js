@@ -39,8 +39,10 @@ export default {
         secondary: "hsl(0, 0%, 0%)",
         accent: "hsl(338, 80%, 65%)",
         linkColor: "hsl(222, 100%, 58%)",
-        warning: "#cc3300",
+        success: "hsl(120, 100%, 25%)",
+        warning: "hsl(15, 100%, 40%)",
         semiDarkOverlay: "rgba(0, 0, 0, 0.4)",
+        hoverColor: "hsl(0, 0%, 80%)",
       },
       borderWidth: {
         3: "3px",

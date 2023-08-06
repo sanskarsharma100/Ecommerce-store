@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef, useState } from "react";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/images/logo.svg";
 import { useLocation } from "react-router-dom";
 import { Menubar } from "./Menubar";
 import { HamBtn } from "./../Buttons/HamBtn";

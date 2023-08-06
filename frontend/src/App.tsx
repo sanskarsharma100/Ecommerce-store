@@ -8,14 +8,9 @@ import { SignUp } from "./components/Pages/SignUp";
 import { useEffect } from "react";
 import { useLazyLoadUserQuery } from "./services/userAuthApi";
 import { UserAccount } from "./components/Pages/UserAccount";
+import RequireAuth from "./components/Routes/RequireAuth";
 
 function App() {
-  const [loadUser] = useLazyLoadUserQuery();
-
-  useEffect(() => {
-    loadUser();
-  }, []);
-
   return (
     <main className="bg-background">
       <Navbar />
@@ -26,7 +21,9 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
-        <Route path="/account" element={<UserAccount />} />
+        <Route element={<RequireAuth />}>
+          <Route path="/account" element={<UserAccount />} />
+        </Route>
       </Routes>
     </main>
   );

@@ -1,21 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   assignCurrentUser,
   removeCurrentUser,
 } from "../features/User/userSlice";
-import { RootState } from "../app/store";
+import { StringObject, signUpTypes } from "../utils/types";
 import { apiSlice } from "./apiSlice";
-
-interface StringObject {
-  [key: string]: string;
-}
-
-interface signUpTypes {
-  name: string;
-  email: string;
-  password: string;
-  avatar: string | ArrayBuffer | null;
-}
 
 type resetArg = {
   token: string | undefined;
@@ -35,9 +23,13 @@ export const userAuthApi = apiSlice.injectEndpoints({
           const { data }: { data: any } = await queryFulfilled;
           const res = {
             isAuthenticated: true,
-            token: data.token,
             user: data.user,
           };
+          localStorage.setItem(
+            "isAuthenticated",
+            JSON.stringify(res.isAuthenticated)
+          );
+          localStorage.setItem("user", JSON.stringify(res.user));
           dispatch(assignCurrentUser(res));
         } catch (err) {
           console.log("error... ", err);
@@ -48,6 +40,7 @@ export const userAuthApi = apiSlice.injectEndpoints({
       query: () => "/logout",
       async onQueryStarted(_body, { dispatch }) {
         try {
+          localStorage.clear();
           dispatch(removeCurrentUser());
         } catch (err) {
           console.log("error... ", err);
@@ -87,11 +80,24 @@ export const userAuthApi = apiSlice.injectEndpoints({
             isAuthenticated: true,
             user: data.user,
           };
+          localStorage.setItem(
+            "isAuthenticated",
+            JSON.stringify(res.isAuthenticated)
+          );
+          localStorage.setItem("user", JSON.stringify(res.user));
+          console.log("Loader User working");
           dispatch(assignCurrentUser(res));
         } catch (err) {
           console.log("error... ", err);
         }
       },
+    }),
+    updateUserDetails: builder.mutation<void, StringObject>({
+      query: (userData) => ({
+        url: "/me/update",
+        method: "PUT",
+        body: userData,
+      }),
     }),
   }),
 });
@@ -103,4 +109,5 @@ export const {
   useResetPasswordMutation,
   useLazyLogoutUserQuery,
   useLazyLoadUserQuery,
+  useUpdateUserDetailsMutation,
 } = userAuthApi;

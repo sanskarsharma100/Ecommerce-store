@@ -1,16 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
 
-interface User {
-  avatar: {
-    public_id: string;
-    url: string;
-  };
-  _id: string;
-  name: string;
-  email: string;
-  role: string;
-}
+import { User } from "../../utils/types";
 
 interface UserSliceState {
   isAuthenticated: boolean;
@@ -18,8 +9,13 @@ interface UserSliceState {
 }
 
 const initialState: UserSliceState = {
-  isAuthenticated: false,
-  user: {} as User,
+  isAuthenticated: JSON.parse(
+    localStorage.getItem("isAuthenticated") || "false"
+  ),
+  user:
+    localStorage.getItem("user") != null
+      ? JSON.parse(localStorage.getItem("user") || ({} as string))
+      : ({} as User),
 };
 
 export const userSlice = createSlice({

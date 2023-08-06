@@ -2,21 +2,15 @@ import { ChangeEvent, FC, useEffect, useState } from "react";
 import { useRegisterUserMutation } from "./../../services/userAuthApi";
 import { Link, useNavigate } from "react-router-dom";
 import { isErrorWithData, isErrorWithMessage } from "./../../services/helpers";
-import NoAvatar from "../../assets/NoAvatar.jpg";
+import NoAvatar from "../../assets/images/NoAvatar.jpg";
 import { TextInputField } from "../Inputs/TextInputField";
 import { SubmitButton } from "../Inputs/SubmitButton";
 import { SpinningAnim } from "../Loaders/SpinningAnim";
 import { AuthBgWrapper } from "../Wrappers/AuthBgWrapper";
-
-interface userData {
-  name: string;
-  email: string;
-  password: string;
-  avatar: string | ArrayBuffer | null;
-}
+import { signUpTypes } from "../../utils/types";
 
 export const SignUp: FC = () => {
-  const [userData, setUserData] = useState<userData>({
+  const [userData, setUserData] = useState<signUpTypes>({
     name: "",
     email: "",
     password: "",
