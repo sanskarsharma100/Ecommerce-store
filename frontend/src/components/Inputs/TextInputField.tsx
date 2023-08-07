@@ -1,12 +1,12 @@
 import { ChangeEventHandler, FC, useId } from "react";
 
 interface Props {
-  fieldLabel: string;
+  fieldLabel?: string;
   fieldType: string;
   fieldValue: string;
   fieldName: string;
   placeholder: string;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   isRequired?: boolean;
   handleChange: ChangeEventHandler<HTMLInputElement>;
 }
@@ -17,7 +17,7 @@ export const TextInputField: FC<Props> = ({
   fieldValue,
   fieldName,
   placeholder,
-  isDisabled,
+  isDisabled = false,
   isRequired = false,
   handleChange,
 }) => {
@@ -25,9 +25,11 @@ export const TextInputField: FC<Props> = ({
 
   return (
     <>
-      <label htmlFor={id} className="text-base font-medium xs:text-2xl">
-        {fieldLabel}
-      </label>
+      {fieldLabel && (
+        <label htmlFor={id} className="text-base font-medium xs:text-2xl">
+          {fieldLabel}
+        </label>
+      )}
       <input
         className="border border-secondary bg-background p-2 text-sm text-textColor focus:outline focus:outline-2 xs:text-2xl"
         id={id}

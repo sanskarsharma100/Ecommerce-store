@@ -35,8 +35,18 @@ export const userAuthApi = apiSlice.injectEndpoints({
         body: userData,
       }),
     }),
+    updatePassword: builder.mutation<void, StringObject>({
+      query: (passwords) => ({
+        url: "/password/update",
+        method: "PUT",
+        body: passwords,
+      }),
+    }),
   }),
 });
 
-export const { useLazyLoadUserQuery, useUpdateUserDetailsMutation } =
-  userAuthApi;
+export const {
+  useLazyLoadUserQuery,
+  useUpdateUserDetailsMutation,
+  useUpdatePasswordMutation,
+} = userAuthApi;
