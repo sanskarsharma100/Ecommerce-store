@@ -113,7 +113,9 @@ export const UserAccount: FC = () => {
       isErrorWithData(passwordError) &&
       isErrorWithMessage(passwordError.data)
     ) {
-      setPasswordErrMsg(passwordError.data.message);
+      const errStr = passwordError.data.message;
+      const newErrStr = errStr.split(":")[2];
+      setPasswordErrMsg(newErrStr || errStr);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUserLoading, isUserSuccess, isPasswordLoading, isPasswordSuccess]);
@@ -121,7 +123,7 @@ export const UserAccount: FC = () => {
   const userInfo = Object.keys(updatedUser).map(function (key) {
     return (
       <div className="flex items-center gap-1" key={key}>
-        <p className="font-semibold capitalize">{[key]}:</p>
+        <p className="font-medium capitalize">{[key]}:</p>
         {!isUserEdit ? (
           <p>{updatedUser[key]}</p>
         ) : (
@@ -140,7 +142,7 @@ export const UserAccount: FC = () => {
   const passwordInputs = Object.keys(newPassword).map(function (key) {
     return (
       <div className="mt-2 flex flex-wrap items-center gap-1" key={key}>
-        <label className="font-semibold capitalize">{[key]}:</label>
+        <label className="font-medium capitalize">{[key]}:</label>
         <input
           className="w-full border border-secondary px-1 py-0.5"
           type="password"
@@ -217,11 +219,11 @@ export const UserAccount: FC = () => {
           {isPasswordEdit && (
             <form onSubmit={handlePasswordUpdate}>
               {passwordInputs}
-              <p className="mt-1 text-xs font-medium text-warning">
+              <p className="mt-1 text-xs font-semibold text-warning">
                 {passwordErrMsg}
               </p>
               <input
-                className="mt-2 w-full border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:cursor-pointer hover:bg-success"
+                className="mt-1 w-full border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:cursor-pointer hover:bg-success"
                 type="submit"
                 value="Update"
               />
