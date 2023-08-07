@@ -13,14 +13,9 @@ export const Menubar = forwardRef(
   ({ isOpen }: Props, ref: Ref<HTMLElement>) => {
     const { isAuthenticated, user } = useAppSelector(selectCurrentUser);
     const [logoutUser] = useLazyLogoutUserQuery();
-    const navigate = useNavigate();
 
     const logoutCurrentUser = () => {
       logoutUser();
-    };
-
-    const redirectToUserAccount = () => {
-      navigate("/account");
     };
 
     return (
@@ -33,9 +28,9 @@ export const Menubar = forwardRef(
         <ul className="m-4 mt-20 flex flex-col gap-4 overflow-x-hidden text-left">
           {isAuthenticated && (
             <li className="w-full bg-primary">
-              <div
+              <Link
                 className="group relative flex max-w-full items-center gap-2 border-x-2 border-t-2 border-secondary bg-background p-2 hover:cursor-pointer"
-                onClick={redirectToUserAccount}
+                to="/account"
               >
                 <div className="absolute right-2 rotate-45 border-r-2 border-t-2 border-secondary p-1 duration-300 group-hover:right-1"></div>
                 <img
@@ -46,7 +41,7 @@ export const Menubar = forwardRef(
                 <div className="w-fit text-ellipsis text-left text-sm font-medium text-textColor">
                   <p>{user.name}</p>
                 </div>
-              </div>
+              </Link>
               <button
                 className="hover:bg-secondary2 w-full overflow-hidden border-2 border-secondary bg-background p-1 text-sm font-medium tracking-wider text-textColor duration-300 hover:bg-accent hover:text-primary"
                 onClick={logoutCurrentUser}

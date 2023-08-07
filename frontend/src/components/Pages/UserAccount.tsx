@@ -82,6 +82,7 @@ export const UserAccount: FC = () => {
       newPassword: "",
       confirmPassword: "",
     });
+    setPasswordErrMsg("");
   };
 
   const updateUserInfo = () => {
@@ -191,7 +192,7 @@ export const UserAccount: FC = () => {
             )}
           </div>
         </div>
-        <div className="mt-2 flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
           {!isPasswordEdit && (
             <button
               className="mt-2 border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-accent"

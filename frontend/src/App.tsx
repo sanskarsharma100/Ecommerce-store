@@ -1,4 +1,3 @@
-import { Navbar } from "./components/Navbar/Navbar";
 import { Routes, Route } from "react-router-dom";
 import { Login } from "./components/Pages/Login";
 import { Home } from "./components/Pages/Home";
@@ -7,13 +6,12 @@ import { ResetPassword } from "./components/Pages/ResetPassword";
 import { SignUp } from "./components/Pages/SignUp";
 import { UserAccount } from "./components/Pages/UserAccount";
 import RequireAuth from "./components/Routes/RequireAuth";
+import { Layout } from "./components/Layout";
 
 function App() {
   return (
-    <main className="bg-background">
-      <Navbar />
-
-      <Routes>
+    <Routes>
+      <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
@@ -22,8 +20,8 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route path="/account" element={<UserAccount />} />
         </Route>
-      </Routes>
-    </main>
+      </Route>
+    </Routes>
   );
 }
 
