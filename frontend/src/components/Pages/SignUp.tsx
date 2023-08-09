@@ -123,9 +123,8 @@ export const SignUp: FC = () => {
               type="file"
               name="avatar"
               required
-              accept="image/*"
+              accept="image/png, image/jpg, image/jpeg"
               onChange={onImageChange}
-              placeholder="Password"
               disabled={isLoading}
             />
           </div>

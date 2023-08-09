@@ -54,7 +54,7 @@ export const Navbar: FC = () => {
   }
 
   return (
-    <header className="sticky top-0 bg-background font-inter">
+    <header className="sticky top-0 z-[99999] bg-background font-inter">
       {isOpen && (
         <div className="fixed z-30 min-h-screen w-screen bg-semiDarkOverlay md:hidden"></div>
       )}

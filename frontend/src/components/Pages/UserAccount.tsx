@@ -2,6 +2,7 @@ import { ChangeEvent, FC, useEffect, useState } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { selectCurrentUser } from "../../features/User/userSlice";
 import { StringObject } from "../../utils/types";
+import iconEdit from "../../assets/icons/iconEdit.svg";
 
 import {
   useLazyLoadUserQuery,
@@ -9,12 +10,13 @@ import {
   useUpdateUserDetailsMutation,
 } from "../../services/userApi";
 import { isErrorWithData, isErrorWithMessage } from "../../services/helpers";
+import { SpinningAnim } from "./../Loaders/SpinningAnim";
 
 export const UserAccount: FC = () => {
   const { user } = useAppSelector(selectCurrentUser);
   const [
     updateUserDetails,
-    { isLoading: isUserLoading, isSuccess: isUserSuccess },
+    { isLoading: isUserLoading, isSuccess: isUserSuccess, error: userError },
   ] = useUpdateUserDetailsMutation();
 
   const [
@@ -33,6 +35,7 @@ export const UserAccount: FC = () => {
     name: user.name,
     email: user.email,
   });
+  const [newAvatar, setNewAvatar] = useState<string>(user.avatar.url);
 
   const [newPassword, setNewPassword] = useState<StringObject>({
     oldPassword: "",
@@ -93,6 +96,19 @@ export const UserAccount: FC = () => {
     updateUserDetails(info);
   };
 
+  const updateAvatar = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    const image: File = (target.files as FileList)[0];
+    if (image) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setNewAvatar(URL.createObjectURL(image));
+        updateUserDetails({ avatar: reader.result as string });
+      };
+      reader.readAsDataURL(image);
+    }
+  };
+
   const handlePasswordUpdate = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(newPassword);
@@ -102,7 +118,7 @@ export const UserAccount: FC = () => {
   useEffect(() => {
     if (!isUserLoading && isUserSuccess) {
       loadUser();
-      toggleUserEdit();
+      setIsUserEdit(false);
     }
     if (!isPasswordLoading && isPasswordSuccess) {
       togglePasswordEdit();
@@ -158,10 +174,35 @@ export const UserAccount: FC = () => {
     <div className="h-[100dvh] font-inter">
       <section className="m-1 border-2 border-secondary p-2">
         <div>
-          <img
-            src={user.avatar.url}
-            alt="Profile Photo"
-            className="m-auto aspect-square rounded-full"
+          <label
+            htmlFor="avatar"
+            className="group relative m-auto flex h-fit w-fit items-center justify-center rounded-full hover:cursor-pointer"
+          >
+            <img
+              src={iconEdit}
+              alt="edit icon"
+              className={`absolute z-[1] hidden w-8 group-hover:block ${
+                isUserLoading && "group-hover:hidden"
+              }`}
+            />
+            {isUserLoading && (
+              <div className="absolute z-20">
+                <SpinningAnim />
+              </div>
+            )}
+            <img
+              src={newAvatar}
+              alt="Profile Photo"
+              className="m-auto aspect-square w-40 rounded-full duration-200 group-hover:brightness-75"
+            />
+          </label>
+          <input
+            hidden
+            id="avatar"
+            type="file"
+            accept="image/png, image/jpg, image/jpeg"
+            onChange={updateAvatar}
+            disabled={isUserLoading}
           />
           <div className="mt-4 flex flex-col gap-2">
             {userInfo}
@@ -170,7 +211,7 @@ export const UserAccount: FC = () => {
                 className="mt-2 border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-accent"
                 onClick={toggleUserEdit}
               >
-                Edit
+                Edit Profile
               </button>
             )}
             {isUserEdit && (
