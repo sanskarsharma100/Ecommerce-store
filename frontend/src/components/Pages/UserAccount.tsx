@@ -141,7 +141,7 @@ export const UserAccount: FC = () => {
       <div className="flex items-center gap-1" key={key}>
         <p className="font-medium capitalize">{[key]}:</p>
         {!isUserEdit ? (
-          <p>{updatedUser[key]}</p>
+          <p className="text-gray-700 font-medium" >{updatedUser[key]}</p>
         ) : (
           <input
             className="w-full border border-secondary px-1 py-0.5"
@@ -172,11 +172,13 @@ export const UserAccount: FC = () => {
 
   return (
     <div className="h-[100dvh] font-inter">
-      <section className="m-1 border-2 border-secondary p-2">
+      <section className="m-1 border-2 border-gray-500 p-2">
         <div>
           <label
             htmlFor="avatar"
-            className="group relative m-auto flex h-fit w-fit items-center justify-center rounded-full hover:cursor-pointer"
+            className={`relative m-auto flex h-fit w-fit items-center justify-center rounded-full ${
+              !isUserLoading && "group hover:cursor-pointer"
+            }`}
           >
             <img
               src={iconEdit}
@@ -186,14 +188,14 @@ export const UserAccount: FC = () => {
               }`}
             />
             {isUserLoading && (
-              <div className="absolute z-20">
+              <div className="absolute z-20 flex h-full w-full items-center justify-center rounded-full bg-semiDarkOverlay">
                 <SpinningAnim />
               </div>
             )}
             <img
               src={newAvatar}
               alt="Profile Photo"
-              className="m-auto aspect-square w-40 rounded-full duration-200 group-hover:brightness-75"
+              className="m-auto aspect-square w-40 rounded-full duration-200 group-hover:brightness-50"
             />
           </label>
           <input
