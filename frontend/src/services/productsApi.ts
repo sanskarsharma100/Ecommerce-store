@@ -1,9 +1,12 @@
+import { allProductResp } from "../utils/types";
 import { apiSlice } from "./apiSlice";
 
-export const userAuthApi = apiSlice.injectEndpoints({
+export const ProductsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getProducts: builder.query<void, void>({
+    getProducts: builder.query<allProductResp, void>({
       query: () => "/products",
     }),
   }),
 });
+
+export const { useGetProductsQuery } = ProductsApi;

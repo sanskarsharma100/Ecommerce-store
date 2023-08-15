@@ -13,6 +13,9 @@ export default {
         dynamicHeading2: "clamp(1.5rem, 8vw, 2.25rem)",
         dynamicText: "clamp(0.8rem, 3vw, 1rem)",
       },
+      gridTemplateColumns: {
+        "fill-8": "repeat(auto-fill, minmax(8rem, auto))",
+      },
       backgroundImage: {
         blackGradient:
           "linear-gradient(-45deg, #000000, #080808, #101010, #151515, #1a1a1a);",
@@ -27,6 +30,7 @@ export default {
           "0 0 5px rgb(255, 0, 0)",
           "0 0 5px rgb(255, 0, 0)",
         ],
+        "3xl": "0 2px 5px rgba(0, 0, 0, 0.25)",
       },
       boxShadow: {
         custom: "6px 6px 0px 0px rgba(0,0,0,0.75)",
