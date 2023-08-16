@@ -38,7 +38,9 @@ export default {
       },
       colors: {
         textColor: "hsl(0, 0%, 0%)",
+        grayDarker: "hsl(0, 0%, 50%)",
         background: "hsl(0, 0%, 95%)",
+        "background-2": "hsl(0, 0%, 10%)",
         primary: "hsl(0, 0%, 100%)",
         secondary: "hsl(0, 0%, 0%)",
         accent: "hsl(338, 80%, 65%)",
