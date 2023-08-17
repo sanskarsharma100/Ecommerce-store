@@ -138,10 +138,12 @@ export const UserAccount: FC = () => {
 
   const userInfo = Object.keys(updatedUser).map(function (key) {
     return (
-      <div className="flex items-center gap-1" key={key}>
+      <div className="flex flex-wrap items-center gap-1" key={key}>
         <p className="font-medium capitalize">{[key]}:</p>
         {!isUserEdit ? (
-          <p className="text-gray-700 font-medium" >{updatedUser[key]}</p>
+          <p className="overflow-clip overflow-ellipsis font-medium text-gray-700">
+            {updatedUser[key]}
+          </p>
         ) : (
           <input
             className="w-full border border-secondary px-1 py-0.5"
