@@ -7,16 +7,28 @@ import { useLazyLogoutUserQuery } from "../../services/userAuthApi";
 
 type Props = {
   isOpen: boolean;
+  navLinks: Array<{ name: string; link: string }>;
 };
 
 export const Menubar = forwardRef(
-  ({ isOpen }: Props, ref: Ref<HTMLElement>) => {
+  ({ isOpen, navLinks }: Props, ref: Ref<HTMLElement>) => {
     const { isAuthenticated, user } = useAppSelector(selectCurrentUser);
     const [logoutUser] = useLazyLogoutUserQuery();
 
     const logoutCurrentUser = () => {
       logoutUser();
     };
+
+    const menuItems = navLinks.map((item, i) => (
+      <li
+        key={i}
+        className="font-semibold hover:cursor-pointer hover:underline"
+      >
+        <Link to={item.link} className="inline-block w-full max-w-xl">
+          {item.name}
+        </Link>
+      </li>
+    ));
 
     return (
       <aside
@@ -61,17 +73,7 @@ export const Menubar = forwardRef(
               </Link>
             </li>
           )}
-          <li className="font-semibold hover:cursor-pointer hover:underline">
-            <Link to="/" className="inline-block w-full max-w-xl">
-              Home
-            </Link>
-          </li>
-          <li className="font-semibold hover:cursor-pointer hover:underline">
-            Products
-          </li>
-          <li className="font-semibold hover:cursor-pointer hover:underline">
-            About
-          </li>
+          {menuItems}
         </ul>
       </aside>
     );

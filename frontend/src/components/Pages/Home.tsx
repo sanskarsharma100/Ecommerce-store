@@ -3,11 +3,10 @@ import { useGetProductsQuery } from "../../services/productsApi";
 import { convertToINR } from "../../utils/utils";
 import { SpinningAnim } from "./../Loaders/SpinningAnim";
 import BannerSlider from "./../Slider/BannerSlider";
-import oneplus10R from "../../assets/Banner/onplus10R.png";
+import oneplus10R from "../../assets/Banner/oneplus10R.png";
 import s23Ultra from "../../assets/Banner/s23Ultra.jpg";
 import iphone14 from "../../assets/Banner/iphone14.jpg";
 import iphone14Poster from "../../assets/images/iphone14Poster.webp";
-import { Footer } from "./../Footer/Footer";
 import { Link } from "react-router-dom";
 
 export const Home: FC = () => {
@@ -19,7 +18,7 @@ export const Home: FC = () => {
   const products = data?.products.map((product) => (
     <div
       key={product._id}
-      className="flex w-full min-w-[8rem] flex-col border-2 border-gray-400 hover:cursor-pointer hover:border-gray-600 hover:drop-shadow-3xl"
+      className="flex w-full flex-col border-2 border-gray-400 hover:cursor-pointer hover:border-gray-600 hover:drop-shadow-3xl xs:min-w-[8rem]"
     >
       {isLoading ? (
         <div className="m-auto flex items-center justify-center">
@@ -68,7 +67,6 @@ export const Home: FC = () => {
           <img src={iphone14Poster} alt="iphone 14 Poster" className="mt-2" />
         </section>
       </div>
-      <Footer />
     </div>
   );
 };

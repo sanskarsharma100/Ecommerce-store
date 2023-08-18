@@ -20,6 +20,7 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route path="/account" element={<UserAccount />} />
         </Route>
+        <Route path="/*" element={<Home />} />
       </Route>
     </Routes>
   );

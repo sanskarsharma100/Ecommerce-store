@@ -9,7 +9,7 @@ export const HamBtn = forwardRef(
   ({ hamBtnHandler }: Props, ref: Ref<HTMLInputElement>) => {
     return (
       <label
-        className="absolute right-0 top-0 z-[99999] hover:cursor-pointer"
+        className="absolute right-0 top-0 z-[99999] hover:cursor-pointer xs:hidden"
         htmlFor="menuBtn"
         onClick={hamBtnHandler}
       >
