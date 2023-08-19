@@ -75,7 +75,7 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
         {slider}
         <button
           role="button"
-          className="group absolute left-0 top-0 hidden h-full w-[5%] rounded-l-lg duration-300 hover:bg-semiDarkOverlay xs:block"
+          className="group absolute left-0 top-0 hidden h-full w-[5%] overflow-hidden rounded-l-lg duration-300 hover:bg-semiDarkOverlay xs:block"
           onClick={previousSlide}
         >
           <span className="left float-left ml-[40%] rotate-[135deg] -skew-x-12 -skew-y-12 border-b-4 border-r-4 p-2 drop-shadow-[0px_0px_5px_rgb(0,0,0)] duration-300 group-hover:ml-[30%] xs:p-1 sm:border-b-8 sm:border-r-8 sm:p-3"></span>

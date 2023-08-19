@@ -18,7 +18,7 @@ export const Home: FC = () => {
   const products = data?.products.map((product) => (
     <div
       key={product._id}
-      className="flex w-full flex-col border-2 border-gray-400 hover:cursor-pointer hover:border-gray-600 hover:drop-shadow-3xl xs:min-w-[8rem]"
+      className="flex w-full flex-col border-2 border-gray-400 hover:cursor-pointer hover:border-gray-600 hover:drop-shadow-3xl xs:min-w-[10rem]"
     >
       {isLoading ? (
         <div className="m-auto flex items-center justify-center">
@@ -42,7 +42,7 @@ export const Home: FC = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="p-2">
+      <div className="mt-2 p-2 ss:p-4">
         <BannerSlider pictures={banner} />
         <section className="mt-4 flex w-full flex-col items-center xs:items-start">
           <div className="mb-2 flex w-full items-center bg-gradient-to-r from-accent to-background to-90%">

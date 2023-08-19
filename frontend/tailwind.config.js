@@ -33,6 +33,7 @@ export default {
         "3xl": "0 2px 5px rgba(0, 0, 0, 0.25)",
       },
       boxShadow: {
+        navbar: "0px 3px 5px 2px rgba(0,0,0,0.2)",
         custom: "6px 6px 0px 0px rgba(0,0,0,0.75)",
         cardShadow: "0px 0px 500px 50px rgba(0,0,0,0.9)",
       },

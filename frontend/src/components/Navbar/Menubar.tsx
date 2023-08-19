@@ -1,32 +1,36 @@
 import { Ref, forwardRef } from "react";
-import { useAppSelector } from "../../app/hooks";
-import { selectCurrentUser } from "../../features/User/userSlice";
 import NoAvatar from "../../assets/images/NoAvatar.jpg";
-import { Link } from "react-router-dom";
-import { useLazyLogoutUserQuery } from "../../services/userAuthApi";
+import { Link, NavLink } from "react-router-dom";
+import { User } from "../../utils/types";
 
 type Props = {
   isOpen: boolean;
   navLinks: Array<{ name: string; link: string }>;
+  isAuthenticated: boolean;
+  user: User;
+  logoutUser: () => void;
 };
 
 export const Menubar = forwardRef(
-  ({ isOpen, navLinks }: Props, ref: Ref<HTMLElement>) => {
-    const { isAuthenticated, user } = useAppSelector(selectCurrentUser);
-    const [logoutUser] = useLazyLogoutUserQuery();
-
-    const logoutCurrentUser = () => {
-      logoutUser();
-    };
-
+  (
+    { isOpen, navLinks, isAuthenticated, user, logoutUser }: Props,
+    ref: Ref<HTMLElement>
+  ) => {
     const menuItems = navLinks.map((item, i) => (
       <li
         key={i}
         className="font-semibold hover:cursor-pointer hover:underline"
       >
-        <Link to={item.link} className="inline-block w-full max-w-xl">
+        <NavLink
+          to={item.link}
+          className={({ isActive }) =>
+            isActive
+              ? "inline-block w-full max-w-xl text-accent"
+              : "inline-block w-full max-w-xl"
+          }
+        >
           {item.name}
-        </Link>
+        </NavLink>
       </li>
     ));
 
@@ -56,7 +60,7 @@ export const Menubar = forwardRef(
               </Link>
               <button
                 className="hover:bg-secondary2 w-full overflow-hidden border-2 border-secondary bg-background p-1 text-sm font-medium tracking-wider text-textColor duration-300 hover:bg-accent hover:text-primary"
-                onClick={logoutCurrentUser}
+                onClick={logoutUser}
                 role="button"
               >
                 Logout
