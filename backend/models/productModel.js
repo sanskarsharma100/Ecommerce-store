@@ -31,9 +31,13 @@ const productSchema = new mongoose.Schema({
       },
     },
   ],
+  // category: {
+  //   type: String,
+  //   required: [true, "Please Enter product category"],
+  // },
   category: {
     type: String,
-    required: [true, "Please Enter product category"],
+    required: true,
   },
   stock: {
     type: Number,
@@ -66,7 +70,6 @@ const productSchema = new mongoose.Schema({
       },
     },
   ],
-
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
