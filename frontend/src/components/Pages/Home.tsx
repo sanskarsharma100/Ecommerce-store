@@ -17,6 +17,7 @@ export const Home: FC = () => {
     price: [0, 100000000],
     category: "",
     ratings: 0,
+    sort: "relevance",
   });
   const { data, isLoading } = useGetProductsQuery(queryPara);
   const banner = [oneplus10R, s23Ultra, iphone14];

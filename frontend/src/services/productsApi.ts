@@ -10,8 +10,9 @@ export const ProductsApi = apiSlice.injectEndpoints({
         price = [0, 25000],
         category,
         ratings = 0,
+        sort = "relevance",
       }) => {
-        let queryUrl = `/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+        let queryUrl = `/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&sort=${sort}`;
 
         if (category) {
           queryUrl = queryUrl + `&category=${category}`;

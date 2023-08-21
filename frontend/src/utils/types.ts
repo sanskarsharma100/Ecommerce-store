@@ -52,4 +52,5 @@ export type getProductPara = {
   price: Array<number>;
   category: string;
   ratings: number;
+  sort: "increasing" | "decreasing" | "ratings" | "relevance";
 };

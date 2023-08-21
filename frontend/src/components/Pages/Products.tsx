@@ -4,6 +4,7 @@ import { SpinningAnim } from "../Loaders/SpinningAnim";
 import { convertToINR } from "../../utils/utils";
 import { getProductPara } from "../../utils/types";
 import { Pagination } from "../Pagination/Pagination";
+import { SortBy } from "../Products/SortBy";
 
 export const Products: FC = () => {
   const [queryPara, setQueryPara] = useState<getProductPara>({
@@ -12,7 +13,10 @@ export const Products: FC = () => {
     price: [0, 100000000],
     category: "",
     ratings: 0,
+    sort: "relevance",
   });
+
+  const [selectedSort, setSelectedSort] = useState<string>("Relevance");
 
   const [getProducts, { data: productsList, isLoading, isFetching }] =
     useLazyGetProductsQuery();
@@ -21,6 +25,18 @@ export const Products: FC = () => {
 
   const changePage = (pageNum: number) => {
     setQueryPara((para) => ({ ...para, currentPage: pageNum }));
+  };
+
+  const sortProducts = (sortBy: { label: string; value: string }) => {
+    setSelectedSort(sortBy.label);
+    setQueryPara((para) => ({
+      ...para,
+      sort: sortBy.value as
+        | "increasing"
+        | "decreasing"
+        | "ratings"
+        | "relevance",
+    }));
   };
 
   const products = productsList?.products.map((product) => (
@@ -53,14 +69,17 @@ export const Products: FC = () => {
   }, [getProducts, queryPara]);
 
   return (
-    <div className="relative h-full pb-4">
+    <div className="relative mt-4 h-full pb-4">
       {isFetching && (
         <div className="absolute flex h-full w-full items-center justify-center bg-semiDarkOverlay">
           <SpinningAnim />
         </div>
       )}
+      <section className="w-fit p-2">
+        <SortBy selectedSort={selectedSort} sortProducts={sortProducts} />
+      </section>
       <section>
-        <div className="grid grid-cols-2">{products}</div>
+        <div className="mt-2 grid grid-cols-2">{products}</div>
       </section>
       <section className="mt-2 w-full">
         <Pagination

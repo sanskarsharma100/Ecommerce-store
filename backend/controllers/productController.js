@@ -42,10 +42,27 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
   const resultPerPage = 10;
   const totalProductCount = await Product.countDocuments();
 
-  const apiFeature = new ApiFeatures(Product.find(), req.query)
+  let findProduct;
+
+  if (req.query.sort && req.query.sort != "") {
+    if (req.query.sort == "decreasing") {
+      findProduct = Product.find().sort({ price: -1 });
+    } else if (req.query.sort == "increasing") {
+      findProduct = Product.find().sort({ price: 1 });
+    } else if (req.query.sort == "ratings") {
+      findProduct = Product.find().sort({ ratings: -1 });
+    } else if (req.query.sort == "relevance") {
+      findProduct = Product.find();
+    }
+  } else {
+    findProduct = Product.find();
+  }
+
+  const apiFeature = new ApiFeatures(findProduct, req.query)
     .search()
     .filter()
     .pagination(resultPerPage);
+
   const products = await apiFeature.query;
   const currentProductCount = products.length;
   let pages = Math.ceil(totalProductCount / resultPerPage);
@@ -104,7 +121,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "Product deleted succesfully",
+    message: "Product deleted successfully",
   });
 });
 
