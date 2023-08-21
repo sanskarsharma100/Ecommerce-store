@@ -33,9 +33,12 @@ export const SortBy: FC<Props> = ({ selectedSort, sortProducts }) => {
         {selectedSort}
       </label>
       <input type="checkbox" id="sortByCheckbox" className="peer hidden" />
-      <ul className="absolute z-[999] hidden bg-hoverColor peer-checked:block">
-        {sortByOptions}
-      </ul>
+      <label
+        htmlFor="sortByCheckbox"
+        className="absolute z-[999] hidden peer-checked:block"
+      >
+        <ul className="bg-hoverColor peer-checked:block">{sortByOptions}</ul>
+      </label>
     </>
   );
 };
