@@ -22,18 +22,7 @@ export const ProductsApi = apiSlice.injectEndpoints({
         };
       },
     }),
-    createProduct: builder.mutation<void, any>({
-      query: (product) => ({
-        url: "/admin/product/new",
-        method: "POST",
-        body: product,
-      }),
-    }),
   }),
 });
 
-export const {
-  useGetProductsQuery,
-  useLazyGetProductsQuery,
-  useCreateProductMutation,
-} = ProductsApi;
+export const { useGetProductsQuery, useLazyGetProductsQuery } = ProductsApi;

@@ -3,6 +3,7 @@ import { useLazyGetProductsQuery } from "../../services/productsApi";
 import { SpinningAnim } from "../Loaders/SpinningAnim";
 import { convertToINR } from "../../utils/utils";
 import { getProductPara } from "../../utils/types";
+import { Pagination } from "../Pagination/Pagination";
 
 export const Products: FC = () => {
   const [queryPara, setQueryPara] = useState<getProductPara>({
@@ -51,20 +52,6 @@ export const Products: FC = () => {
     getProducts(queryPara);
   }, [getProducts, queryPara]);
 
-  const pageBtns = Array(productsList?.pages)
-    .fill(0)
-    .map((_item, ind) => (
-      <button
-        key={ind + 1}
-        className={`border border-gray-500 px-3 py-1 font-semibold hover:bg-hoverColor hover:font-bold ${
-          queryPara.currentPage == ind + 1 && "bg-accent hover:!bg-accent"
-        }`}
-        onClick={() => changePage(ind + 1)}
-      >
-        {ind + 1}
-      </button>
-    ));
-
   return (
     <div className="relative h-full pb-4">
       {isFetching && (
@@ -76,31 +63,11 @@ export const Products: FC = () => {
         <div className="grid grid-cols-2">{products}</div>
       </section>
       <section className="mt-2 w-full">
-        <div className="m-auto w-fit">
-          <button
-            className={`border border-gray-500 px-2 py-1 font-medium ${
-              queryPara.currentPage <= 1
-                ? "bg-gray-300 text-gray-500 hover:cursor-not-allowed"
-                : "hover:bg-hoverColor"
-            }`}
-            onClick={() => changePage(queryPara.currentPage - 1)}
-            disabled={queryPara.currentPage <= 1}
-          >
-            {"<<"}
-          </button>
-          {pageBtns}
-          <button
-            className={`border border-gray-500 px-2 py-1 font-medium ${
-              queryPara.currentPage == productsList?.pages
-                ? "bg-gray-300 text-gray-500 hover:cursor-not-allowed"
-                : "hover:bg-hoverColor"
-            }`}
-            onClick={() => changePage(queryPara.currentPage + 1)}
-            disabled={queryPara.currentPage == productsList?.pages}
-          >
-            {">>"}
-          </button>
-        </div>
+        <Pagination
+          currentPage={queryPara.currentPage}
+          numOfPages={productsList?.pages}
+          changePage={changePage}
+        />
       </section>
     </div>
   );
