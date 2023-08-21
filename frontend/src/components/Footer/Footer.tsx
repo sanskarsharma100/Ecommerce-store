@@ -41,7 +41,7 @@ export const Footer: FC = () => {
   ));
 
   return (
-    <footer className="mt-4 bg-background-2 p-2 font-inter ss:mt-6 ss:px-6">
+    <footer className="bg-background-2 p-2 font-inter ss:mt-6 ss:px-6">
       <div className="mt-2 flex flex-col gap-2 ss:flex-row">
         <div>
           <img

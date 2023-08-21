@@ -22,7 +22,7 @@ export const Navbar: FC = () => {
 
   const navLinks = [
     { name: "Home", link: "/" },
-    { name: "Categories", link: "/categories" },
+    { name: "Products", link: "/products" },
     { name: "About", link: "/about" },
   ];
 

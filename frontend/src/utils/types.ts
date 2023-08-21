@@ -40,6 +40,16 @@ export type productType = {
 
 export type allProductResp = {
   success: boolean;
-  productCount: number;
+  totalProductCount: number;
+  currentProductCount: number;
+  pages: number;
   products: [productType];
+};
+
+export type getProductPara = {
+  keyword: string;
+  currentPage: number;
+  price: Array<number>;
+  category: string;
+  ratings: number;
 };

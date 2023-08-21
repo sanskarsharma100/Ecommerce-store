@@ -7,14 +7,16 @@ import { SignUp } from "./components/Pages/SignUp";
 import { UserAccount } from "./components/Pages/UserAccount";
 import RequireAuth from "./components/Routes/RequireAuth";
 import { Layout } from "./components/Layout";
-import { Categories } from "./components/Pages/Categories";
+import { Products } from "./components/Pages/Products";
+import { CreateProduct } from "./components/Pages/CreateProduct";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/categories" element={<Categories />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/createProduct" element={<CreateProduct />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />
