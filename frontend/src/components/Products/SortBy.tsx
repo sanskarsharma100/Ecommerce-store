@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
 type Props = {
   selectedSort: string;
@@ -25,14 +25,14 @@ export const SortBy: FC<Props> = ({ selectedSort, sortProducts }) => {
 
   return (
     <>
-      <p className="text-sm font-medium">Sort By:</p>
+      <p className="mb-1 text-sm font-medium">Sort By:</p>
+      <input type="checkbox" id="sortByCheckbox" className="peer hidden" />
       <label
         htmlFor="sortByCheckbox"
-        className="w-full select-none border border-secondary px-2 py-1 text-sm hover:cursor-pointer"
+        className="w-full select-none border border-secondary px-2 py-1 text-sm font-semibold focus-within:hidden hover:cursor-pointer"
       >
         {selectedSort}
       </label>
-      <input type="checkbox" id="sortByCheckbox" className="peer hidden" />
       <label
         htmlFor="sortByCheckbox"
         className="absolute z-[999] hidden peer-checked:block"

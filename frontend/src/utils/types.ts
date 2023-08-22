@@ -54,3 +54,14 @@ export type getProductPara = {
   ratings: number;
   sort: "increasing" | "decreasing" | "ratings" | "relevance";
 };
+
+export type categories = {
+  _id: string;
+  name: string;
+};
+
+export type getCategoryResp = {
+  success: boolean;
+  categoryCount: number;
+  categories: [categories];
+};

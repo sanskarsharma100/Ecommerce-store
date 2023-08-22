@@ -39,7 +39,7 @@ export const Home: FC = () => {
             <img src={product.images[0].url} alt={product.name} />
           </div>
           <div className="bg-background p-1 text-xs">
-            <p className="br line-clamp-2 w-full overflow-hidden text-ellipsis font-semibold text-gray-800">
+            <p className="line-clamp-2 w-full overflow-hidden text-ellipsis font-semibold text-gray-800">
               {product.name}
             </p>
             <p className="font-bold">{convertToINR(product.price)}</p>

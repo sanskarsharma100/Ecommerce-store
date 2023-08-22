@@ -1,4 +1,8 @@
-import { allProductResp, getProductPara } from "../utils/types";
+import {
+  allProductResp,
+  getCategoryResp,
+  getProductPara,
+} from "../utils/types";
 import { apiSlice } from "./apiSlice";
 
 export const ProductsApi = apiSlice.injectEndpoints({
@@ -23,7 +27,14 @@ export const ProductsApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    getCategories: builder.query<getCategoryResp, void>({
+      query: () => "/categories",
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useLazyGetProductsQuery } = ProductsApi;
+export const {
+  useGetProductsQuery,
+  useLazyGetProductsQuery,
+  useGetCategoriesQuery,
+} = ProductsApi;
