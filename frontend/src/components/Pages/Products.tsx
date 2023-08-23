@@ -37,8 +37,16 @@ export const Products: FC = () => {
     setQueryPara((para) => ({ ...para, currentPage: pageNum }));
   };
 
-  const updateCategories = (categories: string) => {
+  const updateCategoryPara = (categories: string) => {
+    console.log("categories", categories);
     setQueryPara((para) => ({ ...para, category: categories }));
+  };
+
+  const updateRatingsPara = (ratings: number) => {
+    setQueryPara((para) => ({
+      ...para,
+      ratings: queryPara.ratings == ratings ? 0 : ratings,
+    }));
   };
 
   const sortProducts = (sortBy: { label: string; value: string }) => {
@@ -83,17 +91,17 @@ export const Products: FC = () => {
   }, [getProducts, queryPara]);
 
   return (
-    <div className="relative m-auto flex h-full pb-4">
+    <div className="m-auto flex h-full min-h-[500px] pb-4">
       {showFilter && (
         <div className="fixed z-30 min-h-screen w-screen bg-semiDarkOverlay xs:hidden"></div>
       )}
       {isFetching && (
-        <div className="absolute flex h-full w-full items-center justify-center bg-semiDarkOverlay">
-          <SpinningAnim />
+        <div className="absolute flex h-full w-full items-center justify-center bg-[rgba(0,0,0,0.1)]">
+          <SpinningAnim height="5rem" width="5rem" />
         </div>
       )}
       <div
-        className={`absolute z-50 h-full w-3/5 bg-[rgba(255,255,255,0.95)] xs:static xs:block xs:w-80 xs:bg-transparent ${
+        className={`absolute z-50 h-full w-3/5 bg-[rgba(255,255,255,0.95)] xs:static xs:block xs:w-60 xs:bg-transparent md:w-80 ${
           !showFilter && "hidden"
         }`}
       >
@@ -103,7 +111,11 @@ export const Products: FC = () => {
           className="m-2 ml-auto w-6 p-0.5 duration-200 hover:cursor-pointer hover:border-[1px] hover:border-secondary xs:hidden"
           onClick={() => setShowFilter(false)}
         />
-        <Filters updateCategories={updateCategories} showFilter={showFilter} />
+        <Filters
+          updateCategoryPara={updateCategoryPara}
+          updateRatingsPara={updateRatingsPara}
+          queryPara={queryPara}
+        />
       </div>
       <div className="xs:max-w-[90%] xs:px-4">
         <section className="flex w-fit items-end p-2">
@@ -118,11 +130,11 @@ export const Products: FC = () => {
           </div>
         </section>
         <section className="m-auto">
-          <div className="mt-2 grid grid-cols-2 xs:justify-between xs:gap-4 ss:grid-cols-3 sm:grid-cols-4 sm:gap-8">
+          <div className="mt-2 grid grid-cols-2 xs:justify-between xs:gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 md:gap-8">
             {products}
           </div>
         </section>
-        <section className="mt-2 w-full">
+        <section className="mt-4 w-full">
           <Pagination
             currentPage={queryPara.currentPage}
             numOfPages={productsList?.pages}

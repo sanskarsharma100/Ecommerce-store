@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 
 type Props = {
   selectedSort: string;
@@ -37,7 +37,7 @@ export const SortBy: FC<Props> = ({ selectedSort, sortProducts }) => {
         htmlFor="sortByCheckbox"
         className="absolute z-[999] hidden peer-checked:block"
       >
-        <ul className="bg-hoverColor peer-checked:block">{sortByOptions}</ul>
+        <ul className="bg-hoverColor">{sortByOptions}</ul>
       </label>
     </>
   );

@@ -1,13 +1,19 @@
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import { RatingStar } from "../RatingStar";
 import { useGetCategoriesQuery } from "../../services/productsApi";
+import { getProductPara } from "../../utils/types";
 
 type Props = {
-  updateCategories: (_categories: string) => void;
-  showFilter: boolean;
+  updateCategoryPara: (_categories: string) => void;
+  updateRatingsPara: (_ratings: number) => void;
+  queryPara: getProductPara;
 };
 
-export const Filters: FC<Props> = ({ updateCategories, showFilter }) => {
+export const Filters: FC<Props> = ({
+  updateCategoryPara,
+  updateRatingsPara,
+  queryPara,
+}) => {
   const { data: categoriesData } = useGetCategoriesQuery();
   const [selectedCategories, setSelectedCategories] = useState<Array<string>>(
     []
@@ -15,23 +21,33 @@ export const Filters: FC<Props> = ({ updateCategories, showFilter }) => {
 
   const filterCategories = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
+
     if (target.checked) {
       setSelectedCategories((prevData) => [...prevData, target.name]);
     } else {
-      setSelectedCategories((prevData) => {
-        return prevData.splice(prevData.indexOf(target.name), 0);
-      });
+      setSelectedCategories((prevCategories) =>
+        prevCategories.filter((category) => category !== target.name)
+      );
     }
   };
 
   useEffect(() => {
-    updateCategories(selectedCategories.join("%20"));
-    console.log("selectedCategories", selectedCategories);
+    updateCategoryPara(selectedCategories.join("%20"));
   }, [selectedCategories]);
 
   const ratings = Array(4)
     .fill(0)
-    .map((_, ind) => <RatingStar key={ind * ind} rating={ind + 1} />);
+    .map((_, ind) => (
+      <div
+        key={ind * ind}
+        className={`p-1 hover:cursor-pointer ${
+          queryPara.ratings == ind + 1 && "border border-accent"
+        }`}
+        onClick={() => updateRatingsPara(ind + 1)}
+      >
+        <RatingStar rating={ind + 1} />
+      </div>
+    ));
 
   const categories = categoriesData?.categories.map((category) => (
     <li key={category._id}>
