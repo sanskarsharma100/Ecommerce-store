@@ -50,7 +50,7 @@ export const Filters: FC<Props> = ({
     ));
 
   const categories = categoriesData?.categories.map((category) => (
-    <li key={category._id}>
+    <li key={category._id} className="flex items-center gap-1">
       <input
         id={category._id}
         type="checkbox"
