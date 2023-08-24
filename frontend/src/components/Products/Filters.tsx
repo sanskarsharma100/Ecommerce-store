@@ -33,6 +33,7 @@ export const Filters: FC<Props> = ({
 
   useEffect(() => {
     updateCategoryPara(selectedCategories.join("%20"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategories]);
 
   const ratings = Array(4)

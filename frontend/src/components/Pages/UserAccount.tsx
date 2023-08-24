@@ -16,7 +16,7 @@ export const UserAccount: FC = () => {
   const { user } = useAppSelector(selectCurrentUser);
   const [
     updateUserDetails,
-    { isLoading: isUserLoading, isSuccess: isUserSuccess, error: userError },
+    { isLoading: isUserLoading, isSuccess: isUserSuccess },
   ] = useUpdateUserDetailsMutation();
 
   const [

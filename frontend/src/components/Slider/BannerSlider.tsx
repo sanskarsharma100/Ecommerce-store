@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useEffect } from "react";
 import { useState } from "react";
 
 type Props = {
@@ -67,6 +67,7 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
     return () => {
       clearInterval(timerId);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex]);
 
   return (
