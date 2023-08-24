@@ -75,11 +75,13 @@ export const Products: FC = () => {
           <div className="flex h-full items-center justify-center p-1 xs:p-0">
             <img src={product.images[0].url} alt={product.name} />
           </div>
-          <div className="p-1 text-xs">
+          <div className="p-1 text-dynamicText">
             <p className="line-clamp-2 w-full overflow-hidden text-ellipsis font-semibold text-gray-800">
               {product.name}
             </p>
-            <p className="font-bold">{convertToINR(product.price)}</p>
+            <p className="font-bold text-success">
+              {convertToINR(product.price)}
+            </p>
           </div>
         </>
       )}

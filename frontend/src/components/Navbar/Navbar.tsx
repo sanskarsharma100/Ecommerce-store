@@ -65,8 +65,8 @@ export const Navbar: FC = () => {
         to={item.link}
         className={({ isActive }) =>
           isActive
-            ? "inline-block w-full max-w-xl text-accent"
-            : "inline-block w-full max-w-xl"
+            ? "inline-block w-full max-w-xl uppercase text-accent"
+            : "inline-block w-full max-w-xl uppercase"
         }
       >
         {item.name}

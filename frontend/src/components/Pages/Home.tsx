@@ -7,6 +7,7 @@ import oneplus10R from "../../assets/Banner/oneplus10R.png";
 import s23Ultra from "../../assets/Banner/s23Ultra.jpg";
 import iphone14 from "../../assets/Banner/iphone14.jpg";
 import iphone14Poster from "../../assets/images/iphone14Poster.webp";
+import appleMacbookPro from "../../assets/images/Macbook.jpg";
 import { Link } from "react-router-dom";
 import { getProductPara } from "../../utils/types";
 
@@ -27,7 +28,7 @@ export const Home: FC = () => {
   const products = data?.products.map((product) => (
     <div
       key={product._id}
-      className="flex w-full flex-col border border-gray-400 hover:cursor-pointer hover:border-gray-600 hover:drop-shadow-3xl xs:min-w-[10rem] xs:border-2"
+      className="flex w-full min-w-[10rem]  flex-col border border-gray-400 hover:cursor-pointer hover:border-gray-600 hover:drop-shadow-3xl xs:min-w-[15rem] xs:border-2"
     >
       {isLoading ? (
         <div className="m-auto flex items-center justify-center">
@@ -38,11 +39,13 @@ export const Home: FC = () => {
           <div className="flex h-full items-center justify-center">
             <img src={product.images[0].url} alt={product.name} />
           </div>
-          <div className="bg-background p-1 text-xs">
-            <p className="line-clamp-2 w-full overflow-hidden text-ellipsis font-semibold text-gray-800">
+          <div className="bg-background p-1 text-dynamicText">
+            <p className="line-clamp-2 w-full overflow-hidden text-ellipsis font-semibold">
               {product.name}
             </p>
-            <p className="font-bold">{convertToINR(product.price)}</p>
+            <p className="font-bold text-success">
+              {convertToINR(product.price)}
+            </p>
           </div>
         </>
       )}
@@ -55,25 +58,29 @@ export const Home: FC = () => {
         <BannerSlider pictures={banner} />
         <section className="mt-4 flex w-full flex-col items-center xs:items-start">
           <div className="mb-2 flex w-full items-center bg-gradient-to-r from-accent to-background to-90%">
-            <h2 className="pl-2 text-lg font-extrabold">New Arrivals</h2>
+            <h2 className="pl-2 text-lg font-extrabold sm:text-xl">
+              New Arrivals
+            </h2>
             <Link
-              to="/"
-              className="ml-auto mr-1 hidden text-xs font-semibold text-gray-900 hover:underline xs:block"
+              to="/products"
+              className="ml-auto mr-1 text-sm font-semibold text-gray-900 hover:text-accent hover:underline xs:block"
             >
               See All
             </Link>
           </div>
-          <div className="relative h-96 w-full overflow-hidden xs:h-auto xs:overflow-x-auto">
-            <div className="grid w-fit grid-cols-3 justify-center xs:flex xs:w-full xs:justify-start xs:gap-2">
+          <div className="relative w-full overflow-hidden overflow-x-auto">
+            <div className="flex w-full justify-start gap-1 xs:gap-2">
               {products}
             </div>
-            <button className="absolute bottom-0 h-fit w-full border bg-gray-300 p-1 text-center font-semibold text-textColor shadow-[0px_0px_20px_20px_rgba(0,0,0,0.3)] hover:bg-gray-400 xs:hidden">
-              See All
-            </button>
           </div>
         </section>
-        <section>
-          <img src={iphone14Poster} alt="iphone 14 Poster" className="mt-2" />
+        <section className="mt-4">
+          {/* <img src={iphone14Poster} alt="Iphone 14 Poster" /> */}
+          <img
+            src={appleMacbookPro}
+            alt="Macbook Pro Poster"
+            className="m-auto"
+          />
         </section>
       </div>
     </div>

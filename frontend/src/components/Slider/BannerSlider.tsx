@@ -40,8 +40,8 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
     <button
       role="button"
       key={img + index}
-      className={`m-1 h-[10px] w-[10px] rounded-lg duration-300 ${
-        index == currentIndex ? `bg-accent` : `bg-semiDarkOverlay`
+      className={`m-1 h-[8px] w-[8px] rounded-lg duration-300 xs:h-[10px] xs:w-[10px] ${
+        index == currentIndex ? `bg-accent` : `bg-grayDarker`
       }`}
       onClick={() => slideToImage(index)}
     ></button>
@@ -87,8 +87,10 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
         >
           <span className=" right float-right mr-[40%] -rotate-45 -skew-x-12 -skew-y-12 border-b-4 border-r-4 p-2 drop-shadow-[0px_0px_5px_rgb(0,0,0)] duration-300 group-hover:mr-[30%] xs:p-1 sm:border-b-8 sm:border-r-8 sm:p-3"></span>
         </button>
+        <div className="absolute bottom-1 left-1/2 mt-1 flex -translate-x-1/2 justify-center rounded-lg bg-[rgba(0,0,0,0.6)] p-0 xs:p-0.5">
+          {dots}
+        </div>
       </div>
-      <div className="flex justify-center">{dots}</div>
     </section>
   );
 };

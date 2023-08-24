@@ -45,7 +45,7 @@ export const Filters: FC<Props> = ({
         }`}
         onClick={() => updateRatingsPara(ind + 1)}
       >
-        <RatingStar rating={ind + 1} />
+        <RatingStar rating={ind + 1} starSize="20px" />
       </div>
     ));
 
@@ -71,12 +71,12 @@ export const Filters: FC<Props> = ({
     <aside className="p-2">
       <section className="m-auto w-full max-w-[8rem]">
         <div className="m-auto">
-          <p className="mb-1 font-semibold">Reviews</p>
+          <p className="mb-1 font-semibold xs:text-lg">Reviews</p>
           <div className="flex flex-col-reverse gap-1">{ratings}</div>
         </div>
         <div className="m-auto mt-2">
-          <p className="mb-1 font-semibold">Categories</p>
-          <ul className="text-sm">{categories}</ul>
+          <p className="mb-1 font-semibold xs:text-lg">Categories</p>
+          <ul className="text-sm xs:text-base">{categories}</ul>
         </div>
       </section>
     </aside>
