@@ -13,7 +13,7 @@ export const ProductCard: FC<Props> = ({ product, isLoading }) => {
   return (
     <Link
       to={`/products/${product._id}`}
-      className="flex w-full min-w-[9rem] flex-col bg-background outline outline-1 -outline-offset-1 outline-gray-700 hover:cursor-pointer hover:border-gray-600 hover:drop-shadow-3xl xs:max-w-[15rem] xs:outline-2 ss:max-w-[15rem]"
+      className="flex w-full min-w-[9rem] flex-col bg-background outline outline-1 -outline-offset-1 outline-gray-700 duration-300 hover:cursor-pointer hover:border-gray-600 hover:drop-shadow-3xl xs:max-w-[15rem] xs:shadow-[0px_0px_5px_0px_rgba(0,0,0,0.1)] xs:outline-none ss:max-w-[15rem]"
     >
       {isLoading ? (
         <div className="m-auto flex items-center justify-center">

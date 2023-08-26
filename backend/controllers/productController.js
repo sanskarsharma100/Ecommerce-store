@@ -66,7 +66,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
   const products = await apiFeature.query;
   const currentProductCount = products.length;
   let pages = Math.ceil(totalProductCount / resultPerPage);
-  if (req.query.category || req.query.price) {
+  if (req.query.category) {
     pages = Math.ceil(currentProductCount / resultPerPage);
   }
   res.status(200).json({

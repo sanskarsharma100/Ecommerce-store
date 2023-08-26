@@ -1,4 +1,4 @@
-import React, { FC, TouchEventHandler, useEffect, useRef } from "react";
+import React, { FC } from "react";
 import { useState } from "react";
 import { ImageType } from "../../utils/types";
 import useSwipe from "../../hooks/useSwipe";
