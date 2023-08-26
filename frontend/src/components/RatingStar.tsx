@@ -3,7 +3,7 @@ import { FaRegStarHalfStroke, FaRegStar, FaStar } from "react-icons/fa6";
 
 export const RatingStar: FC<{ rating: number; starSize?: string }> = ({
   rating,
-  starSize,
+  starSize = "16px",
 }) => {
   const ratingStars = [];
   const fractionalRating = rating - Math.floor(rating);

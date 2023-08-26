@@ -62,7 +62,7 @@ export const Products: FC = () => {
   };
 
   const products = productsList?.products.map((product) => (
-    <ProductCard product={product} isLoading={isLoading} />
+    <ProductCard key={product._id} product={product} isLoading={isLoading} />
   ));
 
   useEffect(() => {

@@ -27,15 +27,18 @@ export type ImageType = {
 };
 
 export type productType = {
+  _id: string;
   name: string;
-  category: string;
   description: string;
-  numOfReviews: number;
   price: number;
   ratings: number;
-  stock: number;
-  _id: string;
   images: [ImageType];
+  category: string;
+  stock: number;
+  numOfReviews: number;
+  user: string;
+  reviews: [];
+  createdAt: string;
 };
 
 export type allProductResp = {
@@ -44,6 +47,11 @@ export type allProductResp = {
   currentProductCount: number;
   pages: number;
   products: [productType];
+};
+
+export type productDetailsResp = {
+  success: boolean;
+  product: productType;
 };
 
 export type getProductPara = {

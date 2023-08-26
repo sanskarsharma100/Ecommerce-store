@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+/*eslint-env node*/
 export default {
   future: {
     hoverOnlyWhenSupported: true,
@@ -36,11 +37,13 @@ export default {
         navbar: "0px 3px 5px 2px rgba(0,0,0,0.2)",
         custom: "6px 6px 0px 0px rgba(0,0,0,0.75)",
         cardShadow: "0px 0px 500px 50px rgba(0,0,0,0.9)",
+        accentBox: "0px 0px 2px 1px hsl(338, 80%, 65%, 0.5)",
       },
       colors: {
         textColor: "hsl(0, 0%, 0%)",
         grayDarker: "hsl(0, 0%, 50%)",
-        background: "hsl(0, 0%, 95%)",
+        light: "hsl(0, 0%, 90%)",
+        background: "hsl(0, 0%, 100%)",
         "background-2": "hsl(0, 0%, 10%)",
         primary: "hsl(0, 0%, 100%)",
         secondary: "hsl(0, 0%, 0%)",

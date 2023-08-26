@@ -63,6 +63,7 @@ export const Navbar: FC = () => {
     <li key={i} className="font-semibold hover:cursor-pointer hover:underline">
       <NavLink
         to={item.link}
+        end
         className={({ isActive }) =>
           isActive
             ? "inline-block w-full max-w-xl uppercase text-accent"

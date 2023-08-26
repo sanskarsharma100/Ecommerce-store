@@ -23,6 +23,7 @@ export const Menubar = forwardRef(
       >
         <NavLink
           to={item.link}
+          end
           className={({ isActive }) =>
             isActive
               ? "inline-block w-full max-w-xl uppercase text-accent"

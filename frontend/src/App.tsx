@@ -8,6 +8,7 @@ import { UserAccount } from "./components/Pages/UserAccount";
 import RequireAuth from "./components/Routes/RequireAuth";
 import { Layout } from "./components/Layout";
 import { Products } from "./components/Pages/Products";
+import { ProductDetails } from "./components/Pages/ProductDetails";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />

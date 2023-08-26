@@ -2,6 +2,7 @@ import {
   allProductResp,
   getCategoryResp,
   getProductPara,
+  productDetailsResp,
 } from "../utils/types";
 import { apiSlice } from "./apiSlice";
 
@@ -27,6 +28,9 @@ export const ProductsApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    getProductDetails: builder.query<productDetailsResp, string>({
+      query: (id) => `/product/${id}`,
+    }),
     getCategories: builder.query<getCategoryResp, void>({
       query: () => "/categories",
     }),
@@ -37,4 +41,5 @@ export const {
   useGetProductsQuery,
   useLazyGetProductsQuery,
   useGetCategoriesQuery,
+  useGetProductDetailsQuery,
 } = ProductsApi;

@@ -24,14 +24,14 @@ export const Home: FC = () => {
   console.log("useGetProductsQuery", productsList);
 
   const products = productsList?.products.map((product) => (
-    <ProductCard product={product} isLoading={isLoading} />
+    <ProductCard key={product._id} product={product} isLoading={isLoading} />
   ));
 
   return (
     <div className="min-h-[400px]">
       <div className="mt-2 p-2 ss:p-4">
         <BannerSlider pictures={banner} />
-        <section className="mt-4 flex w-full flex-col items-center xs:items-start">
+        <section className="mt-4 flex w-full flex-col items-center overflow-hidden xs:items-start">
           <div className="mb-2 flex w-full items-center bg-gradient-to-r from-accent to-background to-90%">
             <h2 className="pl-2 text-lg font-extrabold sm:text-xl">
               New Arrivals
@@ -43,8 +43,8 @@ export const Home: FC = () => {
               See All
             </Link>
           </div>
-          <div className="relative w-full overflow-hidden overflow-x-auto">
-            <div className="flex w-full justify-start gap-1 xs:gap-2">
+          <div className="w-full overflow-x-auto">
+            <div className="flex justify-start gap-2 xs:w-[2000px] sm:gap-3 ">
               {products}
             </div>
           </div>
