@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { useGetProductsQuery } from "../../services/productsApi";
 import BannerSlider from "./../Slider/BannerSlider";
 import oneplus10R from "../../assets/Banner/oneplus10R.png";
@@ -8,6 +8,7 @@ import appleMacbookPro from "../../assets/images/Macbook.jpg";
 import { Link } from "react-router-dom";
 import { getProductPara } from "../../utils/types";
 import { ProductCard } from "../Products/ProductCard";
+import useSwipe from "../../hooks/useSwipe";
 
 export const Home: FC = () => {
   const queryPara = {
@@ -19,6 +20,15 @@ export const Home: FC = () => {
     sort: "relevance",
   } as getProductPara;
   const { data: productsList, isLoading } = useGetProductsQuery(queryPara);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const swipeHandlers = useSwipe({
+    onSwipedLeft: () => {
+      containerRef.current?.scrollBy(0, 125);
+    },
+    onSwipedRight: () => {
+      containerRef.current?.scrollBy(0, -125);
+    },
+  });
   const banner = [oneplus10R, s23Ultra, iphone14];
 
   console.log("useGetProductsQuery", productsList);
@@ -43,7 +53,11 @@ export const Home: FC = () => {
               See All
             </Link>
           </div>
-          <div className="w-full overflow-x-auto">
+          <div
+            className="w-full overflow-x-auto"
+            ref={containerRef}
+            {...swipeHandlers}
+          >
             <div className="flex justify-start gap-2 xs:w-[2000px] sm:gap-3 ">
               {products}
             </div>
