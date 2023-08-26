@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from "react";
 import { useState } from "react";
+import useSwipe from "../../hooks/useSwipe";
 
 type Props = {
   pictures: Array<string>;
@@ -7,6 +8,11 @@ type Props = {
 
 const BannerSlider: FC<Props> = ({ pictures }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const swipeHandlers = useSwipe({
+    onSwipedLeft: nextSlide,
+    onSwipedRight: previousSlide,
+  });
 
   function previousSlide() {
     const newIndex = currentIndex == 0 ? pictures.length - 1 : currentIndex - 1;
@@ -72,7 +78,10 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
 
   return (
     <section className="mx-auto my-0 overflow-hidden md:min-w-[60%]">
-      <div className="relative flex aspect-[16/6] h-full w-full">
+      <div
+        className="relative flex aspect-[16/6] h-full w-full"
+        {...swipeHandlers}
+      >
         {slider}
         <button
           role="button"

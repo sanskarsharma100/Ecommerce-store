@@ -77,7 +77,7 @@ export const ProductDetails: FC = () => {
               </button>
             </div>
             <div className="mt-2 sm:mt-6">
-              <div className="text-lg font-extrabold ss:text-3xl sm:mb-2">
+              <div className="text-lg font-extrabold ss:text-2xl sm:mb-2 sm:text-3xl">
                 {convertToINR(product.price)}
               </div>
               <button className="inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-bold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary">
