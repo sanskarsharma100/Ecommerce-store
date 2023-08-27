@@ -25,7 +25,7 @@ export const ProductDetails: FC = () => {
   return product ? (
     <div className="mb-10 mt-6 min-h-[500px] p-2">
       <div className="m-auto flex h-full flex-col items-stretch gap-5 sm:flex-row lg:w-4/5">
-        <section className="min-w-full xs:min-w-[80%] sm:min-w-[50%]">
+        <section className="min-w-full xs:m-auto xs:min-w-[80%] xs:max-w-[40%] ss:max-w-[50%] sm:min-w-[50%]">
           <ImagesPreview pictures={product.images} />
         </section>
         <section className="mx-auto flex w-full max-w-[30rem] flex-col justify-between sm:max-w-[25rem]">

@@ -85,17 +85,17 @@ export const Navbar: FC = () => {
   }
 
   return (
-    <header className="sticky top-0 z-[99999] m-auto bg-background font-inter shadow-navbar xs:py-2">
+    <header className="sticky top-0 z-[99999] m-auto bg-background font-inter shadow-navbar">
       {isOpen && (
-        <div className="fixed z-30 min-h-screen w-screen bg-semiDarkOverlay xs:hidden"></div>
+        <div className="fixed z-30 min-h-screen w-screen bg-semiDarkOverlay ss:hidden"></div>
       )}
-      <div className="m-auto flex items-center justify-between gap-4 xs:max-w-[95%] ss:max-w-[90%]">
+      <div className="m-auto flex items-center justify-between gap-4 p-2 sm:max-w-[90%]">
         <img
           className="h-9 max-w-[10rem] p-2 xs:max-w-[12rem]"
           src={logo}
           alt="ShopeeFast Logo"
         />
-        <ul className="hidden items-center justify-between xs:flex xs:w-[16rem] ss:w-[20rem] sm:w-[25rem]">
+        <ul className="hidden items-center justify-between ss:flex ss:w-[20rem] sm:w-[25rem]">
           {menuItems}
           <li className="flex items-center hover:cursor-pointer">
             {isAuthenticated ? (

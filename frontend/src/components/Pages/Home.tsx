@@ -43,12 +43,12 @@ export const Home: FC = () => {
         <BannerSlider pictures={banner} />
         <section className="mt-4 flex w-full flex-col items-center overflow-hidden xs:items-start">
           <div className="mb-2 flex w-full items-center bg-gradient-to-r from-accent to-background to-90%">
-            <h2 className="pl-2 text-lg font-extrabold sm:text-xl">
+            <h2 className="pl-2 text-sm font-extrabold xs:text-base sm:text-xl">
               New Arrivals
             </h2>
             <Link
               to="/products"
-              className="ml-auto mr-1 text-sm font-semibold text-gray-900 hover:text-accent hover:underline xs:block"
+              className="ml-auto mr-1 text-xs font-semibold text-gray-900 underline hover:text-accent hover:underline xs:block ss:text-sm ss:no-underline"
             >
               See All
             </Link>
