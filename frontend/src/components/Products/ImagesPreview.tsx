@@ -51,7 +51,7 @@ const ImagesPreview: FC<Props> = ({ pictures }) => {
       className={`h-[8px] rounded-full duration-300 xs:h-[10px] ${
         index == currentIndex
           ? `w-[15px] bg-accent ss:w-[18px]`
-          : `w-[8px] bg-grayDarker ss:w-[10px]`
+          : `bg-grayCustom w-[8px] ss:w-[10px]`
       }`}
       onClick={() => slideToImage(index)}
     ></button>

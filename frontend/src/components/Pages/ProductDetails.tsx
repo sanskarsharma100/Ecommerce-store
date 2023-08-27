@@ -30,13 +30,13 @@ export const ProductDetails: FC = () => {
         </section>
         <section className="mx-auto flex w-full max-w-[30rem] flex-col justify-between sm:max-w-[25rem]">
           <div className="mb-auto">
-            <p className="text-xs text-grayDarker ss:text-sm">
+            <p className="text-xs text-grayCustom ss:text-sm">
               {product.category}
             </p>
-            <h1 className="text-lg font-bold ss:text-4xl ss:font-extrabold">
+            <h1 className="text-lg font-bold text-grayDarker ss:text-3xl ss:font-bold">
               {product.name}
             </h1>
-            <h3 className="text-grayDarker ss:text-lg">
+            <h3 className="text-grayCustom ss:text-lg">
               {product.description}
             </h3>
             <div className="flex max-w-[8rem] items-center gap-1 ss:hidden ss:max-w-[9rem]">
@@ -58,7 +58,7 @@ export const ProductDetails: FC = () => {
             <div className="flex w-fit border border-secondary">
               <button
                 className={`border-r border-secondary px-2 text-xl font-extrabold ${
-                  quantity <= 1 && "text-grayDarker"
+                  quantity <= 1 && "text-grayCustom"
                 }`}
                 onClick={() => setQuantity(quantity - 1)}
               >
@@ -69,7 +69,7 @@ export const ProductDetails: FC = () => {
               </div>
               <button
                 className={`border-l border-secondary px-2 text-xl font-bold ${
-                  quantity >= 10 && "text-grayDarker"
+                  quantity >= 10 && "text-grayCustom"
                 }`}
                 onClick={() => setQuantity(quantity + 1)}
               >
@@ -77,10 +77,10 @@ export const ProductDetails: FC = () => {
               </button>
             </div>
             <div className="mt-2 sm:mt-6">
-              <div className="text-lg font-extrabold ss:text-2xl sm:mb-2 sm:text-3xl">
+              <div className="text-lg font-extrabold text-grayDarker ss:text-2xl sm:mb-2 sm:text-3xl">
                 {convertToINR(product.price)}
               </div>
-              <button className="inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-bold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary">
+              <button className=" inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary">
                 Add to Cart
               </button>
             </div>

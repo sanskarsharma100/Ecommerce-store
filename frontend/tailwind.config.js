@@ -41,7 +41,8 @@ export default {
       },
       colors: {
         textColor: "hsl(0, 0%, 0%)",
-        grayDarker: "hsl(0, 0%, 50%)",
+        grayCustom: "hsl(0, 0%, 50%)",
+        grayDarker: "hsl(0, 0%, 20%)",
         light: "hsl(0, 0%, 90%)",
         background: "hsl(0, 0%, 100%)",
         "background-2": "hsl(0, 0%, 10%)",

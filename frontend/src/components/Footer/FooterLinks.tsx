@@ -16,7 +16,7 @@ export const FooterLinks: FC<Props> = ({ title, links }) => {
           <li key={i}>
             <a
               href="#"
-              className="text-xs font-light text-grayDarker hover:underline ss:text-sm"
+              className="text-grayCustom text-xs font-light hover:underline ss:text-sm"
             >
               {link}
             </a>

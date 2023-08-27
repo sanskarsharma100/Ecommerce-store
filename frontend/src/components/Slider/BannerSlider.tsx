@@ -47,7 +47,7 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
       role="button"
       key={img + index}
       className={`m-1 h-[8px] w-[8px] rounded-lg duration-300 xs:h-[10px] xs:w-[10px] ${
-        index == currentIndex ? `bg-accent` : `bg-grayDarker`
+        index == currentIndex ? `bg-accent` : `bg-grayCustom`
       }`}
       onClick={() => slideToImage(index)}
     ></button>
