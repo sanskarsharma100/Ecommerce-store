@@ -6,14 +6,13 @@ const sendToken = require("../utils/jwtToken");
 
 exports.addToCart = catchAsyncErrors(async (req, res, next) => {
   const productId = req.body.productId;
-  let quantity = req.body.quantity;
+  let quantity = req.body.quantity || 1;
   const product = await Product.findById(productId);
   const userId = req.user._id;
   let cart = await Cart.findOne({ user: userId });
   if (quantity > product.stock) {
     quantity = product.stock;
   }
-  const totalPrice = quantity * product.price;
 
   //Check if cart is created or not for the current user
   if (cart) {
@@ -21,12 +20,18 @@ exports.addToCart = catchAsyncErrors(async (req, res, next) => {
     let itemIndex = cart.products.findIndex((p) => p.productId == productId);
     if (itemIndex > -1) {
       let productItem = cart.products[itemIndex];
-      productItem.quantity = quantity;
-      productItem.totalPrice = totalPrice;
+      productItem.quantity = req.body.quantity
+        ? quantity
+        : productItem.quantity + quantity;
+      productItem.totalPrice = productItem.quantity * product.price;
       cart.products[itemIndex] = productItem;
     } else {
       //product does not exists in cart, add new item
-      cart.products.push({ productId, quantity, totalPrice });
+      cart.products.push({
+        productId,
+        quantity,
+        totalPrice: quantity * product.price,
+      });
     }
     cart.cartPrice = cart.products.reduce(
       (acc, product) => acc + product.totalPrice,
@@ -38,6 +43,7 @@ exports.addToCart = catchAsyncErrors(async (req, res, next) => {
       cart,
     });
   } else {
+    const totalPrice = quantity * product.price;
     //No cart found for user, create a new one
     const cart = await Cart.create({
       products: [{ productId, quantity, totalPrice }],
@@ -63,8 +69,6 @@ exports.deleteCartProduct = catchAsyncErrors(async (req, res, next) => {
     return product.productId == productId;
   });
 
-  console.log("productToDelete", productToDelete);
-
   if (!productToDelete) {
     return next(new ErrorHandler("Product Not Found in the cart", 404));
   }
@@ -84,7 +88,6 @@ exports.deleteCartProduct = catchAsyncErrors(async (req, res, next) => {
 exports.getCartProducts = catchAsyncErrors(async (req, res) => {
   const userId = req.user._id;
   const cart = await Cart.findOne({ user: userId });
-  console.log(cart);
   res.status(200).json({
     success: true,
     cart,
