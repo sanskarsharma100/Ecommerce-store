@@ -174,7 +174,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     email: req.body.email,
   };
 
-  if (req.body.avatar != "") {
+  if (req.body.avatar && req.body.avatar != "") {
     const user = await User.findById(req.user.id);
     const imgId = user.avatar.public_id;
     await cloudinary.v2.uploader.destroy(imgId);
