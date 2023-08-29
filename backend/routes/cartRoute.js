@@ -3,6 +3,8 @@ const {
   addToCart,
   getCartProducts,
   deleteCartProduct,
+  increaseProductQuantity,
+  decreaseProductQuantity,
 } = require("../controllers/cartController");
 const { isAuthenticatedUser } = require("../middleware/auth");
 
@@ -12,5 +14,13 @@ router.route("/cart/").get(isAuthenticatedUser, getCartProducts);
 router
   .route("/cart/product/:id")
   .delete(isAuthenticatedUser, deleteCartProduct);
+
+router
+  .route("/cart/product/:id/quantity/increase")
+  .patch(isAuthenticatedUser, increaseProductQuantity);
+
+router
+  .route("/cart/product/:id/quantity/decrease")
+  .patch(isAuthenticatedUser, decreaseProductQuantity);
 
 module.exports = router;
