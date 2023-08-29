@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../../services/productsApi";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { RatingStar } from "./../RatingStar";
@@ -39,9 +39,6 @@ export const ProductDetails: FC = () => {
       setIsProductInCart(true);
     }
   }, [cart, productId]);
-
-  console.log("product", product);
-  console.log("isProductInCart", isProductInCart);
 
   return product ? (
     <div className="mb-10 mt-6 min-h-[500px] p-2">
@@ -89,9 +86,12 @@ export const ProductDetails: FC = () => {
                   <SpinningAnim />
                 </button>
               ) : isProductInCart ? (
-                <button className=" inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary">
+                <Link
+                  to="/cart"
+                  className=" inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary"
+                >
                   Go to Cart
-                </button>
+                </Link>
               ) : (
                 <button
                   className=" inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary"

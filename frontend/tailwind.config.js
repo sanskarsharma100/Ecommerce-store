@@ -46,6 +46,7 @@ export default {
         light: "hsl(0, 0%, 90%)",
         background: "hsl(0, 0%, 100%)",
         "background-2": "hsl(0, 0%, 10%)",
+        "background-3": "rgb(234, 237, 237)",
         primary: "hsl(0, 0%, 100%)",
         secondary: "hsl(0, 0%, 0%)",
         accent: "hsl(338, 80%, 65%)",

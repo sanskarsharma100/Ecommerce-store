@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react";
 import logo from "../../assets/images/logo.svg";
+import { IoCartOutline } from "react-icons/io5";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menubar } from "./Menubar";
 import { HamBtn } from "./../Buttons/HamBtn";
@@ -23,7 +24,7 @@ export const Navbar: FC = () => {
   const navLinks = [
     { name: "Home", link: "/" },
     { name: "Products", link: "/products" },
-    { name: "About", link: "/about" },
+    { name: "Cart", link: "/cart", icon: "cart" },
   ];
 
   const hamBtnHandler = (e: React.FormEvent) => {
@@ -60,7 +61,10 @@ export const Navbar: FC = () => {
   }, [isOpen, menuBtnRef.current]);
 
   const menuItems = navLinks.map((item, i) => (
-    <li key={i} className="font-semibold hover:cursor-pointer hover:underline">
+    <li
+      key={i}
+      className="flex align-middle font-semibold hover:cursor-pointer hover:underline"
+    >
       <NavLink
         to={item.link}
         end
@@ -70,7 +74,7 @@ export const Navbar: FC = () => {
             : "inline-block w-full max-w-xl uppercase"
         }
       >
-        {item.name}
+        {item.icon ? <IoCartOutline className="text-3xl" /> : item.name}
       </NavLink>
     </li>
   ));

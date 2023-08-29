@@ -13,7 +13,7 @@ export const cartApi = apiSlice.injectEndpoints({
         invalidatesTags: ["Cart"],
       }
     ),
-    increaseQuantity: builder.mutation<void, string | undefined>({
+    increaseQuantity: builder.mutation<void, string>({
       query: (productId) => ({
         url: `/cart/product/${productId}/quantity/increase`,
         method: "PATCH",
@@ -21,7 +21,7 @@ export const cartApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Cart"],
     }),
 
-    decreaseQuantity: builder.mutation<void, string | undefined>({
+    decreaseQuantity: builder.mutation<void, string>({
       query: (productId) => ({
         url: `/cart/product/${productId}/quantity/decrease`,
         method: "PATCH",
@@ -29,7 +29,7 @@ export const cartApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Cart"],
     }),
 
-    deleteProductFromCart: builder.mutation<void, string | undefined>({
+    removeProductFromCart: builder.mutation<void, string>({
       query: (productId) => ({
         url: `/cart/product/${productId}`,
         method: "DELETE",
@@ -45,7 +45,7 @@ export const cartApi = apiSlice.injectEndpoints({
 
 export const {
   useAddProductToCartMutation,
-  useDeleteProductFromCartMutation,
+  useRemoveProductFromCartMutation,
   useGetCartProductsQuery,
   useIncreaseQuantityMutation,
   useDecreaseQuantityMutation,
