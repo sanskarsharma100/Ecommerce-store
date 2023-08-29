@@ -6,7 +6,7 @@ import {
 } from "../utils/types";
 import { apiSlice } from "./apiSlice";
 
-export const ProductsApi = apiSlice.injectEndpoints({
+export const productsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query<allProductResp, getProductPara>({
       query: ({
@@ -42,4 +42,4 @@ export const {
   useLazyGetProductsQuery,
   useGetCategoriesQuery,
   useGetProductDetailsQuery,
-} = ProductsApi;
+} = productsApi;

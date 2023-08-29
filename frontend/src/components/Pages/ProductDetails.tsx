@@ -1,26 +1,47 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../../services/productsApi";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { RatingStar } from "./../RatingStar";
 import { convertToINR } from "./../../utils/utils";
 import ImagesPreview from "../Products/ImagesPreview";
+import { SpinningAnim } from "../Loaders/SpinningAnim";
+import {
+  useAddProductToCartMutation,
+  useGetCartProductsQuery,
+} from "../../services/cartApi";
 
 export const ProductDetails: FC = () => {
   const { id: productId } = useParams();
-  const [quantity, setQuantity] = useState<number>(1);
-  const { data, isLoading } = useGetProductDetailsQuery(productId ?? skipToken);
-  const product = data && data.product && data.product;
+  const [isProductInCart, setIsProductInCart] = useState<boolean>(false);
+  const { data: productData, isLoading: isProductsLoading } =
+    useGetProductDetailsQuery(productId ?? skipToken);
+  const [addProductToCart] = useAddProductToCartMutation();
+  const {
+    data: cartData,
+    isSuccess: isCartSuccess,
+    isLoading: isCartLoading,
+  } = useGetCartProductsQuery();
+  const product = productData && productData.product;
+  const cart = cartData && cartData.cart;
 
-  if (quantity <= 0) {
-    setQuantity(1);
-  }
+  const isOutOfStock = product?.stock == 0;
 
-  if (quantity > 10) {
-    setQuantity(10);
-  }
+  const addToCart = () => {
+    addProductToCart({ productId: productId });
+  };
+
+  useEffect(() => {
+    const cartProduct = cart?.products.some(
+      (product) => product.productId === productId
+    );
+    if (cartProduct) {
+      setIsProductInCart(true);
+    }
+  }, [cart, productId]);
 
   console.log("product", product);
+  console.log("isProductInCart", isProductInCart);
 
   return product ? (
     <div className="mb-10 mt-6 min-h-[500px] p-2">
@@ -55,34 +76,30 @@ export const ProductDetails: FC = () => {
             </div>
           </div>
           <div className="mt-8 sm:mt-auto">
-            <div className="flex w-fit border border-secondary">
-              <button
-                className={`border-r border-secondary px-2 text-xl font-extrabold ${
-                  quantity <= 1 && "text-grayCustom"
-                }`}
-                onClick={() => setQuantity(quantity - 1)}
-              >
-                -
-              </button>
-              <div className="h-full w-10 text-center text-lg font-bold">
-                {quantity}
-              </div>
-              <button
-                className={`border-l border-secondary px-2 text-xl font-bold ${
-                  quantity >= 10 && "text-grayCustom"
-                }`}
-                onClick={() => setQuantity(quantity + 1)}
-              >
-                +
-              </button>
-            </div>
             <div className="mt-2 sm:mt-6">
               <div className="text-lg font-extrabold text-grayDarker ss:text-2xl sm:mb-2 sm:text-3xl">
                 {convertToINR(product.price)}
               </div>
-              <button className=" inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary">
-                Add to Cart
-              </button>
+              {isOutOfStock ? (
+                <button className="inline-block w-full max-w-xl overflow-hidden border-2 bg-grayCustom p-2 text-center text-base font-extrabold tracking-wider text-grayDarker hover:cursor-default">
+                  Out of stock
+                </button>
+              ) : isCartLoading ? (
+                <button className="inline-block w-full max-w-xl overflow-hidden border-2 p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:cursor-default">
+                  <SpinningAnim />
+                </button>
+              ) : isProductInCart ? (
+                <button className=" inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary">
+                  Go to Cart
+                </button>
+              ) : (
+                <button
+                  className=" inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary"
+                  onClick={addToCart}
+                >
+                  Add to Cart
+                </button>
+              )}
             </div>
           </div>
         </section>

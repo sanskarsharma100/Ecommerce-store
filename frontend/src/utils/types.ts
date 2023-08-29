@@ -73,3 +73,22 @@ export type getCategoryResp = {
   categoryCount: number;
   categories: [categories];
 };
+
+export type Cart = {
+  _id: string;
+  products: [
+    {
+      productId: string;
+      quantity: number;
+      totalPrice: number;
+      _id: string;
+    }
+  ];
+  cartPrice: number;
+  user: string;
+};
+
+export type getCartResp = {
+  success: boolean;
+  cart: Cart;
+};
