@@ -10,8 +10,10 @@ const cloudinary = require("cloudinary");
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
     folder: "avatars",
-    width: 150,
-    crop: "scale",
+    width: 250,
+    height: 250,
+    gravity: "face",
+    crop: "auto",
   });
 
   const { name, email, password } = req.body;
@@ -180,8 +182,10 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     await cloudinary.v2.uploader.destroy(imgId);
     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
       folder: "avatars",
-      width: 150,
-      crop: "scale",
+      width: 250,
+      height: 250,
+      gravity: "face",
+      crop: "auto",
     });
     newUserData.avatar = {
       public_id: myCloud.public_id,
