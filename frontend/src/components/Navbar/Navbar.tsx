@@ -71,7 +71,7 @@ export const Navbar: FC = () => {
         end
         className={({ isActive }) =>
           isActive
-            ? "flex w-full max-w-xl items-center justify-center bg-light px-2 text-sm uppercase duration-300"
+            ? "flex w-full max-w-xl items-center justify-center bg-light px-2 text-sm uppercase text-accent duration-300"
             : "flex w-full max-w-xl items-center justify-center px-2 text-sm uppercase duration-300 hover:bg-light"
         }
       >
@@ -110,7 +110,7 @@ export const Navbar: FC = () => {
                 to="/account"
                 className={({ isActive }) =>
                   isActive
-                    ? "flex items-center bg-light px-2 py-1.5 duration-300"
+                    ? "flex items-center bg-light px-2 py-1.5 text-accent duration-300"
                     : "flex items-center px-2 py-1.5 duration-300 hover:bg-light"
                 }
               >
@@ -125,12 +125,13 @@ export const Navbar: FC = () => {
                       <span className="text-sm font-semibold">{user.name}</span>
                     </div>
                   </div>
-                  <div className="">
+                  <div>
                     <button
                       className="group peer flex h-7 items-center justify-center self-auto px-1 hover:cursor-pointer"
+                      onClick={(e) => e.preventDefault()}
                       role="button"
                     >
-                      <span className="h-2 w-2 rotate-45 border-b-2 border-r-2 border-black duration-500 group-focus-within:rotate-[225deg]"></span>
+                      <span className="h-2 w-2 rotate-45 border-b-2 border-r-2 border-black duration-300 group-focus-within:rotate-[225deg] group-focus-within:border-accent group-hover:border-accent"></span>
                     </button>
                     <button
                       className="absolute right-0 top-full mt-1 hidden w-full border border-light bg-background px-3 py-1.5 shadow-navbar duration-300 hover:bg-background-3 peer-focus-within:block"

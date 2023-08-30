@@ -18,17 +18,14 @@ export const Menubar = forwardRef(
     ref: Ref<HTMLElement>
   ) => {
     const menuItems = navLinks.map((item, i) => (
-      <li
-        key={i}
-        className="font-semibold hover:cursor-pointer hover:underline"
-      >
+      <li key={i} className="font-semibold hover:cursor-pointer">
         <NavLink
           to={item.link}
           end
           className={({ isActive }) =>
             isActive
-              ? "inline-block w-full max-w-xl uppercase text-accent"
-              : "inline-block w-full max-w-xl uppercase"
+              ? "inline-block w-full max-w-xl bg-light p-2 uppercase text-accent"
+              : "inline-block w-full max-w-xl p-2 uppercase active:bg-light"
           }
         >
           {item.icon ? <IoCartOutline className="text-3xl" /> : item.name}
