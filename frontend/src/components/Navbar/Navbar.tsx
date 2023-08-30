@@ -128,16 +128,15 @@ export const Navbar: FC = () => {
                   <div className="relative">
                     <button
                       className="group peer flex h-7 items-center justify-center self-auto px-1 hover:cursor-pointer"
-                      onClick={(e) => e.preventDefault()}
                       role="button"
                     >
                       <span className="h-2 w-2 rotate-45 border-b-2 border-r-2 border-black duration-500 group-focus-within:rotate-[225deg]"></span>
-                      <button
-                        className="absolute right-0 top-full mt-2 hidden bg-background px-2 py-1 shadow-navbar duration-300 hover:bg-accent group-focus-within:block"
-                        onClick={logoutCurrentUser}
-                      >
-                        Logout
-                      </button>
+                    </button>
+                    <button
+                      className="absolute right-0 top-full mt-2 hidden bg-background px-2 py-1 shadow-navbar duration-300 hover:bg-accent peer-focus-within:block"
+                      onClick={logoutCurrentUser}
+                    >
+                      Logout
                     </button>
                   </div>
                 </div>
@@ -145,7 +144,7 @@ export const Navbar: FC = () => {
             ) : (
               <Link
                 to="/login"
-                className="inline-block w-full max-w-xl overflow-hidden border-2 border-textColor px-2 py-0.5 text-center text-base font-medium tracking-wider text-textColor duration-300 hover:border-secondary hover:bg-accent hover:text-secondary"
+                className="flex w-full max-w-xl items-center justify-center overflow-hidden border-2 bg-accent px-2 py-0.5 text-center text-base font-medium tracking-wider text-textColor duration-300 hover:border-black"
               >
                 Login/Signup
               </Link>

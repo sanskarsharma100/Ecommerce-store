@@ -11,6 +11,7 @@ import {
 } from "../../services/userApi";
 import { isErrorWithData, isErrorWithMessage } from "../../services/helpers";
 import { SpinningAnim } from "./../Loaders/SpinningAnim";
+import { TextInputField2 } from "../Inputs/TextInputField2";
 
 export const UserAccount: FC = () => {
   const { user } = useAppSelector(selectCurrentUser);
@@ -111,7 +112,6 @@ export const UserAccount: FC = () => {
 
   const handlePasswordUpdate = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(newPassword);
     updatePassword(newPassword);
   };
 
@@ -136,7 +136,7 @@ export const UserAccount: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUserLoading, isUserSuccess, isPasswordLoading, isPasswordSuccess]);
 
-  const userInfo = Object.keys(updatedUser).map(function (key) {
+  const userInfo = Object.keys(updatedUser).map((key) => {
     return (
       <div className="flex flex-wrap items-center gap-1" key={key}>
         <p className="font-medium capitalize">{[key]}:</p>
@@ -157,24 +157,9 @@ export const UserAccount: FC = () => {
     );
   });
 
-  const passwordInputs = Object.keys(newPassword).map(function (key) {
-    return (
-      <div className="mt-2 flex flex-wrap items-center gap-1" key={key}>
-        <label className="font-medium capitalize">{[key]}:</label>
-        <input
-          className="w-full border border-secondary px-1 py-0.5"
-          type="password"
-          value={newPassword[key]}
-          onChange={changePassword}
-          name={key}
-        />
-      </div>
-    );
-  });
-
   return (
-    <div className="h-[100dvh] font-inter">
-      <section className="m-1 border-2 border-gray-500 p-2">
+    <div className="mt-4 min-h-[500px] font-inter">
+      <section className="m-2 border-2 border-gray-500 p-2 sm:m-auto sm:max-w-lg">
         <div>
           <label
             htmlFor="avatar"
@@ -262,11 +247,43 @@ export const UserAccount: FC = () => {
             </div>
           )}
           {isPasswordEdit && (
-            <form onSubmit={handlePasswordUpdate}>
-              {passwordInputs}
-              <p className="mt-1 text-xs font-semibold text-warning">
+            <form noValidate={true} onSubmit={handlePasswordUpdate}>
+              <input
+                type="text"
+                name="email"
+                autoComplete="username email"
+                hidden
+              ></input>
+              <TextInputField2
+                fieldLabel="Old Password"
+                fieldType="password"
+                fieldValue={newPassword.oldPassword}
+                fieldName={"oldPassword"}
+                handleChange={changePassword}
+                isRequired={true}
+                autoComplete="current-password"
+              />
+              <TextInputField2
+                fieldLabel="New Password"
+                fieldType="password"
+                fieldValue={newPassword.newPassword}
+                fieldName={"newPassword"}
+                handleChange={changePassword}
+                isRequired={true}
+                autoComplete="new-password"
+              />
+              <TextInputField2
+                fieldLabel="Confirm Password"
+                fieldType="password"
+                fieldValue={newPassword.confirmPassword}
+                fieldName={"confirmPassword"}
+                handleChange={changePassword}
+                isRequired={true}
+                autoComplete="new-password"
+              />
+              <div className="mt-1 text-xs font-semibold text-warning">
                 {passwordErrMsg}
-              </p>
+              </div>
               <input
                 className="mt-1 w-full border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:cursor-pointer hover:bg-success"
                 type="submit"
