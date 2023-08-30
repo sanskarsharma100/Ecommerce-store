@@ -1,14 +1,15 @@
-import { Ref, forwardRef } from "react";
+import { Ref, forwardRef, MouseEvent } from "react";
 import NoAvatar from "../../assets/images/NoAvatar.jpg";
 import { Link, NavLink } from "react-router-dom";
+import { IoCartOutline } from "react-icons/io5";
 import { User } from "../../utils/types";
 
 type Props = {
   isOpen: boolean;
-  navLinks: Array<{ name: string; link: string }>;
+  navLinks: Array<{ name: string; link: string; icon?: string }>;
   isAuthenticated: boolean;
   user: User;
-  logoutUser: () => void;
+  logoutUser: (_e: MouseEvent<HTMLButtonElement>) => void;
 };
 
 export const Menubar = forwardRef(
@@ -30,7 +31,7 @@ export const Menubar = forwardRef(
               : "inline-block w-full max-w-xl uppercase"
           }
         >
-          {item.name}
+          {item.icon ? <IoCartOutline className="text-3xl" /> : item.name}
         </NavLink>
       </li>
     ));

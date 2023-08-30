@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, MouseEvent, useEffect, useRef, useState } from "react";
 import logo from "../../assets/images/logo.svg";
 import { IoCartOutline } from "react-icons/io5";
 import { Link, NavLink, useLocation } from "react-router-dom";
@@ -17,7 +17,8 @@ export const Navbar: FC = () => {
   const { isAuthenticated, user } = useAppSelector(selectCurrentUser);
   const [logoutUser] = useLazyLogoutUserQuery();
 
-  const logoutCurrentUser = () => {
+  const logoutCurrentUser = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     logoutUser();
   };
 
@@ -104,24 +105,38 @@ export const Navbar: FC = () => {
           <li className="flex items-center hover:cursor-pointer">
             {isAuthenticated ? (
               <>
-                <Link to="/account">
-                  <img
-                    src={user.avatar.url}
-                    alt="Profile Picture"
-                    className="w-8 rounded-full border-2 border-accent"
-                  />
-                </Link>
-                <div className="relative">
-                  <button className="group peer flex h-7 items-center justify-center self-auto px-1 hover:cursor-pointer">
-                    <span className="h-2 w-2 rotate-45 border-b-2 border-r-2 border-black duration-500 group-focus-within:rotate-[225deg]"></span>
-                    <div
-                      className="absolute right-0 top-full mt-2 hidden bg-background px-2 py-1 shadow-navbar duration-300 hover:bg-accent group-focus-within:block"
-                      onClick={logoutCurrentUser}
-                    >
-                      Logout
+                <NavLink
+                  to="/account"
+                  className={({ isActive }) =>
+                    isActive ? "flex gap-1 text-accent" : "flex gap-1"
+                  }
+                >
+                  <div className="flex items-center gap-1">
+                    <img
+                      src={user.avatar.url}
+                      alt="Profile Picture"
+                      className="w-8 rounded-full"
+                    />
+                    <div>
+                      <span className="text-sm font-semibold">{user.name}</span>
                     </div>
-                  </button>
-                </div>
+                  </div>
+                  <div className="relative">
+                    <button
+                      className="group peer flex h-7 items-center justify-center self-auto px-1 hover:cursor-pointer"
+                      onClick={(e) => e.preventDefault()}
+                      role="button"
+                    >
+                      <span className="h-2 w-2 rotate-45 border-b-2 border-r-2 border-black duration-500 group-focus-within:rotate-[225deg]"></span>
+                      <button
+                        className="absolute right-0 top-full mt-2 hidden bg-background px-2 py-1 shadow-navbar duration-300 hover:bg-accent group-focus-within:block"
+                        onClick={logoutCurrentUser}
+                      >
+                        Logout
+                      </button>
+                    </button>
+                  </div>
+                </NavLink>
               </>
             ) : (
               <Link
