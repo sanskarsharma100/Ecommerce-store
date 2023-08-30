@@ -3,6 +3,7 @@ import { useGetCartProductsQuery } from "../../services/cartApi";
 import { CartProductCard } from "../Cart/CartProductCard";
 import { convertToINR } from "./../../utils/utils";
 import { isErrorWithData, isErrorWithMessage } from "../../services/helpers";
+import { SpinningAnim } from "./../Loaders/SpinningAnim";
 
 export const Cart: FC = () => {
   const {
@@ -21,7 +22,11 @@ export const Cart: FC = () => {
     <CartProductCard product={product} key={product._id} />
   ));
 
-  return cart && cart.products.length ? (
+  return isLoading ? (
+    <div className="flex min-h-[500px] items-center justify-center">
+      <SpinningAnim height="2.5rem" width="2.5rem" />
+    </div>
+  ) : cart && cart.products.length ? (
     <div className="m-2 mt-5 min-h-[500px]">
       <div className="gap-2 ss:flex lg:gap-4 ">
         <section className="w-full">

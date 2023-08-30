@@ -134,7 +134,7 @@ export const Navbar: FC = () => {
                       <span className="h-2 w-2 rotate-45 border-b-2 border-r-2 border-black duration-300 group-focus-within:rotate-[225deg] group-focus-within:border-accent group-hover:border-accent"></span>
                     </button>
                     <button
-                      className="absolute right-0 top-full mt-1 hidden w-full border border-light bg-background px-3 py-1.5 shadow-navbar duration-300 hover:bg-background-3 peer-focus-within:block"
+                      className="absolute right-0 top-full mt-1 hidden w-full border border-light bg-background px-3 py-1.5 text-black shadow-navbar duration-300 hover:bg-background-3 peer-focus-within:block"
                       onClick={logoutCurrentUser}
                     >
                       Logout

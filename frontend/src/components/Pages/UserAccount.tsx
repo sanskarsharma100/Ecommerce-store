@@ -3,6 +3,7 @@ import { useAppSelector } from "../../app/hooks";
 import { selectCurrentUser } from "../../features/User/userSlice";
 import { StringObject } from "../../utils/types";
 import iconEdit from "../../assets/icons/iconEdit.svg";
+import { HiCamera } from "react-icons/hi";
 
 import {
   useLazyLoadUserQuery,
@@ -14,6 +15,7 @@ import { SpinningAnim } from "./../Loaders/SpinningAnim";
 import { TextInputField2 } from "../Inputs/TextInputField2";
 
 export const UserAccount: FC = () => {
+  const [isTouchscreen, setIsTouchscreen] = useState(false);
   const { user } = useAppSelector(selectCurrentUser);
   const [
     updateUserDetails,
@@ -133,6 +135,21 @@ export const UserAccount: FC = () => {
       const newErrStr = errStr.split(":")[2];
       setPasswordErrMsg(newErrStr || errStr);
     }
+
+    const mediaQuery = window.matchMedia("(pointer: coarse)");
+
+    const handleMediaQueryChange = (e: MediaQueryListEvent) => {
+      setIsTouchscreen(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    setIsTouchscreen(mediaQuery.matches);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUserLoading, isUserSuccess, isPasswordLoading, isPasswordSuccess]);
 
@@ -151,6 +168,7 @@ export const UserAccount: FC = () => {
             value={updatedUser[key]}
             onChange={changeUserInfo}
             name={key}
+            disabled={isUserLoading}
           />
         )}
       </div>
@@ -171,7 +189,7 @@ export const UserAccount: FC = () => {
               src={iconEdit}
               alt="edit icon"
               className={`absolute z-[1] hidden w-8 group-hover:block ${
-                isUserLoading && "group-hover:hidden"
+                isUserLoading || (isTouchscreen && "group-hover:hidden")
               }`}
             />
             {isUserLoading && (
@@ -184,6 +202,10 @@ export const UserAccount: FC = () => {
               alt="Profile Photo"
               className="m-auto aspect-square w-40 rounded-full duration-200 group-hover:brightness-50"
             />
+
+            {isTouchscreen && (
+              <HiCamera className="absolute bottom-2 right-2 rounded-full bg-accent p-1 text-3xl" />
+            )}
           </label>
           <input
             hidden
@@ -199,8 +221,13 @@ export const UserAccount: FC = () => {
               <button
                 className="mt-2 border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-accent"
                 onClick={toggleUserEdit}
+                disabled={isUserLoading}
               >
-                Edit Profile
+                {isUserLoading ? (
+                  <SpinningAnim height="20px" width="20px" />
+                ) : (
+                  "Edit Profile"
+                )}
               </button>
             )}
             {isUserEdit && (
@@ -208,8 +235,13 @@ export const UserAccount: FC = () => {
                 <button
                   className="mt-2 w-full border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-success"
                   onClick={updateUserInfo}
+                  disabled={isUserLoading}
                 >
-                  Save
+                  {isUserLoading ? (
+                    <SpinningAnim height="20px" width="20px" />
+                  ) : (
+                    "Save"
+                  )}
                 </button>
                 <button
                   className="mt-2 w-full border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-warning"
@@ -217,8 +249,13 @@ export const UserAccount: FC = () => {
                     toggleUserEdit();
                     resetUserInfo();
                   }}
+                  disabled={isUserLoading}
                 >
-                  Cancel
+                  {isUserLoading ? (
+                    <SpinningAnim height="20px" width="20px" />
+                  ) : (
+                    "Cancel"
+                  )}
                 </button>
               </div>
             )}
@@ -229,8 +266,13 @@ export const UserAccount: FC = () => {
             <button
               className="mt-2 border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-accent"
               onClick={togglePasswordEdit}
+              disabled={isPasswordLoading}
             >
-              Change Password
+              {isPasswordLoading ? (
+                <SpinningAnim height="20px" width="20px" />
+              ) : (
+                "Change Password"
+              )}
             </button>
           )}
           {isPasswordEdit && (
@@ -242,12 +284,16 @@ export const UserAccount: FC = () => {
                   resetPasswordFields();
                 }}
               >
-                Cancel
+                {isPasswordLoading ? (
+                  <SpinningAnim height="20px" width="20px" />
+                ) : (
+                  "Cancel"
+                )}
               </button>
             </div>
           )}
           {isPasswordEdit && (
-            <form noValidate={true} onSubmit={handlePasswordUpdate}>
+            <form onSubmit={handlePasswordUpdate}>
               <input
                 type="text"
                 name="email"
@@ -262,6 +308,7 @@ export const UserAccount: FC = () => {
                 handleChange={changePassword}
                 isRequired={true}
                 autoComplete="current-password"
+                isDisabled={isPasswordLoading}
               />
               <TextInputField2
                 fieldLabel="New Password"
@@ -271,6 +318,7 @@ export const UserAccount: FC = () => {
                 handleChange={changePassword}
                 isRequired={true}
                 autoComplete="new-password"
+                isDisabled={isPasswordLoading}
               />
               <TextInputField2
                 fieldLabel="Confirm Password"
@@ -280,6 +328,7 @@ export const UserAccount: FC = () => {
                 handleChange={changePassword}
                 isRequired={true}
                 autoComplete="new-password"
+                isDisabled={isPasswordLoading}
               />
               <div className="mt-1 text-xs font-semibold text-warning">
                 {passwordErrMsg}
@@ -288,6 +337,7 @@ export const UserAccount: FC = () => {
                 className="mt-1 w-full border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:cursor-pointer hover:bg-success"
                 type="submit"
                 value="Update"
+                disabled={isPasswordLoading}
               />
             </form>
           )}

@@ -14,7 +14,7 @@ import {
 export const ProductDetails: FC = () => {
   const { id: productId } = useParams();
   const [isProductInCart, setIsProductInCart] = useState<boolean>(false);
-  const { data: productData, isLoading: isProductsLoading } =
+  const { data: productData, isLoading: isProductLoading } =
     useGetProductDetailsQuery(productId ?? skipToken);
   const [addProductToCart] = useAddProductToCartMutation();
   const {
@@ -40,7 +40,11 @@ export const ProductDetails: FC = () => {
     }
   }, [cart, productId]);
 
-  return product ? (
+  return isProductLoading ? (
+    <div className="flex min-h-[500px] items-center justify-center">
+      <SpinningAnim height="2.5rem" width="2.5rem" />
+    </div>
+  ) : product ? (
     <div className="mb-10 mt-6 min-h-[500px] p-2">
       <div className="m-auto flex h-full flex-col items-stretch gap-5 sm:flex-row lg:w-4/5">
         <section className="min-w-full xs:m-auto xs:min-w-[80%] xs:max-w-[40%] ss:max-w-[50%] sm:min-w-[50%]">

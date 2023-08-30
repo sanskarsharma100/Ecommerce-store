@@ -71,13 +71,13 @@ export const CartProductCard: FC<Props> = ({ product }) => {
           </div>
           <div className="flex w-fit items-center border border-secondary">
             <button
-              className={`h-full border-r border-secondary px-2 text-sm xs:text-xl ${
+              className={`group h-full border-r border-secondary px-2 text-sm xs:text-xl ${
                 quantity <= 1 && "text-grayCustom"
               }`}
               onClick={quantity <= 1 ? removeProduct : reduceQuantity}
             >
               {quantity <= 1 ? (
-                <GoTrash class="text-xs text-black hover:text-warning xs:text-base" />
+                <GoTrash className="text-xs text-black group-hover:text-warning xs:text-base" />
               ) : (
                 "-"
               )}
