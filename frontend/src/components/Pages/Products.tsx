@@ -66,7 +66,7 @@ export const Products: FC = () => {
   ));
 
   useEffect(() => {
-    getProducts(queryPara);
+    getProducts(queryPara, true);
   }, [getProducts, queryPara]);
 
   return (

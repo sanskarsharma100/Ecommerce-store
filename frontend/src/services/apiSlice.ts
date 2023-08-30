@@ -6,6 +6,6 @@ export const apiSlice = createApi({
     baseUrl: "http://127.0.0.1:4000/api/v1/",
     credentials: "include",
   }),
-  tagTypes: ["Cart"],
+  tagTypes: ["Products", "Cart"],
   endpoints: () => ({}),
 });
