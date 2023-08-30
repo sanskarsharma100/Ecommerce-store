@@ -37,7 +37,7 @@ export const SortBy: FC<Props> = ({ selectedSort, sortProducts }) => {
         htmlFor="sortByCheckbox"
         className="absolute z-[999] hidden peer-checked:block"
       >
-        <ul className="bg-hoverColor">{sortByOptions}</ul>
+        <ul className="bg-grayLighter">{sortByOptions}</ul>
       </label>
     </>
   );

@@ -64,15 +64,15 @@ export const Navbar: FC = () => {
   const menuItems = navLinks.map((item, i) => (
     <li
       key={i}
-      className="flex align-middle font-semibold hover:cursor-pointer hover:underline"
+      className="flex h-full align-middle font-semibold hover:cursor-pointer"
     >
       <NavLink
         to={item.link}
         end
         className={({ isActive }) =>
           isActive
-            ? "inline-block w-full max-w-xl uppercase text-accent"
-            : "inline-block w-full max-w-xl uppercase"
+            ? "flex w-full max-w-xl items-center justify-center bg-light px-2 text-sm uppercase duration-300"
+            : "flex w-full max-w-xl items-center justify-center px-2 text-sm uppercase duration-300 hover:bg-light"
         }
       >
         {item.icon ? <IoCartOutline className="text-3xl" /> : item.name}
@@ -94,23 +94,27 @@ export const Navbar: FC = () => {
       {isOpen && (
         <div className="fixed z-30 min-h-screen w-screen bg-semiDarkOverlay ss:hidden"></div>
       )}
-      <div className="m-auto flex items-center justify-between gap-4 p-2 sm:max-w-[90%]">
-        <img
-          className="h-9 max-w-[10rem] p-2 xs:max-w-[12rem]"
-          src={logo}
-          alt="ShopeeFast Logo"
-        />
-        <ul className="hidden items-center justify-between ss:flex ss:w-[20rem] sm:w-[25rem]">
+      <div className="m-auto flex justify-between gap-4 sm:max-w-[90%]">
+        <div className="m-2 flex items-center">
+          <img
+            className="h-9 max-w-[10rem] p-2 xs:max-w-[12rem] sm:p-1"
+            src={logo}
+            alt="ShopeeFast Logo"
+          />
+        </div>
+        <ul className="hidden items-center gap-2 p-2 ss:flex">
           {menuItems}
-          <li className="flex items-center hover:cursor-pointer">
+          <li className="flex h-full hover:cursor-pointer">
             {isAuthenticated ? (
-              <>
-                <NavLink
-                  to="/account"
-                  className={({ isActive }) =>
-                    isActive ? "flex gap-1 text-accent" : "flex gap-1"
-                  }
-                >
+              <NavLink
+                to="/account"
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center bg-light px-2 py-1.5 duration-300"
+                    : "flex items-center px-2 py-1.5 duration-300 hover:bg-light"
+                }
+              >
+                <div className="flex gap-1">
                   <div className="flex items-center gap-1">
                     <img
                       src={user.avatar.url}
@@ -136,8 +140,8 @@ export const Navbar: FC = () => {
                       </button>
                     </button>
                   </div>
-                </NavLink>
-              </>
+                </div>
+              </NavLink>
             ) : (
               <Link
                 to="/login"

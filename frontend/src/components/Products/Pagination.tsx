@@ -16,7 +16,7 @@ export const Pagination: FC<Props> = ({
     .map((_item, ind) => (
       <button
         key={ind + 1}
-        className={`border border-gray-500 px-1.5 py-0.5 text-xs font-semibold hover:bg-hoverColor hover:font-bold xs:text-sm ss:px-3 ss:py-1 ss:text-base ${
+        className={`hover:bg-grayLighter border border-gray-500 px-1.5 py-0.5 text-xs font-semibold hover:font-bold xs:text-sm ss:px-3 ss:py-1 ss:text-base ${
           currentPage == ind + 1 && "bg-accent hover:!bg-accent"
         }`}
         onClick={() => changePage(ind + 1)}
@@ -31,7 +31,7 @@ export const Pagination: FC<Props> = ({
         className={`border border-gray-500 px-1 py-0.5 text-xs font-medium xs:text-sm ss:px-2 ss:py-1 ss:text-base ${
           currentPage <= 1
             ? "bg-gray-300 text-gray-500 hover:cursor-not-allowed"
-            : "hover:bg-hoverColor"
+            : "hover:bg-grayLighter"
         }`}
         onClick={() => changePage(currentPage - 1)}
         disabled={currentPage <= 1}
@@ -43,7 +43,7 @@ export const Pagination: FC<Props> = ({
         className={`border border-gray-500 px-1 py-0.5 text-xs font-medium xs:text-sm ss:px-2 ss:py-1 ss:text-base ${
           currentPage == numOfPages
             ? "bg-gray-300 text-gray-500 hover:cursor-not-allowed"
-            : "hover:bg-hoverColor"
+            : "hover:bg-grayLighter"
         }`}
         onClick={() => changePage(currentPage + 1)}
         disabled={currentPage == numOfPages}
