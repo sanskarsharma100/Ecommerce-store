@@ -1,9 +1,13 @@
 import React, { FC, useEffect } from "react";
 import { useState } from "react";
 import useSwipe from "../../hooks/useSwipe";
+import { Link } from "react-router-dom";
 
 type Props = {
-  pictures: Array<string>;
+  pictures: {
+    image: string;
+    link: string;
+  }[];
 };
 
 const BannerSlider: FC<Props> = ({ pictures }) => {
@@ -42,10 +46,10 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
     scrollToIndex(index);
   }
 
-  const dots = pictures.map((img, index) => (
+  const dots = pictures.map((picture, index) => (
     <button
       role="button"
-      key={img + index}
+      key={picture.link}
       className={`m-1 h-[8px] w-[8px] rounded-lg duration-300 xs:h-[10px] xs:w-[10px] ${
         index == currentIndex ? `bg-accent` : `bg-grayCustom`
       }`}
@@ -53,15 +57,16 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
     ></button>
   ));
 
-  const slider = pictures.map((img, index) => (
-    <React.Fragment key={index + img}>
-      <figure
+  const slider = pictures.map((picture, index) => (
+    <React.Fragment key={index + picture.link}>
+      <Link
+        to={picture.link}
         style={{
-          backgroundImage: `url(${img})`,
+          backgroundImage: `url(${picture.image})`,
           transform: `translateX(${-(currentIndex * 100)}%)`,
         }}
         className="h-full min-w-full rounded-lg bg-cover bg-left-top duration-500 ease-in-out"
-      ></figure>
+      ></Link>
     </React.Fragment>
   ));
 

@@ -29,7 +29,20 @@ export const Home: FC = () => {
       containerRef.current?.scrollBy(0, -125);
     },
   });
-  const banner = [oneplus10R, s23Ultra, iphone14];
+  const banner = [
+    {
+      image: oneplus10R,
+      link: "/products/64da4240194d64167456e8ee",
+    },
+    {
+      image: s23Ultra,
+      link: "/products/64d7ac91c5171c84f9a0dfa1",
+    },
+    {
+      image: iphone14,
+      link: "/products/64d7ad71c5171c84f9a0dfa9",
+    },
+  ];
 
   console.log("useGetProductsQuery", productsList);
 
@@ -64,11 +77,13 @@ export const Home: FC = () => {
           </div>
         </section>
         <section className="mt-4">
-          <img
-            src={appleMacbookPro}
-            alt="Macbook Pro Poster"
-            className="m-auto"
-          />
+          <Link to={"/products/64d7a834c5171c84f9a0df8d"}>
+            <img
+              src={appleMacbookPro}
+              alt="Macbook Pro Poster"
+              className="m-auto"
+            />
+          </Link>
         </section>
       </div>
     </div>

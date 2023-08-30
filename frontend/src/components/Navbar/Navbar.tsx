@@ -95,13 +95,13 @@ export const Navbar: FC = () => {
         <div className="fixed z-30 min-h-screen w-screen bg-semiDarkOverlay ss:hidden"></div>
       )}
       <div className="m-auto flex justify-between gap-4 sm:max-w-[90%]">
-        <div className="m-2 flex items-center">
+        <NavLink to="/" className="m-2 flex items-center">
           <img
             className="h-9 max-w-[10rem] p-2 xs:max-w-[12rem] sm:p-1"
             src={logo}
             alt="ShopeeFast Logo"
           />
-        </div>
+        </NavLink>
         <ul className="hidden items-center gap-2 p-2 ss:flex">
           {menuItems}
           <li className="flex h-full hover:cursor-pointer">
