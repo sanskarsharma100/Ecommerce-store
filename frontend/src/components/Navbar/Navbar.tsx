@@ -104,7 +104,7 @@ export const Navbar: FC = () => {
         </NavLink>
         <ul className="hidden items-center gap-2 p-2 ss:flex">
           {menuItems}
-          <li className="flex h-full hover:cursor-pointer">
+          <li className="relative flex h-full hover:cursor-pointer">
             {isAuthenticated ? (
               <NavLink
                 to="/account"
@@ -125,7 +125,7 @@ export const Navbar: FC = () => {
                       <span className="text-sm font-semibold">{user.name}</span>
                     </div>
                   </div>
-                  <div className="relative">
+                  <div className="">
                     <button
                       className="group peer flex h-7 items-center justify-center self-auto px-1 hover:cursor-pointer"
                       role="button"
@@ -133,7 +133,7 @@ export const Navbar: FC = () => {
                       <span className="h-2 w-2 rotate-45 border-b-2 border-r-2 border-black duration-500 group-focus-within:rotate-[225deg]"></span>
                     </button>
                     <button
-                      className="absolute right-0 top-full mt-2 hidden bg-background px-2 py-1 shadow-navbar duration-300 hover:bg-accent peer-focus-within:block"
+                      className="absolute right-0 top-full mt-1 hidden w-full border border-light bg-background px-3 py-1.5 shadow-navbar duration-300 hover:bg-background-3 peer-focus-within:block"
                       onClick={logoutCurrentUser}
                     >
                       Logout

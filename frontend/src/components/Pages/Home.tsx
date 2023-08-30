@@ -55,7 +55,7 @@ export const Home: FC = () => {
       <div className="mt-2 p-2 ss:p-4">
         <BannerSlider pictures={banner} />
         <section className="mt-4 flex w-full flex-col items-center overflow-hidden xs:items-start">
-          <div className="mb-2 flex w-full items-center bg-gradient-to-r from-accent to-background to-90%">
+          <div className="mb-2 flex w-full items-center bg-gradient-to-r from-accent to-background to-[99%] py-1">
             <h2 className="pl-2 text-sm font-extrabold xs:text-base sm:text-xl">
               New Arrivals
             </h2>

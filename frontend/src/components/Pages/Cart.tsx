@@ -2,19 +2,26 @@ import { FC } from "react";
 import { useGetCartProductsQuery } from "../../services/cartApi";
 import { CartProductCard } from "../Cart/CartProductCard";
 import { convertToINR } from "./../../utils/utils";
+import { isErrorWithData, isErrorWithMessage } from "../../services/helpers";
 
 export const Cart: FC = () => {
-  const { data: cartData, isLoading, isSuccess } = useGetCartProductsQuery();
+  const {
+    data: cartData,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetCartProductsQuery();
 
   const cart = cartData && cartData.cart;
 
-  console.log("cart", cart);
+  console.log("cart");
 
   const products = cart?.products.map((product) => (
     <CartProductCard product={product} key={product._id} />
   ));
 
-  return cart ? (
+  return cart && cart.products.length ? (
     <div className="m-2 mt-5 min-h-[500px]">
       <div className="gap-2 ss:flex lg:gap-4 ">
         <section className="w-full">
@@ -49,7 +56,15 @@ export const Cart: FC = () => {
         </div>
       </div>
     </div>
+  ) : !cart || !cart.products.length ? (
+    <div className="mt-10 min-h-[500px] text-center text-2xl font-bold ss:mt-5 ss:text-3xl">
+      No product in the cart
+    </div>
+  ) : isError && isErrorWithData(error) && isErrorWithMessage(error.data) ? (
+    <div className="text-error min-h-[500px] font-semibold">
+      {error?.data.message}
+    </div>
   ) : (
-    <div>Error Occurred</div>
+    <div className="min-h-[500px]">An Error Occurred</div>
   );
 };
