@@ -1,10 +1,13 @@
 import { FC } from "react";
 import { FooterLinks } from "./FooterLinks";
 import BrandName from "../../assets/images/BrandName.svg";
-import iconFacebook from "../../assets/icons/iconFacebook.svg";
-import iconInstagram from "../../assets/icons/iconInstagram.svg";
-import iconTwitter from "../../assets/icons/iconTwitter.svg";
-import iconYoutube from "../../assets/icons/iconYoutube.svg";
+// import iconFacebook from "../../assets/icons/iconFacebook.svg";
+// import iconInstagram from "../../assets/icons/iconInstagram.svg";
+// import iconTwitter from "../../assets/icons/iconTwitter.svg";
+// import iconYoutube from "../../assets/icons/iconYoutube.svg";
+import iconGithub from "../../assets/icons/iconGithub.svg";
+import iconLinkedin from "../../assets/icons/iconLinkedin.svg";
+import { Link } from "react-router-dom";
 
 export const Footer: FC = () => {
   const help = [
@@ -24,19 +27,27 @@ export const Footer: FC = () => {
   ];
 
   const socialIcons = [
-    { src: iconFacebook, alt: "Facebook" },
-    { src: iconTwitter, alt: "Twitter" },
-    { src: iconInstagram, alt: "Instagram" },
-    { src: iconYoutube, alt: "Youtube" },
+    {
+      link: "https://github.com/sanskarsharma100",
+      src: iconGithub,
+      alt: "Github",
+    },
+    {
+      link: "https://www.linkedin.com/in/sanskarsharma100",
+      src: iconLinkedin,
+      alt: "Linkedin",
+    },
   ];
 
   const socials = socialIcons.map((icon, i) => (
     <li key={i}>
-      <img
-        src={icon.src}
-        alt={icon.alt}
-        className="w-6 hover:cursor-pointer hover:drop-shadow-[0_0_5px_hsl(0,0%,40%)]"
-      />
+      <a href={icon.link} target="_blank">
+        <img
+          src={icon.src}
+          alt={icon.alt}
+          className="w-6 hover:cursor-pointer hover:drop-shadow-[0_0_5px_hsl(0,0%,40%)]"
+        />
+      </a>
     </li>
   ));
 
@@ -54,7 +65,9 @@ export const Footer: FC = () => {
           <FooterLinks title={"help"} links={help} />
           <FooterLinks title={"company"} links={company} />
         </div>
-        <ul className="mt-2 flex justify-evenly ss:flex-col">{socials}</ul>
+        <ul className="mt-2 flex justify-center gap-4 ss:flex-col">
+          {socials}
+        </ul>
       </div>
       <div className="mt-4 text-center text-xs text-white ss:text-left">
         <p>&#169; 2022 ShopeeFast Private Limited.</p>
