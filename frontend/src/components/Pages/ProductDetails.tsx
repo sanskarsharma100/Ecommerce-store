@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../../services/productsApi";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { RatingStar } from "./../RatingStar";
@@ -10,18 +10,19 @@ import {
   useAddProductToCartMutation,
   useGetCartProductsQuery,
 } from "../../services/cartApi";
+import { useAppSelector } from "../../app/hooks";
+import { selectCurrentUser } from "../../features/User/userSlice";
 
 export const ProductDetails: FC = () => {
   const { id: productId } = useParams();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAppSelector(selectCurrentUser);
   const [isProductInCart, setIsProductInCart] = useState<boolean>(false);
   const { data: productData, isLoading: isProductLoading } =
     useGetProductDetailsQuery(productId ?? skipToken);
   const [addProductToCart] = useAddProductToCartMutation();
-  const {
-    data: cartData,
-    isSuccess: isCartSuccess,
-    isLoading: isCartLoading,
-  } = useGetCartProductsQuery();
+  const { data: cartData, isLoading: isCartLoading } =
+    useGetCartProductsQuery();
   const product = productData && productData.product;
   const cart = cartData && cartData.cart;
 
@@ -98,10 +99,12 @@ export const ProductDetails: FC = () => {
                 </Link>
               ) : (
                 <button
-                  className=" inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary"
-                  onClick={addToCart}
+                  className="w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary"
+                  onClick={
+                    isAuthenticated ? addToCart : () => navigate("/login")
+                  }
                 >
-                  Add to Cart
+                  {isAuthenticated ? "Add to Cart" : "Login to continue"}
                 </button>
               )}
             </div>

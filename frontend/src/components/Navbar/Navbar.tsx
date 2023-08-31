@@ -10,9 +10,12 @@ import { useAppSelector } from "../../app/hooks";
 
 export const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isAccountDropdownOpen, setIsAccountDropdownOpen] =
+    useState<boolean>(false);
   const location = useLocation();
   const menubarRef = useRef<HTMLElement>(null);
   const menuBtnRef = useRef<HTMLInputElement>(null);
+  const accountDropdownRef = useRef<HTMLInputElement>(null);
 
   const { isAuthenticated, user } = useAppSelector(selectCurrentUser);
   const [logoutUser] = useLazyLogoutUserQuery();
@@ -41,8 +44,16 @@ export const Navbar: FC = () => {
       menuBtnRef.current != target &&
       menuBtnRef.current?.checked
     ) {
+      console.log("Outside btn");
       setIsOpen(false);
       menuBtnRef.current.checked = false;
+    }
+    if (
+      accountDropdownRef.current &&
+      !accountDropdownRef.current.contains(target)
+    ) {
+      console.log("Outside ACc");
+      setIsAccountDropdownOpen(false);
     }
   };
 
@@ -52,14 +63,12 @@ export const Navbar: FC = () => {
         setIsOpen(menuBtnRef.current?.checked);
       }
     }
-    if (isOpen) {
-      document.addEventListener("click", handleOutsideClick);
-    }
+    document.addEventListener("click", handleOutsideClick);
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen, menuBtnRef.current]);
+  }, [isOpen, menuBtnRef.current, isAccountDropdownOpen]);
 
   const menuItems = navLinks.map((item, i) => (
     <li
@@ -125,16 +134,26 @@ export const Navbar: FC = () => {
                       <span className="text-sm font-semibold">{user.name}</span>
                     </div>
                   </div>
-                  <div>
+                  <div ref={accountDropdownRef}>
                     <button
-                      className="group peer flex h-7 items-center justify-center self-auto px-1 hover:cursor-pointer"
-                      onClick={(e) => e.preventDefault()}
-                      role="button"
+                      className="group flex h-full items-center justify-center self-auto px-1 hover:cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsAccountDropdownOpen(!isAccountDropdownOpen);
+                      }}
                     >
-                      <span className="h-2 w-2 rotate-45 border-b-2 border-r-2 border-black duration-300 group-focus-within:rotate-[225deg] group-focus-within:border-accent group-hover:border-accent"></span>
+                      <span
+                        className={`h-2 w-2 rotate-45 border-b-2 border-r-2 duration-300 group-hover:border-accent ${
+                          isAccountDropdownOpen
+                            ? "rotate-[225deg] border-accent"
+                            : "border-black"
+                        }`}
+                      ></span>
                     </button>
                     <button
-                      className="absolute right-0 top-full mt-1 hidden w-full border border-light bg-background px-3 py-1.5 text-black shadow-navbar duration-300 hover:bg-background-3 peer-focus-within:block"
+                      className={`absolute right-0 top-full mt-1 w-full border border-light bg-background px-3 py-1.5 text-black shadow-navbar duration-300 hover:bg-background-3 ${
+                        isAccountDropdownOpen ? "block" : "hidden"
+                      }`}
                       onClick={logoutCurrentUser}
                     >
                       Logout
@@ -145,7 +164,7 @@ export const Navbar: FC = () => {
             ) : (
               <Link
                 to="/login"
-                className="flex w-full max-w-xl items-center justify-center overflow-hidden border-2 bg-accent px-2 py-0.5 text-center text-base font-medium tracking-wider text-textColor duration-300 hover:border-black"
+                className="flex w-full max-w-xl items-center justify-center overflow-hidden border-2 border-black px-2 py-0.5 text-center text-sm font-medium tracking-wider text-textColor duration-300 hover:bg-accent"
               >
                 Login/Signup
               </Link>

@@ -4,15 +4,19 @@ import { CartProductCard } from "../Cart/CartProductCard";
 import { convertToINR } from "./../../utils/utils";
 import { isErrorWithData, isErrorWithMessage } from "../../services/helpers";
 import { SpinningAnim } from "./../Loaders/SpinningAnim";
+import { useAppSelector } from "../../app/hooks";
+import { selectCurrentUser } from "../../features/User/userSlice";
+import { Link } from "react-router-dom";
 
 export const Cart: FC = () => {
   const {
     data: cartData,
     isLoading,
-    isSuccess,
     isError,
     error,
   } = useGetCartProductsQuery();
+
+  const { isAuthenticated } = useAppSelector(selectCurrentUser);
 
   const cart = cartData && cartData.cart;
 
@@ -22,7 +26,18 @@ export const Cart: FC = () => {
     <CartProductCard product={product} key={product._id} />
   ));
 
-  return isLoading ? (
+  return !isAuthenticated ? (
+    <div>
+      <div className="flex min-h-[500px] items-center justify-center">
+        <Link
+          to="/login"
+          className="flex w-fit items-center justify-center overflow-hidden border-2 border-black px-3 py-2 font-medium tracking-wider text-textColor duration-300 hover:bg-accent"
+        >
+          Login to Continue
+        </Link>
+      </div>
+    </div>
+  ) : isLoading ? (
     <div className="flex min-h-[500px] items-center justify-center">
       <SpinningAnim height="2.5rem" width="2.5rem" />
     </div>
@@ -62,8 +77,8 @@ export const Cart: FC = () => {
       </div>
     </div>
   ) : !cart || !cart.products.length ? (
-    <div className="mt-10 min-h-[500px] text-center text-2xl font-bold ss:mt-5 ss:text-3xl">
-      No product in the cart
+    <div className="flex min-h-[500px] items-center justify-center p-2 text-2xl font-bold ss:text-3xl">
+      No products in the cart
     </div>
   ) : isError && isErrorWithData(error) && isErrorWithMessage(error.data) ? (
     <div className="text-error min-h-[500px] font-semibold">
