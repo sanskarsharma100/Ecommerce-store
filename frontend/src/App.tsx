@@ -10,6 +10,7 @@ import { Layout } from "./components/Layout";
 import { Products } from "./components/Pages/Products";
 import { ProductDetails } from "./components/Pages/ProductDetails";
 import { Cart } from "./components/Pages/Cart";
+import SecuredRoute from "./components/Routes/SecuredRoute";
 
 function App() {
   return (
@@ -19,10 +20,12 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/password/forgot" element={<ForgotPassword />} />
-        <Route path="/password/reset/:token" element={<ResetPassword />} />
+        <Route element={<SecuredRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/password/forgot" element={<ForgotPassword />} />
+          <Route path="/password/reset/:token" element={<ResetPassword />} />
+        </Route>
         <Route element={<RequireAuth />}>
           <Route path="/account" element={<UserAccount />} />
         </Route>
