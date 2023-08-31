@@ -61,16 +61,14 @@ export const SignUp: FC = () => {
 
   return (
     <AuthBgWrapper>
-      <h1 className="mb-3 text-center text-3xl font-bold xs:text-6xl">
-        Sign Up
-      </h1>
-      <p className="mb-1 text-center text-sm xs:text-base">
+      <h1 className="mb-3 text-center text-3xl font-bold">Sign Up</h1>
+      <p className="mb-1 text-center text-sm">
         Already has an account?{" "}
         <span className="italic text-linkColor hover:underline">
           <Link to="/login">Login</Link>
         </span>
       </p>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 xs:gap-5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
           <TextInputField
             fieldLabel={"Name"}
@@ -108,17 +106,17 @@ export const SignUp: FC = () => {
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label htmlFor="avatar" className="text-base font-medium xs:text-2xl">
+          <label htmlFor="avatar" className="text-base font-medium">
             Profile Photo
           </label>
-          <div className="flex gap-1 xs:gap-4">
+          <div className="flex gap-1 xs:gap-2">
             <img
-              className="aspect-square max-h-full w-1/4 rounded-md"
+              className="aspect-square max-h-full w-1/6 rounded-md"
               src={previewAvatar}
               alt="Picture Photo"
             />
             <input
-              className="block w-full border border-secondary text-base text-textColor file:h-full file:w-full  file:border-none file:font-medium hover:border-2 hover:border-secondary hover:file:cursor-pointer focus:outline focus:outline-4 focus:outline-secondary xs:text-2xl"
+              className="block w-full border border-secondary text-base text-textColor file:h-full file:w-full  file:border-none file:font-medium hover:border-2 hover:border-secondary hover:file:cursor-pointer focus:outline focus:outline-4 focus:outline-secondary "
               id="avatar"
               type="file"
               name="avatar"
@@ -135,7 +133,7 @@ export const SignUp: FC = () => {
             isErrorWithMessage(error.data) && (
               <p className="text-error font-semibold">{error?.data.message}</p>
             )}
-          <SubmitButton fieldValue={"Sign Up"} isDisabled={isLoading} />
+          <SubmitButton fieldValue="Sign Up" isDisabled={isLoading} />
           {isLoading && (
             <div className="absolute left-1/2 top-2/4 -translate-x-1/2 -translate-y-1/2">
               <SpinningAnim />

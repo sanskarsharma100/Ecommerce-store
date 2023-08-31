@@ -41,14 +41,14 @@ export const Login: FC = () => {
 
   return (
     <AuthBgWrapper>
-      <h1 className="mb-3 text-center text-3xl font-bold xs:text-6xl">Login</h1>
-      <p className="mb-1 text-center text-sm xs:text-base">
+      <h1 className="mb-3 text-center text-3xl font-bold">Login</h1>
+      <p className="mb-1 text-center text-sm">
         Don't have a account?{" "}
         <span className="italic text-linkColor hover:underline">
           <Link to="/signup">Sign Up</Link>
         </span>
       </p>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 xs:gap-5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
           <TextInputField
             fieldLabel={"Email"}
@@ -87,7 +87,7 @@ export const Login: FC = () => {
           )}
         </div>
       </form>
-      <p className="mt-4 text-sm italic text-linkColor hover:cursor-pointer hover:underline xs:text-base">
+      <p className="mt-4 text-sm italic text-linkColor hover:cursor-pointer hover:underline">
         <Link to="/password/forgot">Forgot Password?</Link>
       </p>
     </AuthBgWrapper>

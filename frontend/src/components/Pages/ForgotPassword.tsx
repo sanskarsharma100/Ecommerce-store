@@ -26,10 +26,8 @@ export const ForgotPassword: FC = () => {
 
   return (
     <AuthBgWrapper>
-      <h1 className="mb-5 text-center text-3xl font-bold xs:text-4xl md:text-5xl">
-        Forgot Password
-      </h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 xs:gap-4">
+      <h1 className="mb-5 text-center text-3xl font-bold">Forgot Password</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
           <TextInputField
             fieldLabel={"Email"}
@@ -46,7 +44,7 @@ export const ForgotPassword: FC = () => {
           {isError &&
             isErrorWithData(error) &&
             isErrorWithMessage(error.data) && (
-              <p className="font-semibold text-error">{error?.data.message}</p>
+              <p className="text-error font-semibold">{error?.data.message}</p>
             )}
           <SubmitButton fieldValue={"Submit"} isDisabled={isLoading} />
           {isLoading && (

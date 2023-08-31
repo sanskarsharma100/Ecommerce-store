@@ -26,12 +26,12 @@ export const TextInputField: FC<Props> = ({
   return (
     <>
       {fieldLabel && (
-        <label htmlFor={id} className="text-base font-medium xs:text-2xl">
+        <label htmlFor={id} className="text-base font-medium">
           {fieldLabel}
         </label>
       )}
       <input
-        className="border border-secondary bg-background p-2 text-sm text-textColor focus:outline focus:outline-2 xs:text-2xl"
+        className="border border-secondary bg-background p-2 text-sm text-textColor focus:outline focus:outline-2"
         id={id}
         type={fieldType}
         value={fieldValue}

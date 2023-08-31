@@ -9,7 +9,7 @@ export const SubmitButton: FC<Props> = ({ fieldValue, isDisabled }) => {
   return (
     <>
       <input
-        className="button-1 relative w-full border border-secondary bg-accent p-2 text-base font-bold xs:text-2xl"
+        className="button-1 relative w-full border border-secondary bg-accent p-2 text-base font-bold sm:text-lg"
         value={isDisabled ? "" : fieldValue}
         type="submit"
         role="button"
