@@ -51,7 +51,7 @@ const ImagesPreview: FC<Props> = ({ pictures }) => {
       className={`h-[8px] rounded-full duration-300 xs:h-[10px] ${
         index == currentIndex
           ? `w-[15px] bg-accent ss:w-[18px]`
-          : `bg-grayCustom w-[8px] ss:w-[10px]`
+          : `w-[8px] bg-grayCustom ss:w-[10px]`
       }`}
       onClick={() => slideToImage(index)}
     ></button>
@@ -70,16 +70,19 @@ const ImagesPreview: FC<Props> = ({ pictures }) => {
   ));
 
   const imgList = pictures.map((img, index) => (
-    <img
-      src={img.url}
-      alt="Game Photo"
-      key={img._id}
-      className={`w-20 hover:cursor-pointer sm:w-16 ${
+    <button
+      className={`flex aspect-square items-center justify-center hover:cursor-pointer ${
         index == currentIndex && `border-2 border-accent`
       }`}
       onClick={() => slideToImage(index)}
-      loading="lazy"
-    />
+    >
+      <img
+        src={img.url}
+        alt="Game Photo"
+        key={img._id}
+        className="w-20 sm:w-16"
+      />
+    </button>
   ));
 
   return (
