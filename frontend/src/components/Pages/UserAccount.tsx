@@ -198,7 +198,7 @@ export const UserAccount: FC = () => {
               </div>
             )}
             <img
-              src={newAvatar}
+              src={user.avatar.url}
               alt="Profile Photo"
               className="m-auto aspect-square w-40 rounded-full duration-200 group-hover:brightness-50"
             />
