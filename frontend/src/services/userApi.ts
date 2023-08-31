@@ -21,7 +21,6 @@ export const userAuthApi = apiSlice.injectEndpoints({
             JSON.stringify(res.isAuthenticated)
           );
           localStorage.setItem("user", JSON.stringify(res.user));
-          console.log("Loader User working");
           dispatch(assignCurrentUser(res));
         } catch (err) {
           console.log("error... ", err);

@@ -44,7 +44,6 @@ export const Navbar: FC = () => {
       menuBtnRef.current != target &&
       menuBtnRef.current?.checked
     ) {
-      console.log("Outside btn");
       setIsOpen(false);
       menuBtnRef.current.checked = false;
     }
@@ -52,7 +51,6 @@ export const Navbar: FC = () => {
       accountDropdownRef.current &&
       !accountDropdownRef.current.contains(target)
     ) {
-      console.log("Outside ACc");
       setIsAccountDropdownOpen(false);
     }
   };

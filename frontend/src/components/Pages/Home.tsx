@@ -44,8 +44,6 @@ export const Home: FC = () => {
     },
   ];
 
-  console.log("useGetProductsQuery", productsList);
-
   const products = productsList?.products.map((product) => (
     <ProductCard key={product._id} product={product} isLoading={isLoading} />
   ));

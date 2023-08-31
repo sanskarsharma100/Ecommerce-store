@@ -4,7 +4,6 @@ const sendToken = require("../utils/jwtToken");
 
 exports.createCategory = catchAsyncErrors(async (req, res, next) => {
   const { name } = req.body;
-  console.log(req.body);
   const category = await Category.create({
     name,
   });

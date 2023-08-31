@@ -44,7 +44,6 @@ export default (input: SwipeInput): SwipeOutput => {
     }
     if (isLeftSwipe && distanceX > distanceY) {
       input.onSwipedLeft();
-      console.log("left");
     }
   };
 

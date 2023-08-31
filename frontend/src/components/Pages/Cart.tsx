@@ -20,8 +20,6 @@ export const Cart: FC = () => {
 
   const cart = cartData && cartData.cart;
 
-  console.log("cart");
-
   const products = cart?.products.map((product) => (
     <CartProductCard product={product} key={product._id} />
   ));

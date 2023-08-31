@@ -25,8 +25,6 @@ export const Products: FC = () => {
   const [getProducts, { data: productsList, isLoading, isFetching }] =
     useLazyGetProductsQuery();
 
-  console.log("useGetProductsQuery", productsList);
-
   if (showFilter) {
     document.body.style.overflow = "hidden";
   } else {
@@ -38,7 +36,6 @@ export const Products: FC = () => {
   };
 
   const updateCategoryPara = (categories: string) => {
-    console.log("categories", categories);
     setQueryPara((para) => ({ ...para, category: categories }));
   };
 
