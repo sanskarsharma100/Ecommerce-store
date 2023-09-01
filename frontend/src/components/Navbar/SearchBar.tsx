@@ -26,7 +26,7 @@ export const SearchBar: FC<Props> = ({
   );
   const searchBarRef = useRef<HTMLFormElement>(null);
   const searchBtnRef = useRef<HTMLButtonElement>(null);
-  // const [isSearchBarFocused, setIsSearchBarFocused] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const handleSearch = (e: FormEvent) => {
@@ -38,14 +38,10 @@ export const SearchBar: FC<Props> = ({
     }
   };
 
-  console.log("isSearchBarFocused", isSearchBarFocused);
-
   useEffect(() => {
     const handleOutsideClick = (e: Event) => {
       const target = e.target as HTMLElement;
       const currentTarget = e.currentTarget as HTMLElement;
-      console.log("target", target);
-
       if (
         searchBarRef.current &&
         !searchBarRef.current.contains(target) &&

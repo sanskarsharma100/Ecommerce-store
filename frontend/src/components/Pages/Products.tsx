@@ -38,8 +38,6 @@ export const Products: FC = () => {
     isFetching,
   } = useGetProductsQuery(queryPara);
 
-  console.log("productsList", productsList);
-
   if (showFilter) {
     document.body.style.overflow = "hidden";
   } else {
@@ -78,8 +76,6 @@ export const Products: FC = () => {
   ));
 
   useEffect(() => {
-    console.log("sa");
-
     if (urlParams.get("keyword") != queryPara.keyword) {
       setQueryPara((para) => ({
         ...para,
