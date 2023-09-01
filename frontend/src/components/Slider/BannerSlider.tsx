@@ -50,7 +50,7 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
     <button
       role="button"
       key={picture.link}
-      className={`m-1 h-[8px] w-[8px] rounded-lg duration-300 xs:h-[10px] xs:w-[10px] ${
+      className={`m-1 h-[8px] w-[8px] rounded-full duration-300 xs:h-[10px] xs:w-[10px] ${
         index == currentIndex ? `bg-accent` : `bg-grayCustom`
       }`}
       onClick={() => slideToImage(index)}
@@ -65,7 +65,7 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
           backgroundImage: `url(${picture.image})`,
           transform: `translateX(${-(currentIndex * 100)}%)`,
         }}
-        className="h-full min-w-full rounded-lg bg-cover bg-left-top duration-500 ease-in-out"
+        className="h-full min-w-full bg-cover bg-left-top duration-500 ease-in-out"
       ></Link>
     </React.Fragment>
   ));
@@ -90,14 +90,14 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
         {slider}
         <button
           role="button"
-          className="group absolute left-0 top-0 hidden h-full w-[5%] overflow-hidden rounded-l-lg duration-300 hover:bg-semiDarkOverlay xs:block"
+          className="group absolute left-0 top-0 hidden h-full w-[5%] overflow-hidden duration-300 hover:bg-semiDarkOverlay xs:block"
           onClick={previousSlide}
         >
           <span className="left float-left ml-[40%] rotate-[135deg] -skew-x-12 -skew-y-12 border-b-4 border-r-4 p-2 drop-shadow-[0px_0px_5px_rgb(0,0,0)] duration-300 group-hover:ml-[30%] xs:p-1 sm:border-b-8 sm:border-r-8 sm:p-3"></span>
         </button>
         <button
           role="button"
-          className="group absolute right-0 top-0 hidden h-full w-[5%] rounded-r-lg duration-300 hover:bg-semiDarkOverlay xs:block "
+          className="group absolute right-0 top-0 hidden h-full w-[5%] duration-300 hover:bg-semiDarkOverlay xs:block "
           onClick={nextSlide}
         >
           <span className=" right float-right mr-[40%] -rotate-45 -skew-x-12 -skew-y-12 border-b-4 border-r-4 p-2 drop-shadow-[0px_0px_5px_rgb(0,0,0)] duration-300 group-hover:mr-[30%] xs:p-1 sm:border-b-8 sm:border-r-8 sm:p-3"></span>

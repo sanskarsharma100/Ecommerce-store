@@ -7,9 +7,11 @@ import { HamBtn } from "./../Buttons/HamBtn";
 import { useLazyLogoutUserQuery } from "../../services/userAuthApi";
 import { selectCurrentUser } from "../../features/User/userSlice";
 import { useAppSelector } from "../../app/hooks";
+import { SearchBar } from "./SearchBar";
 
 export const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isSearchBarFocused, setIsSearchBarFocused] = useState<boolean>(false);
   const [isAccountDropdownOpen, setIsAccountDropdownOpen] =
     useState<boolean>(false);
   const location = useLocation();
@@ -99,19 +101,31 @@ export const Navbar: FC = () => {
   return (
     <header className="sticky top-0 z-[99999] m-auto bg-background font-inter shadow-navbar">
       {isOpen && (
-        <div className="fixed z-30 min-h-screen w-screen bg-semiDarkOverlay ss:hidden"></div>
+        <div className="fixed z-[9999] min-h-screen w-screen bg-semiDarkOverlay sm:hidden"></div>
       )}
-      <div className="m-auto flex justify-between gap-4 sm:max-w-[90%]">
+      <div className="relative m-auto flex justify-between md:max-w-[90%]">
         <NavLink to="/" className="m-2 flex items-center">
           <img
-            className="h-9 max-w-[10rem] p-2 xs:max-w-[12rem] sm:p-1"
+            className="h-9 max-w-[10rem] p-2 xs:max-w-[12rem] sm:p-2"
             src={logo}
             alt="ShopeeFast Logo"
           />
         </NavLink>
-        <ul className="hidden items-center gap-2 p-2 ss:flex">
+        <div
+          className={`z-[9990] h-fit bg-background xs:flex xs:w-full xs:p-0 md:max-w-sm lg:max-w-md ${
+            isSearchBarFocused
+              ? "absolute m-auto w-full p-2"
+              : "my-auto ml-auto w-fit"
+          }`}
+        >
+          <SearchBar
+            isSearchBarFocused={isSearchBarFocused}
+            setIsSearchBarFocused={setIsSearchBarFocused}
+          />
+        </div>
+        <ul className="hidden items-center gap-2 p-2 sm:flex">
           {menuItems}
-          <li className="relative flex h-full hover:cursor-pointer">
+          <li className="relative flex h-full min-w-fit hover:cursor-pointer">
             {isAuthenticated ? (
               <NavLink
                 to="/account"
@@ -121,15 +135,17 @@ export const Navbar: FC = () => {
                     : "flex items-center px-2 py-1.5 duration-300 hover:bg-light"
                 }
               >
-                <div className="flex gap-1">
+                <div className="flex min-w-fit gap-1">
                   <div className="flex items-center gap-1">
                     <img
                       src={user.avatar.url}
                       alt="Profile Picture"
                       className="w-8 rounded-full"
                     />
-                    <div>
-                      <span className="text-sm font-semibold">{user.name}</span>
+                    <div className="hidden md:block">
+                      <span className="line-clamp-1 overflow-ellipsis text-sm font-semibold">
+                        {user.name}
+                      </span>
                     </div>
                   </div>
                   <div ref={accountDropdownRef}>
@@ -149,7 +165,7 @@ export const Navbar: FC = () => {
                       ></span>
                     </button>
                     <button
-                      className={`absolute right-0 top-full mt-1 w-full border border-light bg-background px-3 py-1.5 text-black shadow-navbar duration-300 hover:bg-background-3 ${
+                      className={`absolute right-0 top-full mt-1 w-full border border-light bg-background py-1.5 text-black shadow-navbar duration-300 hover:bg-background-3 ${
                         isAccountDropdownOpen ? "block" : "hidden"
                       }`}
                       onClick={logoutCurrentUser}
@@ -169,7 +185,9 @@ export const Navbar: FC = () => {
             )}
           </li>
         </ul>
-        <HamBtn hamBtnHandler={hamBtnHandler} ref={menuBtnRef} />
+        <div className="static ml-10">
+          <HamBtn hamBtnHandler={hamBtnHandler} ref={menuBtnRef} />
+        </div>
         <Menubar
           isOpen={isOpen}
           navLinks={navLinks}

@@ -54,13 +54,15 @@ export type productDetailsResp = {
   product: productType;
 };
 
+export type sortOptions = "increasing" | "decreasing" | "ratings" | "relevance";
+
 export type getProductPara = {
   keyword: string;
   currentPage: number;
   price: Array<number>;
   category: string;
   ratings: number;
-  sort: "increasing" | "decreasing" | "ratings" | "relevance";
+  sort: sortOptions;
 };
 
 export type categories = {
