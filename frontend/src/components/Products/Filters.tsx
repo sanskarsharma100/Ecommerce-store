@@ -69,7 +69,7 @@ export const Filters: FC<Props> = ({
   ));
 
   return (
-    <aside className="p-2">
+    <aside className="h-full p-2">
       <section className="m-auto w-full max-w-[8rem]">
         <div className="m-auto">
           <p className="mb-1 font-semibold xs:text-lg">Reviews</p>

@@ -9,6 +9,7 @@ import {
   useRemoveProductFromCartMutation,
 } from "../../services/cartApi";
 import { convertToINR } from "../../utils/utils";
+import { SpinningAnim } from "./../Loaders/SpinningAnim";
 
 type Product = {
   productId: string;
@@ -19,15 +20,19 @@ type Product = {
 
 type Props = {
   product: Product;
+  isCartFetching: boolean;
 };
 
-export const CartProductCard: FC<Props> = ({ product }) => {
+export const CartProductCard: FC<Props> = ({ product, isCartFetching }) => {
   const { productId, quantity, totalPrice } = product;
   const { data } = useGetProductDetailsQuery(product.productId);
 
-  const [increaseQuantity] = useIncreaseQuantityMutation();
-  const [decreaseQuantity] = useDecreaseQuantityMutation();
-  const [removeProductFromCart] = useRemoveProductFromCartMutation();
+  const [increaseQuantity, { isLoading: isIncreaseQuantityLoading }] =
+    useIncreaseQuantityMutation();
+  const [decreaseQuantity, { isLoading: isDecreaseQuantityLoading }] =
+    useDecreaseQuantityMutation();
+  const [removeProductFromCart, { isLoading: isRemoveProductLoading }] =
+    useRemoveProductFromCartMutation();
 
   const addQuantity = () => {
     increaseQuantity(productId);
@@ -42,7 +47,23 @@ export const CartProductCard: FC<Props> = ({ product }) => {
   };
 
   return data ? (
-    <div className="relative bg-background-3 p-2">
+    <div
+      className={`relative left-0 bg-background-3 p-2 ${
+        (isCartFetching ||
+          isIncreaseQuantityLoading ||
+          isDecreaseQuantityLoading ||
+          isRemoveProductLoading) &&
+        "before:absolute before:bottom-0 before:right-0 before:top-0 before:z-[1] before:h-full before:w-full before:bg-semiLightOverlay before:content-['']"
+      }`}
+    >
+      {(isCartFetching ||
+        isIncreaseQuantityLoading ||
+        isDecreaseQuantityLoading ||
+        isRemoveProductLoading) && (
+        <div className="absolute m-auto flex h-full w-full items-center justify-center">
+          <SpinningAnim />
+        </div>
+      )}
       <button
         className="absolute right-0 top-0 m-2 hover:outline hover:outline-1 hover:outline-black"
         onClick={removeProduct}

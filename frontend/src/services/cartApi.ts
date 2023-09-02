@@ -1,18 +1,19 @@
-import { getCartResp } from "../utils/types";
+import { addToCartResp, getCartResp } from "../utils/types";
 import { apiSlice } from "./apiSlice";
 
 export const cartApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    addProductToCart: builder.mutation<void, { productId: string | undefined }>(
-      {
-        query: (product) => ({
-          url: "/cart/product/add",
-          method: "POST",
-          body: product,
-        }),
-        invalidatesTags: ["Cart"],
-      }
-    ),
+    addProductToCart: builder.mutation<
+      addToCartResp,
+      { productId: string | undefined }
+    >({
+      query: (product) => ({
+        url: "/cart/product/add",
+        method: "POST",
+        body: product,
+      }),
+      invalidatesTags: ["Cart"],
+    }),
     increaseQuantity: builder.mutation<void, string>({
       query: (productId) => ({
         url: `/cart/product/${productId}/quantity/increase`,

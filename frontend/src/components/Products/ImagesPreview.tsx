@@ -47,7 +47,7 @@ const ImagesPreview: FC<Props> = ({ pictures }) => {
   const dots = pictures.map((img, index) => (
     <button
       role="button"
-      key={img._id}
+      key={img._id + index}
       className={`h-[8px] rounded-full duration-300 xs:h-[10px] ${
         index == currentIndex
           ? `w-[15px] bg-accent ss:w-[18px]`
@@ -71,17 +71,13 @@ const ImagesPreview: FC<Props> = ({ pictures }) => {
 
   const imgList = pictures.map((img, index) => (
     <button
+      key={img.url + img._id}
       className={`flex aspect-square items-center justify-center hover:cursor-pointer ${
         index == currentIndex && `border-2 border-accent`
       }`}
       onClick={() => slideToImage(index)}
     >
-      <img
-        src={img.url}
-        alt="Game Photo"
-        key={img._id}
-        className="w-20 sm:w-16"
-      />
+      <img src={img.url} alt="Game Photo" className="w-20 sm:w-16" />
     </button>
   ));
 

@@ -43,7 +43,7 @@ export const Login: FC = () => {
     <AuthBgWrapper>
       <h1 className="mb-3 text-center text-3xl font-bold">Login</h1>
       <p className="mb-1 text-center text-sm">
-        Don't have a account?{" "}
+        Don't have an account?{" "}
         <span className="italic text-linkColor hover:underline">
           <Link to="/signup">Sign Up</Link>
         </span>

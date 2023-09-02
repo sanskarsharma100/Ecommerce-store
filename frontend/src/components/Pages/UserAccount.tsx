@@ -223,11 +223,7 @@ export const UserAccount: FC = () => {
                 onClick={toggleUserEdit}
                 disabled={isUserLoading}
               >
-                {isUserLoading ? (
-                  <SpinningAnim height="20px" width="20px" />
-                ) : (
-                  "Edit Profile"
-                )}
+                {isUserLoading ? <SpinningAnim size="20px" /> : "Edit Profile"}
               </button>
             )}
             {isUserEdit && (
@@ -237,11 +233,7 @@ export const UserAccount: FC = () => {
                   onClick={updateUserInfo}
                   disabled={isUserLoading}
                 >
-                  {isUserLoading ? (
-                    <SpinningAnim height="20px" width="20px" />
-                  ) : (
-                    "Save"
-                  )}
+                  {isUserLoading ? <SpinningAnim size="20px" /> : "Save"}
                 </button>
                 <button
                   className="mt-2 w-full border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-warning"
@@ -251,11 +243,7 @@ export const UserAccount: FC = () => {
                   }}
                   disabled={isUserLoading}
                 >
-                  {isUserLoading ? (
-                    <SpinningAnim height="20px" width="20px" />
-                  ) : (
-                    "Cancel"
-                  )}
+                  {isUserLoading ? <SpinningAnim size="20px" /> : "Cancel"}
                 </button>
               </div>
             )}
@@ -269,7 +257,7 @@ export const UserAccount: FC = () => {
               disabled={isPasswordLoading}
             >
               {isPasswordLoading ? (
-                <SpinningAnim height="20px" width="20px" />
+                <SpinningAnim size="20px" />
               ) : (
                 "Change Password"
               )}
@@ -284,11 +272,7 @@ export const UserAccount: FC = () => {
                   resetPasswordFields();
                 }}
               >
-                {isPasswordLoading ? (
-                  <SpinningAnim height="20px" width="20px" />
-                ) : (
-                  "Cancel"
-                )}
+                {isPasswordLoading ? <SpinningAnim size="20px" /> : "Cancel"}
               </button>
             </div>
           )}

@@ -76,6 +76,12 @@ export type getCategoryResp = {
   categories: [categories];
 };
 
+export type addToCartResp = {
+  success: boolean;
+  cart: Cart;
+  product: productType;
+};
+
 export type Cart = {
   _id: string;
   products: [

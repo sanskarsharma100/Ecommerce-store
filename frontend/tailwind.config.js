@@ -54,6 +54,7 @@ export default {
         success: "hsl(120, 100%, 25%)",
         warning: "hsl(15, 100%, 40%)",
         semiDarkOverlay: "rgba(0, 0, 0, 0.4)",
+        semiLightOverlay: "rgba(255, 255, 255, 0.4)",
         grayLighter: "hsl(0, 0%, 80%)",
       },
       borderWidth: {

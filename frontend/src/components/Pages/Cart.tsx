@@ -11,7 +11,8 @@ import { Link } from "react-router-dom";
 export const Cart: FC = () => {
   const {
     data: cartData,
-    isLoading,
+    isLoading: isCartLoading,
+    isFetching: isCartFetching,
     isError,
     error,
   } = useGetCartProductsQuery();
@@ -21,7 +22,11 @@ export const Cart: FC = () => {
   const cart = cartData && cartData.cart;
 
   const products = cart?.products.map((product) => (
-    <CartProductCard product={product} key={product._id} />
+    <CartProductCard
+      product={product}
+      isCartFetching={isCartFetching}
+      key={product._id}
+    />
   ));
 
   return !isAuthenticated ? (
@@ -35,9 +40,9 @@ export const Cart: FC = () => {
         </Link>
       </div>
     </div>
-  ) : isLoading ? (
+  ) : isCartLoading ? (
     <div className="flex min-h-[500px] items-center justify-center">
-      <SpinningAnim height="2.5rem" width="2.5rem" />
+      <SpinningAnim size="2.5rem" />
     </div>
   ) : cart && cart.products.length ? (
     <div className="m-2 mt-5 min-h-[500px]">

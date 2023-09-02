@@ -38,6 +38,7 @@ exports.addToCart = catchAsyncErrors(async (req, res, next) => {
     cart = await cart.save();
     return res.status(201).json({
       success: true,
+      product,
       cart,
     });
   } else {
@@ -50,6 +51,7 @@ exports.addToCart = catchAsyncErrors(async (req, res, next) => {
 
     return res.status(201).json({
       success: true,
+      product,
       cart,
     });
   }

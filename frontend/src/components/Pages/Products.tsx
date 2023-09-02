@@ -85,17 +85,17 @@ export const Products: FC = () => {
   }, [queryPara.keyword, urlParams]);
 
   return (
-    <div className="m-auto flex h-full min-h-[500px] pb-4">
+    <div className="relative m-auto flex h-full min-h-[700px] pb-4">
       {showFilter && (
         <div className="fixed z-30 min-h-screen w-screen bg-semiDarkOverlay xs:hidden"></div>
       )}
-      {isFetching && (
-        <div className="absolute flex h-full w-full items-center justify-center bg-[rgba(0,0,0,0.1)]">
-          <SpinningAnim height="5rem" width="5rem" />
+      {(isFetching || isLoading) && (
+        <div className="fixed z-[51] flex h-full w-full items-center justify-center bg-semiLightOverlay">
+          <SpinningAnim size="5rem" width="8px" />
         </div>
       )}
       <div
-        className={`absolute z-50 h-full w-3/5 bg-[rgba(255,255,255,0.95)] xs:static xs:block xs:w-60 xs:bg-transparent md:w-80 ${
+        className={`absolute z-50 h-full w-3/5 bg-[rgba(255,255,255,0.95)] xs:static xs:block xs:h-auto xs:w-60 xs:bg-background md:w-80 ${
           !showFilter && "hidden"
         }`}
       >

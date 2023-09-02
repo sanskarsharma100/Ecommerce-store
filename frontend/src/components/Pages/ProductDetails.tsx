@@ -20,7 +20,8 @@ export const ProductDetails: FC = () => {
   const [isProductInCart, setIsProductInCart] = useState<boolean>(false);
   const { data: productData, isLoading: isProductLoading } =
     useGetProductDetailsQuery(productId ?? skipToken);
-  const [addProductToCart] = useAddProductToCartMutation();
+  const [addProductToCart, { isLoading: isAddToCartLoading, isSuccess }] =
+    useAddProductToCartMutation();
   const { data: cartData, isLoading: isCartLoading } =
     useGetCartProductsQuery();
   const product = productData && productData.product;
@@ -43,7 +44,7 @@ export const ProductDetails: FC = () => {
 
   return isProductLoading ? (
     <div className="flex min-h-[500px] items-center justify-center">
-      <SpinningAnim height="2.5rem" width="2.5rem" />
+      <SpinningAnim size="2.5rem" />
     </div>
   ) : product ? (
     <div className="mb-10 mt-6 min-h-[500px] p-2">
@@ -90,10 +91,14 @@ export const ProductDetails: FC = () => {
                 <button className="inline-block w-full max-w-xl overflow-hidden border-2 p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:cursor-default">
                   <SpinningAnim />
                 </button>
-              ) : isProductInCart ? (
+              ) : isAddToCartLoading ? (
+                <button className="flex w-full max-w-xl items-center justify-center overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary">
+                  <SpinningAnim />
+                </button>
+              ) : isSuccess || isProductInCart ? (
                 <Link
                   to="/cart"
-                  className=" inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary"
+                  className="block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary"
                 >
                   Go to Cart
                 </Link>
@@ -104,7 +109,7 @@ export const ProductDetails: FC = () => {
                     isAuthenticated ? addToCart : () => navigate("/login")
                   }
                 >
-                  {isAuthenticated ? "Add to Cart" : "Login to continue"}
+                  {isAuthenticated ? "Add to Cart" : "Login to Continue"}
                 </button>
               )}
             </div>
