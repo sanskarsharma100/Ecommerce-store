@@ -1,13 +1,8 @@
 import { FC } from "react";
 import { FooterLinks } from "./FooterLinks";
 import BrandName from "../../assets/images/BrandName.svg";
-// import iconFacebook from "../../assets/icons/iconFacebook.svg";
-// import iconInstagram from "../../assets/icons/iconInstagram.svg";
-// import iconTwitter from "../../assets/icons/iconTwitter.svg";
-// import iconYoutube from "../../assets/icons/iconYoutube.svg";
 import iconGithub from "../../assets/icons/iconGithub.svg";
 import iconLinkedin from "../../assets/icons/iconLinkedin.svg";
-import { Link } from "react-router-dom";
 
 export const Footer: FC = () => {
   const help = [

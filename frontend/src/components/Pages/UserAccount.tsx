@@ -38,7 +38,6 @@ export const UserAccount: FC = () => {
     name: user.name,
     email: user.email,
   });
-  const [newAvatar, setNewAvatar] = useState<string>(user.avatar.url);
 
   const [newPassword, setNewPassword] = useState<StringObject>({
     oldPassword: "",
@@ -105,7 +104,6 @@ export const UserAccount: FC = () => {
     if (image) {
       const reader = new FileReader();
       reader.onload = () => {
-        setNewAvatar(URL.createObjectURL(image));
         updateUserDetails({ avatar: reader.result as string });
       };
       reader.readAsDataURL(image);

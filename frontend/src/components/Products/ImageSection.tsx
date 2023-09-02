@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { ImageType } from "../../utils/types";
 import iconArrow from "../../assets/icons/iconArrow.svg";
 
