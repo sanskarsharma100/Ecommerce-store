@@ -80,7 +80,7 @@ export const Cart: FC = () => {
       </div>
     </div>
   ) : !cart || !cart.products.length ? (
-    <div className="flex min-h-[500px] items-center justify-center p-2 text-2xl font-bold ss:text-3xl">
+    <div className="flex min-h-[500px] items-center justify-center p-2 text-center text-2xl font-bold ss:text-3xl">
       No products in the cart
     </div>
   ) : isError && isErrorWithData(error) && isErrorWithMessage(error.data) ? (

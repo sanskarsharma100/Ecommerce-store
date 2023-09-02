@@ -131,7 +131,7 @@ export const Products: FC = () => {
               </div>
             </section>
             <section className="m-auto">
-              <div className="mt-2 grid grid-cols-2 xs:justify-between xs:gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 md:gap-8">
+              <div className="mt-2 grid grid-cols-2 xs:justify-between xs:gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 md:gap-4 lg:gap-6">
                 {products}
               </div>
             </section>

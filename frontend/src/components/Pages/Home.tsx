@@ -69,7 +69,7 @@ export const Home: FC = () => {
             ref={containerRef}
             {...swipeHandlers}
           >
-            <div className="flex justify-start gap-2 xs:w-[2000px] sm:gap-3 ">
+            <div className="flex justify-start gap-2 p-0.5 xs:my-1 xs:w-[3000px] xs:gap-6">
               {products}
             </div>
           </div>
