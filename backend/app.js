@@ -1,5 +1,6 @@
 const express = require("express");
 var cors = require("cors");
+const dotenv = require("dotenv");
 const app = express();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -7,7 +8,14 @@ const fileUpload = require("express-fileupload");
 
 const errorMiddleware = require("./middleware/error");
 
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+dotenv.config({ path: "backend/config/config.env" });
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
 app.use(bodyParser.json({ limit: "50mb" }));
