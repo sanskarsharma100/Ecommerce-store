@@ -112,9 +112,7 @@ export const Products: FC = () => {
         />
       </div>
       <div className="w-full xs:max-w-[90%] xs:px-4">
-        {(productsList && productsList.currentProductCount) ||
-        isLoading ||
-        isFetching ? (
+        {(productsList && productsList.pages) || isLoading || isFetching ? (
           <>
             <section className="flex w-fit items-end p-2">
               <button

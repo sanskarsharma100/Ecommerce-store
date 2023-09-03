@@ -43,8 +43,6 @@ export type productType = {
 
 export type allProductResp = {
   success: boolean;
-  totalProductCount: number;
-  currentProductCount: number;
   pages: number;
   products: [productType];
 };
