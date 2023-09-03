@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { getProductPara } from "../../utils/types";
 import { ProductCard } from "../Products/ProductCard";
 import useSwipe from "../../hooks/useSwipe";
+import { SpinningAnim } from "../Loaders/SpinningAnim";
 
 export const Home: FC = () => {
   const queryPara = {
@@ -69,9 +70,15 @@ export const Home: FC = () => {
             ref={containerRef}
             {...swipeHandlers}
           >
-            <div className="flex justify-start gap-2 p-0.5 xs:my-1 xs:w-[3000px] xs:gap-6">
-              {products}
-            </div>
+            {isLoading ? (
+              <div className="flex h-48 w-full items-center justify-center overflow-hidden xs:h-96">
+                <SpinningAnim size="40px" width="6px" />
+              </div>
+            ) : (
+              <div className="flex justify-start gap-2 p-0.5 xs:my-1 xs:w-[3000px] xs:gap-6">
+                {products}
+              </div>
+            )}
           </div>
         </section>
         <section className="mt-4">
