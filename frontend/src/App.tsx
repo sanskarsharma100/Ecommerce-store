@@ -11,27 +11,31 @@ import { Products } from "./components/Pages/Products";
 import { ProductDetails } from "./components/Pages/ProductDetails";
 import { Cart } from "./components/Pages/Cart";
 import SecuredRoute from "./components/Routes/SecuredRoute";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route element={<SecuredRoute />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/password/forgot" element={<ForgotPassword />} />
-          <Route path="/password/reset/:token" element={<ResetPassword />} />
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route element={<SecuredRoute />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/password/forgot" element={<ForgotPassword />} />
+            <Route path="/password/reset/:token" element={<ResetPassword />} />
+          </Route>
+          <Route element={<RequireAuth />}>
+            <Route path="/account" element={<UserAccount />} />
+          </Route>
+          <Route path="/*" element={<Home />} />
         </Route>
-        <Route element={<RequireAuth />}>
-          <Route path="/account" element={<UserAccount />} />
-        </Route>
-        <Route path="/*" element={<Home />} />
-      </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 }
 
