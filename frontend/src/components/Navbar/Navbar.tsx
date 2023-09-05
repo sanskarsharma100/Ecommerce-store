@@ -84,7 +84,7 @@ export const Navbar: FC = () => {
             : "flex w-full max-w-xl items-center justify-center px-2 text-sm uppercase duration-300 hover:bg-light"
         }
       >
-        {item.icon ? <IoCartOutline className="text-3xl" /> : item.name}
+        {item.icon ? <IoCartOutline className="text-2xl" /> : item.name}
       </NavLink>
     </li>
   ));
@@ -112,7 +112,7 @@ export const Navbar: FC = () => {
           />
         </NavLink>
         <div
-          className={`z-[9990] h-fit bg-background xs:flex xs:w-full xs:p-0 md:max-w-sm lg:max-w-md ${
+          className={`z-[9990] h-fit bg-background xs:flex xs:w-full xs:basis-[40%] xs:p-0 md:max-w-sm lg:max-w-md ${
             isSearchBarFocused
               ? "absolute m-auto w-full p-2"
               : "my-auto ml-auto w-fit"
@@ -185,7 +185,7 @@ export const Navbar: FC = () => {
             )}
           </li>
         </ul>
-        <div className="static ml-10">
+        <div className="static ml-10 sm:hidden">
           <HamBtn hamBtnHandler={hamBtnHandler} ref={menuBtnRef} />
         </div>
         <Menubar

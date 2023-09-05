@@ -175,7 +175,7 @@ export const UserAccount: FC = () => {
 
   return (
     <div className="mt-4 min-h-[500px] font-inter">
-      <section className="m-2 border-2 border-gray-500 p-2 sm:m-auto sm:max-w-lg">
+      <section className="m-2 border-2 border-gray-500 p-2 ss:m-auto ss:max-w-lg">
         <div>
           <label
             htmlFor="avatar"
