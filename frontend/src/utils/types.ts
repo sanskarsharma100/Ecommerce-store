@@ -5,6 +5,8 @@ export type Button = {
   type?: "submit" | "reset";
   className?: string;
   children: React.ReactNode;
+  to?: string;
+  href?: string;
 };
 
 export type User = {

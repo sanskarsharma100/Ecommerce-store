@@ -74,7 +74,8 @@ input[type="search"]::-webkit-search-results-decoration {
 
   .button-1 {
     box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
-    color: hsl(211, 61%, 8%)
+    /* color: hsl(209, 61%, 16%) */
+    color: #051a2e
   }
 
   .button-1:hover {

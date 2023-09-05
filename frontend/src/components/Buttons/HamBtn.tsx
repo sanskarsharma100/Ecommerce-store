@@ -9,13 +9,13 @@ export const HamBtn = forwardRef(
   ({ hamBtnHandler }: Props, ref: Ref<HTMLInputElement>) => {
     return (
       <label
-        className="absolute right-0 top-1/2 z-[999] -translate-y-1/2 hover:cursor-pointer"
+        className="absolute right-1 top-1/2 z-[999] -translate-y-1/2 hover:cursor-pointer"
         htmlFor="menuBtn"
         onClick={hamBtnHandler}
       >
         <span className="sr-only">Menubar Button</span>
         <div className="relative flex h-[32px] w-[32px] transform items-center justify-center overflow-hidden transition-all duration-200">
-          <div className="ham-btn flex h-[24px] w-[20px] transform flex-col items-center justify-between overflow-hidden p-1 transition-all duration-300">
+          <div className="ham-btn flex h-full w-full transform flex-col items-center justify-center gap-1 overflow-hidden transition-all duration-300">
             <input
               className="peer hidden"
               type="checkbox"
