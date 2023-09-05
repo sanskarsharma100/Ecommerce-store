@@ -99,7 +99,7 @@ export const Navbar: FC = () => {
   }
 
   return (
-    <header className="sticky top-0 z-[99999] m-auto bg-background font-inter shadow-navbar">
+    <header className="sticky top-0 z-[99999] m-auto bg-primary-100 font-inter shadow-navbar">
       {isOpen && (
         <div className="fixed z-[9999] min-h-screen w-screen bg-semiDarkOverlay sm:hidden"></div>
       )}
@@ -112,7 +112,7 @@ export const Navbar: FC = () => {
           />
         </NavLink>
         <div
-          className={`z-[9990] h-fit bg-background xs:flex xs:w-full xs:basis-[40%] xs:p-0 md:max-w-sm lg:max-w-md ${
+          className={`z-[9990] mr-2 h-fit bg-background xs:flex xs:w-fit md:max-w-sm lg:max-w-md ${
             isSearchBarFocused
               ? "absolute m-auto w-full p-2"
               : "my-auto ml-auto w-fit"

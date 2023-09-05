@@ -31,22 +31,7 @@ input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
 
-.button-1 {
-  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
-  cursor: pointer;
-}
 
-.button-1:hover {
-  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.75);
-  top: 2px;
-  left: 2px;
-}
-
-.button-1:active {
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
-  top: 5px;
-  left: 5px;
-}
 
 .dark-overlay {
   box-shadow: 400px 400px 50px 0px rgba(0, 0, 0, 0.75);
@@ -85,5 +70,20 @@ input[type="search"]::-webkit-search-results-decoration {
     -ms-overflow-style: none;
     /* Firefox */
     scrollbar-width: none;
+  }
+
+  .button-1 {
+    box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
+    color: hsl(211, 61%, 8%)
+  }
+
+  .button-1:hover {
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.75);
+    color: hsl(212, 75%, 6%);
+  }
+
+  .button-1:active {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+
   }
 }

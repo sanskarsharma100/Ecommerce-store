@@ -50,7 +50,7 @@ export const Home: FC = () => {
   ));
 
   return (
-    <div className="mb-2 min-h-[400px]">
+    <div className="min-h-[400px] pb-2">
       <BannerSlider pictures={banner} />
       <div className="p-2 ss:p-4">
         <section className="mt-4 flex w-full flex-col items-center overflow-hidden xs:items-start">
