@@ -1,7 +1,7 @@
-import { FC, MouseEvent, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import logo from "../../assets/images/logo.svg";
 import { IoCartOutline } from "react-icons/io5";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Menubar } from "./Menubar";
 import { HamBtn } from "./../Buttons/HamBtn";
 import { useLazyLogoutUserQuery } from "../../services/userAuthApi";
@@ -24,8 +24,7 @@ export const Navbar: FC = () => {
   const { isAuthenticated, user } = useAppSelector(selectCurrentUser);
   const [logoutUser] = useLazyLogoutUserQuery();
 
-  const logoutCurrentUser = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const logoutCurrentUser = () => {
     logoutUser();
   };
 
@@ -116,7 +115,7 @@ export const Navbar: FC = () => {
           />
         </NavLink>
         <div
-          className={`z-[9990] mr-2 h-fit xs:flex xs:w-fit md:max-w-sm lg:max-w-md ${
+          className={`z-[9990] mr-2 h-fit xs:static xs:!flex xs:w-fit xs:p-0 md:max-w-sm lg:max-w-md ${
             isSearchBarFocused
               ? "absolute m-auto w-full p-2"
               : "my-auto ml-auto w-fit"

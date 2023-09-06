@@ -22,9 +22,9 @@ export const HamBtn = forwardRef(
               id="menuBtn"
               ref={ref}
             />
-            <div className="peer-checked:translate-y-0.3 peer-checked:translate-x-0.6 h-[3px] w-4 origin-left transform bg-black transition-all duration-300 peer-checked:rotate-[45deg]"></div>
-            <div className="h-[3px] w-4 transform rounded bg-black transition-all duration-300 peer-checked:-translate-x-10"></div>
-            <div className="peer-checked:translate-x-0.6 h-[3px] w-4 origin-left transform bg-black transition-all  duration-300 peer-checked:-translate-y-0.5 peer-checked:-rotate-[45deg]"></div>
+            <div className="peer-checked:translate-y-0.3 peer-checked:translate-x-0.6 h-[3px] w-4 origin-left transform bg-primary-900 transition-all duration-300 peer-checked:rotate-[45deg]"></div>
+            <div className="h-[3px] w-4 transform rounded bg-primary-900 transition-all duration-300 peer-checked:-translate-x-10"></div>
+            <div className="peer-checked:translate-x-0.6 h-[3px] w-4 origin-left transform bg-primary-900 transition-all  duration-300 peer-checked:-translate-y-0.5 peer-checked:-rotate-[45deg]"></div>
           </div>
         </div>
       </label>
