@@ -55,14 +55,14 @@ export const Home: FC = () => {
       <div className="p-2 ss:p-4">
         <section className="mt-4 flex w-full flex-col items-center overflow-hidden xs:items-start">
           <div className="relative mb-4 w-full">
-            <h2 className="m-auto w-6/12 whitespace-nowrap border-b border-grayCustom pb-1 text-center text-2xl font-light xs:text-3xl sm:text-4xl md:text-5xl">
+            <h2 className="m-auto w-6/12 whitespace-nowrap border-b border-primary-900 pb-1 text-center text-2xl font-light text-primary-900 xs:text-3xl sm:text-4xl md:text-5xl">
               New Arrivals
             </h2>
             <Link
               to="/products"
-              className="absolute bottom-0 right-0 ml-auto w-fit text-xs font-semibold text-gray-900 underline hover:text-accent hover:underline xs:block ss:text-sm ss:no-underline"
+              className="absolute bottom-0 right-0 ml-auto w-fit text-xs font-semibold text-light-blue-vivid-900 underline hover:text-accent hover:underline xs:block ss:text-sm ss:no-underline"
             >
-              See All
+              View More
             </Link>
           </div>
           <div
