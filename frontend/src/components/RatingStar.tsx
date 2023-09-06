@@ -12,7 +12,8 @@ export const RatingStar: FC<{ rating: number; starSize?: string }> = ({
     ratingStars.push(
       <FaStar
         key={i}
-        style={{ color: "hsl(338, 80%, 65%)", fontSize: starSize }}
+        style={{ fontSize: starSize }}
+        className="text-primary-800"
       />
     );
   }
@@ -21,14 +22,16 @@ export const RatingStar: FC<{ rating: number; starSize?: string }> = ({
     ratingStars.push(
       <FaRegStar
         key={fractionalRating}
-        style={{ color: "hsl(338, 80%, 65%)", fontSize: starSize }}
+        style={{ fontSize: starSize }}
+        className="text-primary-800"
       />
     );
   } else if (fractionalRating >= 0.5) {
     ratingStars.push(
       <FaRegStarHalfStroke
         key={fractionalRating}
-        style={{ color: "hsl(338, 80%, 65%)", fontSize: starSize }}
+        style={{ fontSize: starSize }}
+        className="text-primary-800"
       />
     );
   }
@@ -37,7 +40,8 @@ export const RatingStar: FC<{ rating: number; starSize?: string }> = ({
     ratingStars.push(
       <FaRegStar
         key={i * i + i}
-        style={{ color: "hsl(338, 80%, 65%)", fontSize: starSize }}
+        style={{ fontSize: starSize }}
+        className="text-primary-700"
       />
     );
   }

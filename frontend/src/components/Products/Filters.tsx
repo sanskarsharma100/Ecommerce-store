@@ -41,8 +41,8 @@ export const Filters: FC<Props> = ({
     .map((_, ind) => (
       <div
         key={ind * ind}
-        className={`p-1 hover:cursor-pointer ${
-          queryPara.ratings == ind + 1 && "border border-accent"
+        className={`rounded-lg px-1 py-1.5 duration-300 hover:cursor-pointer ${
+          queryPara.ratings == ind + 1 && "bg-primary-300"
         }`}
         onClick={() => updateRatingsPara(ind + 1)}
       >
@@ -55,13 +55,13 @@ export const Filters: FC<Props> = ({
       <input
         id={category._id}
         type="checkbox"
-        className="peer text-accent shadow-sm hover:cursor-pointer focus:ring-0 focus:ring-offset-0"
+        className="peer rounded-md border-2 bg-primary-050 text-primary-800 shadow-sm hover:cursor-pointer focus:ring-2 focus:ring-primary-700 focus:ring-offset-1"
         onChange={filterCategories}
         name={category.name}
       />
       <label
         htmlFor={category._id}
-        className="ml-1 select-none font-medium hover:cursor-pointer peer-checked:text-accent peer-hover:text-accent"
+        className="ml-1 select-none font-medium text-primary-900 hover:cursor-pointer"
       >
         {category.name}
       </label>
@@ -72,12 +72,14 @@ export const Filters: FC<Props> = ({
     <aside className="h-full p-2">
       <section className="m-auto w-full max-w-[8rem]">
         <div className="m-auto">
-          <p className="mb-1 font-semibold xs:text-lg">Reviews</p>
+          <p className="font-semibold text-primary-900 xs:text-lg">Reviews</p>
           <div className="flex flex-col-reverse gap-1">{ratings}</div>
         </div>
         <div className="m-auto mt-2">
-          <p className="mb-1 font-semibold xs:text-lg">Categories</p>
-          <ul className="text-sm xs:text-base">{categories}</ul>
+          <p className="font-semibold text-primary-900 xs:text-lg">
+            Categories
+          </p>
+          <ul className="p-1 text-sm xs:text-base">{categories}</ul>
         </div>
       </section>
     </aside>

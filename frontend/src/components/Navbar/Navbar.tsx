@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
 import logo from "../../assets/images/logo.svg";
 import { IoCartOutline } from "react-icons/io5";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menubar } from "./Menubar";
 import { HamBtn } from "./../Buttons/HamBtn";
 import { useLazyLogoutUserQuery } from "../../services/userAuthApi";
@@ -171,16 +171,16 @@ export const Navbar: FC = () => {
                     isAccountDropdownOpen ? "block" : "hidden"
                   }`}
                 >
-                  <NavLink
+                  <Link
                     to="/account"
-                    className={`w-full border-b border-inherit py-1.5 duration-300 hover:bg-slate-400 ${
+                    className={`w-full border-b border-inherit py-1.5 duration-300 hover:bg-primary-400 ${
                       isAccountDropdownOpen ? "block" : "hidden"
                     }`}
                   >
                     Account
-                  </NavLink>
+                  </Link>
                   <button
-                    className={`w-full py-1.5 duration-300 hover:bg-slate-400`}
+                    className={`w-full py-1.5 duration-300 hover:bg-primary-400`}
                     onClick={logoutCurrentUser}
                   >
                     Logout
