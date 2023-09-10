@@ -10,6 +10,7 @@ import {
 } from "../../services/cartApi";
 import { convertToINR } from "../../utils/utils";
 import { SpinningAnim } from "./../Loaders/SpinningAnim";
+import { ButtonClose } from "./../Buttons/ButtonClose";
 
 type Product = {
   productId: string;
@@ -48,7 +49,7 @@ export const CartProductCard: FC<Props> = ({ product, isCartFetching }) => {
 
   return data ? (
     <div
-      className={`relative left-0 bg-background-3 p-2 ${
+      className={`relative left-0 rounded-lg bg-primary-200 p-2 ${
         (isCartFetching ||
           isIncreaseQuantityLoading ||
           isDecreaseQuantityLoading ||
@@ -64,12 +65,10 @@ export const CartProductCard: FC<Props> = ({ product, isCartFetching }) => {
           <SpinningAnim />
         </div>
       )}
-      <button
-        className="absolute right-0 top-0 m-2 hover:outline hover:outline-1 hover:outline-black"
+      <ButtonClose
+        className="absolute right-0 top-0 m-2 !bg-primary-400 !p-0.5"
         onClick={removeProduct}
-      >
-        <img src={iconCross} alt="Remove Item" className="w-4 lg:w-6" />
-      </button>
+      />
       <div className="flex">
         <div className="max-w-[30%] xs:max-w-[20%] sm:w-[20%] sm:max-w-[15rem] lg:max-w-[12%]">
           <img src={data.product.images[0].url} alt={data.product.name} />
@@ -79,37 +78,35 @@ export const CartProductCard: FC<Props> = ({ product, isCartFetching }) => {
             <div>
               <Link
                 to={`/products/${productId}`}
-                className="text-sm font-medium xs:text-base sm:text-lg"
+                className="text-sm font-medium text-primary-900 xs:text-base sm:text-lg"
               >
                 {data.product.name}
               </Link>
             </div>
             <div>
-              <span className="text-sm font-semibold">
+              <span className="text-sm font-semibold text-primary-900">
                 {convertToINR(data.product.price)}
               </span>
             </div>
           </div>
-          <div className="flex w-fit items-center border border-secondary">
+          <div className="flex w-fit items-center border border-primary-900">
             <button
-              className={`group h-full border-r border-secondary px-2 text-sm xs:text-xl ${
-                quantity <= 1 && "text-grayCustom"
-              }`}
+              className="group h-full border-r border-primary-900 px-2 text-sm xs:text-xl"
               onClick={quantity <= 1 ? removeProduct : reduceQuantity}
             >
               {quantity <= 1 ? (
-                <GoTrash className="text-xs text-black group-hover:text-warning xs:text-base" />
+                <GoTrash className="text-xs text-red-vivid-800 xs:text-base" />
               ) : (
                 "-"
               )}
             </button>
-            <span className="h-fit w-5 text-center text-sm font-bold leading-none xs:w-8 xs:text-base sm:w-10 sm:text-lg">
+            <span className="h-fit w-5 text-center text-sm font-bold leading-none text-primary-900 xs:w-8 xs:text-base sm:w-10 sm:text-lg">
               {quantity}
             </span>
             <button
-              className={`border-l border-secondary px-2 text-sm xs:text-xl ${
-                quantity >= 10 ||
-                (quantity >= data.product.stock && "bg-light text-grayCustom")
+              className={`border-l border-primary-900 px-2 text-sm text-primary-900 xs:text-xl ${
+                (quantity >= 10 || quantity >= data.product.stock) &&
+                "text-primary-500 hover:cursor-not-allowed"
               }`}
               onClick={addQuantity}
               disabled={quantity >= 10 || quantity >= data.product.stock}
@@ -119,7 +116,7 @@ export const CartProductCard: FC<Props> = ({ product, isCartFetching }) => {
           </div>
         </div>
         <div className="hidden self-center ss:block">
-          <span className="text-sm font-medium">
+          <span className="text-sm font-medium text-primary-900">
             {convertToINR(totalPrice)}
           </span>
         </div>

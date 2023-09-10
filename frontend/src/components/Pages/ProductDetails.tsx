@@ -12,6 +12,8 @@ import {
 } from "../../services/cartApi";
 import { useAppSelector } from "../../app/hooks";
 import { selectCurrentUser } from "../../features/User/userSlice";
+import { ButtonPrimary } from "../Buttons/ButtonPrimary";
+import { ButtonWarning } from "../Buttons/ButtonWarning";
 
 export const ProductDetails: FC = () => {
   const { id: productId } = useParams();
@@ -54,13 +56,13 @@ export const ProductDetails: FC = () => {
         </section>
         <section className="mx-auto flex w-full max-w-[30rem] flex-col justify-between sm:max-w-[25rem]">
           <div className="mb-auto">
-            <p className="text-xs text-grayCustom ss:text-sm">
+            <p className="text-xs font-medium text-primary-800 ss:text-sm">
               {product.category}
             </p>
-            <h1 className="text-lg font-bold text-grayDarker ss:text-3xl ss:font-bold">
+            <h1 className="text-lg font-bold text-primary-900 ss:text-3xl ss:font-bold">
               {product.name}
             </h1>
-            <h3 className="text-grayCustom ss:text-lg">
+            <h3 className="font-medium text-primary-500 ss:text-lg">
               {product.description}
             </h3>
             <div className="flex max-w-[8rem] items-center gap-1 ss:hidden ss:max-w-[9rem]">
@@ -80,37 +82,31 @@ export const ProductDetails: FC = () => {
           </div>
           <div className="mt-8 sm:mt-auto">
             <div className="mt-2 sm:mt-6">
-              <div className="text-lg font-extrabold text-grayDarker ss:text-2xl sm:mb-2 sm:text-3xl">
+              <div className="text-lg font-extrabold text-primary-900 ss:text-2xl sm:mb-2 sm:text-3xl">
                 {convertToINR(product.price)}
               </div>
               {isOutOfStock ? (
-                <button className="inline-block w-full max-w-xl overflow-hidden border-2 bg-grayCustom p-2 text-center text-base font-extrabold tracking-wider text-grayDarker hover:cursor-default">
+                <ButtonWarning className="hover:!cursor-not-allowed" disabled>
                   Out of stock
-                </button>
+                </ButtonWarning>
               ) : isCartLoading ? (
-                <button className="inline-block w-full max-w-xl overflow-hidden border-2 p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:cursor-default">
+                <ButtonPrimary>
                   <SpinningAnim />
-                </button>
+                </ButtonPrimary>
               ) : isAddToCartLoading ? (
-                <button className="flex w-full max-w-xl items-center justify-center overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary">
+                <ButtonPrimary>
                   <SpinningAnim />
-                </button>
+                </ButtonPrimary>
               ) : isSuccess || isProductInCart ? (
-                <Link
-                  to="/cart"
-                  className="block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary"
-                >
-                  Go to Cart
-                </Link>
+                <ButtonPrimary to="/cart">Go to Cart</ButtonPrimary>
               ) : (
-                <button
-                  className="w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary"
+                <ButtonPrimary
                   onClick={
                     isAuthenticated ? addToCart : () => navigate("/login")
                   }
                 >
                   {isAuthenticated ? "Add to Cart" : "Login to Continue"}
-                </button>
+                </ButtonPrimary>
               )}
             </div>
           </div>
@@ -118,7 +114,7 @@ export const ProductDetails: FC = () => {
       </div>
     </div>
   ) : (
-    <div>
+    <div className="flex min-h-[500px] items-center justify-center text-3xl text-red-vivid-600">
       <div>Error Occurred</div>
     </div>
   );

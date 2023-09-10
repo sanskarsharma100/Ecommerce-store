@@ -45,7 +45,7 @@ export const ImageSection: FC<Props> = ({ images }) => {
     <section className="flex flex-col-reverse gap-2 overflow-hidden ss:flex-row">
       <div className="flex gap-0.5 border p-0.5 ss:flex-col">
         <button
-          className="min-w-[0.75rem] outline outline-1 outline-black hover:outline-accent ss:w-full"
+          className="min-w-[0.75rem] outline outline-1 outline-primary-800 hover:outline-primary-900 ss:w-full"
           onClick={scrollUp}
         >
           <img
@@ -62,7 +62,7 @@ export const ImageSection: FC<Props> = ({ images }) => {
           {imagesList}
         </ul>
         <button
-          className="min-w-[0.75rem] outline outline-1 outline-black hover:outline-accent ss:w-full"
+          className="min-w-[0.75rem] outline outline-1 outline-primary-800 hover:outline-primary-900 ss:w-full"
           onClick={scrollDown}
         >
           <img

@@ -4,11 +4,10 @@ import { getProductPara, sortOptions } from "../../utils/types";
 import { Pagination } from "../Products/Pagination";
 import { SortBy } from "../Products/SortBy";
 import { Filters } from "./../Products/Filters";
-import iconCross from "../../assets/icons/iconCross.svg";
 import { ProductCard } from "../Products/ProductCard";
 import { useLocation } from "react-router-dom";
 import { SpinningAnimDark } from "../Loaders/SpinningAnimDark";
-import { FaXmark } from "react-icons/fa6";
+import { ButtonClose } from "../Buttons/ButtonClose";
 
 export const Products: FC = () => {
   const location = useLocation();
@@ -114,12 +113,10 @@ export const Products: FC = () => {
         }`}
         ref={filterContainerRef}
       >
-        <button
-          className="m-2 ml-auto block w-fit rounded-lg bg-primary-200 p-1 duration-200 hover:ring-2 hover:ring-primary-700 active:ring-2 active:ring-primary-700 xs:hidden"
+        <ButtonClose
+          className="m-2 ml-auto xs:hidden"
           onClick={() => setShowFilter(false)}
-        >
-          <FaXmark className="text-2xl text-primary-900" />
-        </button>
+        />
         <Filters
           updateCategoryPara={updateCategoryPara}
           updateRatingsPara={updateRatingsPara}
