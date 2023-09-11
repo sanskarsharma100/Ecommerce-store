@@ -25,7 +25,7 @@ export const ProductCard: FC<Props> = ({ product, isLoading }) => {
             <img src={product.images[0].url} alt={product.name} />
           </div>
           <div className="p-1 text-dynamicText">
-            <p className="line-clamp-2 w-full overflow-hidden text-ellipsis font-medium text-primary-700">
+            <p className="line-clamp-2 w-full overflow-hidden text-ellipsis font-medium capitalize text-primary-700">
               {product.name}
             </p>
             <p className="font-bold text-primary-800">
