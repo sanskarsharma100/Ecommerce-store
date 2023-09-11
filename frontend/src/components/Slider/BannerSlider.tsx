@@ -50,7 +50,7 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
   const dots = pictures.map((picture, index) => (
     <button
       role="button"
-      key={picture.link}
+      key={picture.image}
       className={`m-1 h-[8px] w-[8px] rounded-full duration-300 xs:h-[10px] xs:w-[10px] ${
         index == currentIndex ? `bg-primary-900` : `bg-primary-400`
       }`}
@@ -58,8 +58,8 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
     ></button>
   ));
 
-  const slider = pictures.map((picture, index) => (
-    <React.Fragment key={index + picture.link}>
+  const slider = pictures.map((picture) => (
+    <React.Fragment key={picture.image + picture.link}>
       <Link
         to={picture.link}
         style={{
