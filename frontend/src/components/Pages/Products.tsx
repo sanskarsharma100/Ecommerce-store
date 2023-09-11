@@ -138,7 +138,6 @@ export const Products: FC = () => {
                 onClick={() => setShowFilter(true)}
               >
                 Filters
-                {/* <img src={iconSettings} alt="Open Filters" className="w-8" /> */}
               </button>
             </section>
             <section className="m-auto">
@@ -158,7 +157,7 @@ export const Products: FC = () => {
           </>
         ) : (
           <>
-            <div className="flex h-full w-full items-center justify-center text-3xl">
+            <div className="flex h-full w-full items-center justify-center text-3xl text-primary-900">
               No Products Found
             </div>
           </>

@@ -32,16 +32,19 @@ export const Home: FC = () => {
   });
   const banner = [
     {
-      image: oneplus10R,
-      link: "/products/64da4240194d64167456e8ee",
+      image:
+        "https://images.pexels.com/photos/6800327/pexels-photo-6800327.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      link: "/products",
     },
     {
-      image: s23Ultra,
-      link: "/products/64d7ac91c5171c84f9a0dfa1",
+      image:
+        "https://images.pexels.com/photos/5709665/pexels-photo-5709665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      link: "/products",
     },
     {
-      image: iphone14,
-      link: "/products/64d7ad71c5171c84f9a0dfa9",
+      image:
+        "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      link: "/products",
     },
   ];
 
@@ -52,7 +55,7 @@ export const Home: FC = () => {
   return (
     <div className="min-h-[400px] pb-2">
       <BannerSlider pictures={banner} />
-      <div className="p-2 ss:p-4">
+      <div className="scroll-mt-16 p-2 ss:p-4" id="featured-products">
         <section className="mt-4 flex w-full flex-col items-center overflow-hidden xs:items-start">
           <div className="relative mb-4 w-full">
             <h2 className="m-auto w-6/12 whitespace-nowrap border-b border-primary-900 pb-1 text-center text-2xl font-light text-primary-900 xs:text-3xl sm:text-4xl md:text-5xl">
