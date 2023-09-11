@@ -59,10 +59,10 @@ export const ProductDetails: FC = () => {
             <p className="text-xs font-medium text-primary-800 ss:text-sm">
               {product.category}
             </p>
-            <h1 className="text-lg font-bold text-primary-900 ss:text-3xl ss:font-bold">
+            <h1 className="text-lg font-bold capitalize text-primary-900 ss:text-3xl ss:font-bold">
               {product.name}
             </h1>
-            <h3 className="font-medium text-primary-500 ss:text-lg">
+            <h3 className="text-sm font-medium text-primary-500 ss:text-base">
               {product.description}
             </h3>
             <div className="flex max-w-[8rem] items-center gap-1 ss:hidden ss:max-w-[9rem]">
