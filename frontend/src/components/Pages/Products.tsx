@@ -1,32 +1,26 @@
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { useGetProductsQuery } from "../../services/productsApi";
-import { getProductPara, sortOptions } from "../../utils/types";
+import { sortOptions } from "../../utils/types";
 import { Pagination } from "../Products/Pagination";
 import { SortBy } from "../Products/SortBy";
 import { Filters } from "./../Products/Filters";
 import { ProductCard } from "../Products/ProductCard";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { SpinningAnimDark } from "../Loaders/SpinningAnimDark";
 import { ButtonClose } from "../Buttons/ButtonClose";
 
 export const Products: FC = () => {
-  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const searchParams = useMemo(() => {
-    const searchParams = new URLSearchParams(location.search);
-    return { searchParams };
-  }, [location.search]);
+  const price = useMemo(() => {
+    return [0, 1000000];
+  }, []);
 
-  const urlParams = searchParams.searchParams;
-
-  const [queryPara, setQueryPara] = useState<getProductPara>({
-    keyword: urlParams.get("keyword") || "",
-    currentPage: Number(urlParams.get("currentPage")) || 1,
-    price: [0, 100000000],
-    category: urlParams.get("category") || "",
-    ratings: Number(urlParams.get("ratings")) || 0,
-    sort: (urlParams.get("sort") as sortOptions) || "relevance",
-  });
+  const keyword = searchParams.get("keyword") || "";
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const category = searchParams.get("category") || "";
+  const ratings = Number(searchParams.get("ratings")) || 0;
+  const sort = (searchParams.get("sort") as sortOptions) || "relevance";
 
   const [selectedSort, setSelectedSort] = useState<string>("Relevance");
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -36,7 +30,14 @@ export const Products: FC = () => {
     data: productsList,
     isLoading,
     isFetching,
-  } = useGetProductsQuery(queryPara);
+  } = useGetProductsQuery({
+    keyword,
+    currentPage,
+    price,
+    category,
+    ratings,
+    sort,
+  });
 
   if (showFilter) {
     document.body.style.overflow = "hidden";
@@ -45,30 +46,60 @@ export const Products: FC = () => {
   }
 
   const changePage = (pageNum: number) => {
-    setQueryPara((para) => ({ ...para, currentPage: pageNum }));
+    setSearchParams(
+      `${new URLSearchParams({
+        keyword: keyword,
+        category: category,
+        "price[gte]": String(price[0]),
+        "price[lte]": String(price[1]),
+        ratings: String(ratings),
+        sort: sort,
+        page: String(pageNum),
+      })}`
+    );
   };
 
   const updateCategoryPara = (categories: string) => {
-    setQueryPara((para) => ({ ...para, category: categories }));
+    setSearchParams(
+      `${new URLSearchParams({
+        keyword: keyword,
+        category: categories,
+        "price[gte]": String(price[0]),
+        "price[lte]": String(price[1]),
+        ratings: String(ratings),
+        sort: sort,
+        page: String(currentPage),
+      })}`
+    );
   };
 
-  const updateRatingsPara = (ratings: number) => {
-    setQueryPara((para) => ({
-      ...para,
-      ratings: queryPara.ratings == ratings ? 0 : ratings,
-    }));
+  const updateRatingsPara = (FilteredRatings: number) => {
+    setSearchParams(
+      `${new URLSearchParams({
+        keyword: keyword,
+        category: category,
+        "price[gte]": String(price[0]),
+        "price[lte]": String(price[1]),
+        ratings: ratings == FilteredRatings ? "0" : String(FilteredRatings),
+        sort: sort,
+        page: String(currentPage),
+      })}`
+    );
   };
 
   const sortProducts = (sortBy: { label: string; value: string }) => {
     setSelectedSort(sortBy.label);
-    setQueryPara((para) => ({
-      ...para,
-      sort: sortBy.value as
-        | "increasing"
-        | "decreasing"
-        | "ratings"
-        | "relevance",
-    }));
+    setSearchParams(
+      `${new URLSearchParams({
+        keyword: keyword,
+        category: category,
+        "price[gte]": String(price[0]),
+        "price[lte]": String(price[1]),
+        ratings: String(ratings),
+        sort: sortBy.value,
+        page: String(currentPage),
+      })}`
+    );
   };
 
   const products = productsList?.products.map((product) => (
@@ -76,12 +107,10 @@ export const Products: FC = () => {
   ));
 
   useEffect(() => {
-    if (urlParams.get("keyword") != queryPara.keyword) {
-      setQueryPara((para) => ({
-        ...para,
-        keyword: urlParams.get("keyword") || "",
-      }));
-    }
+    setSearchParams(
+      `?keyword=${keyword}&category=${category}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings=${ratings}&sort=${sort}&page=${currentPage}`,
+      history.state
+    );
     const handleOutsideClick = (e: Event) => {
       const target = e.target as HTMLElement;
       if (
@@ -95,7 +124,7 @@ export const Products: FC = () => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [queryPara.keyword, urlParams]);
+  }, [category, currentPage, keyword, price, ratings, setSearchParams, sort]);
 
   return (
     <div className="relative m-auto flex h-full min-h-[700px] pb-4">
@@ -120,7 +149,14 @@ export const Products: FC = () => {
         <Filters
           updateCategoryPara={updateCategoryPara}
           updateRatingsPara={updateRatingsPara}
-          queryPara={queryPara}
+          queryPara={{
+            keyword,
+            currentPage,
+            price,
+            category,
+            ratings,
+            sort,
+          }}
         />
       </div>
       <div className="w-full xs:max-w-[90%] xs:px-4">
@@ -148,7 +184,7 @@ export const Products: FC = () => {
             {productsList && productsList?.pages > 1 && (
               <section className="mt-4 w-full">
                 <Pagination
-                  currentPage={queryPara.currentPage}
+                  currentPage={currentPage}
                   numOfPages={productsList?.pages}
                   changePage={changePage}
                 />
