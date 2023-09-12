@@ -3,10 +3,10 @@ import { useGetCartProductsQuery } from "../../services/cartApi";
 import { CartProductCard } from "../Cart/CartProductCard";
 import { convertToINR } from "./../../utils/utils";
 import { isErrorWithData, isErrorWithMessage } from "../../services/helpers";
-import { SpinningAnim } from "./../Loaders/SpinningAnim";
 import { useAppSelector } from "../../app/hooks";
 import { selectCurrentUser } from "../../features/User/userSlice";
 import { ButtonPrimary } from "../Buttons/ButtonPrimary";
+import { SpinningAnimDark } from "../Loaders/SpinningAnimDark";
 
 export const Cart: FC = () => {
   const {
@@ -39,7 +39,7 @@ export const Cart: FC = () => {
     </div>
   ) : isCartLoading ? (
     <div className="flex min-h-[500px] items-center justify-center">
-      <SpinningAnim size="2.5rem" />
+      <SpinningAnimDark size="2.5rem" />
     </div>
   ) : cart && cart.products.length ? (
     <div className="m-2 mt-5 min-h-[500px]">
