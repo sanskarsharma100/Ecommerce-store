@@ -1,4 +1,4 @@
-import { Ref, forwardRef, MouseEvent } from "react";
+import { Ref, forwardRef } from "react";
 import NoAvatar from "../../assets/images/NoAvatar.jpg";
 import { Link, NavLink } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa6";

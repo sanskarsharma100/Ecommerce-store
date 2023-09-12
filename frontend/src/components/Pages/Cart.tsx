@@ -6,7 +6,6 @@ import { isErrorWithData, isErrorWithMessage } from "../../services/helpers";
 import { SpinningAnim } from "./../Loaders/SpinningAnim";
 import { useAppSelector } from "../../app/hooks";
 import { selectCurrentUser } from "../../features/User/userSlice";
-import { Link } from "react-router-dom";
 import { ButtonPrimary } from "../Buttons/ButtonPrimary";
 
 export const Cart: FC = () => {

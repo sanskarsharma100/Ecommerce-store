@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { useGetProductDetailsQuery } from "../../services/productsApi";
-import iconCross from "../../assets/icons/iconCross.svg";
 import { GoTrash } from "react-icons/go";
 import { Link } from "react-router-dom";
 import {
