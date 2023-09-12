@@ -70,12 +70,12 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
         }}
         className="group relative min-w-full bg-cover bg-top bg-no-repeat duration-500 ease-in-out ss:min-h-full"
       >
-        <div className="absolute bottom-1.5 flex flex-col gap-1.5 xs:bottom-5 xs:left-5 xs:max-w-xs xs:gap-3 ss:bottom-20 ss:left-10 ss:max-w-lg md:bottom-40 md:left-20">
-          <div className="text-center text-xs text-white xs:text-left xs:text-sm ss:text-lg sm:text-xl">
+        <div className="absolute bottom-3 flex flex-col gap-1.5 xs:bottom-5 xs:left-5 xs:max-w-xs xs:gap-2.5 ss:bottom-20 ss:left-10 ss:max-w-lg md:bottom-40 md:left-20">
+          <div className="m-auto max-w-[80%] text-center text-dynamic text-white xs:max-w-max xs:text-left xs:text-sm ss:text-lg sm:text-xl">
             Revamp your wardrobe with the latest fashion trends, delivered
             straight to your doorstep.
           </div>
-          <button className="m-auto w-fit border-2 border-white px-1 py-0.5 text-[0.65rem] text-primary-050 duration-300 group-hover:border-primary-900 group-hover:bg-primary-900 group-hover:text-primary-100 group-active:border-primary-900 group-active:bg-primary-900 group-active:text-primary-100 xs:m-0 xs:px-2 xs:py-1 xs:text-xs ss:px-4 ss:py-2 ss:text-base">
+          <button className="m-auto w-fit border-2 border-white px-1 py-0.5 text-dynamic text-primary-050 duration-300 group-hover:border-primary-900 group-hover:bg-primary-900 group-hover:text-primary-100 group-active:border-primary-900 group-active:bg-primary-900 group-active:text-primary-100 xs:m-0 xs:px-2 xs:py-1 xs:text-xs ss:px-4 ss:py-2 ss:text-base">
             Shop Now
           </button>
         </div>

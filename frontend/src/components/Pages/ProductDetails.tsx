@@ -14,6 +14,7 @@ import { useAppSelector } from "../../app/hooks";
 import { selectCurrentUser } from "../../features/User/userSlice";
 import { ButtonPrimary } from "../Buttons/ButtonPrimary";
 import { ButtonWarning } from "../Buttons/ButtonWarning";
+import { SpinningAnimDark } from "../Loaders/SpinningAnimDark";
 
 export const ProductDetails: FC = () => {
   const { id: productId } = useParams();
@@ -46,7 +47,7 @@ export const ProductDetails: FC = () => {
 
   return isProductLoading ? (
     <div className="flex min-h-[500px] items-center justify-center">
-      <SpinningAnim size="2.5rem" />
+      <SpinningAnimDark size="2.5rem" />
     </div>
   ) : product ? (
     <div className="mb-10 mt-6 min-h-[500px] p-2">
