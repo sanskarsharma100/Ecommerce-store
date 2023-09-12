@@ -16,8 +16,8 @@ export const Pagination: FC<Props> = ({
     .map((_item, ind) => (
       <button
         key={ind + 1}
-        className={`hover:bg-grayLighter border border-gray-500 px-1.5 py-0.5 text-xs font-semibold hover:font-bold xs:text-sm ss:px-3 ss:py-1 ss:text-base ${
-          currentPage == ind + 1 && "bg-accent hover:!bg-accent"
+        className={`border-r-2 border-primary-400 px-1.5 py-0.5 text-xs font-semibold text-primary-900 hover:bg-primary-100 hover:font-bold xs:text-sm ss:px-3 ss:py-1 ss:text-base ${
+          currentPage == ind + 1 && "bg-primary-400 hover:!bg-primary-400"
         }`}
         onClick={() => changePage(ind + 1)}
       >
@@ -26,12 +26,12 @@ export const Pagination: FC<Props> = ({
     ));
 
   return (
-    <div className="m-auto w-fit">
+    <div className="m-auto w-fit border-2 border-primary-400">
       <button
-        className={`border border-gray-500 px-1 py-0.5 text-xs font-medium xs:text-sm ss:px-2 ss:py-1 ss:text-base ${
+        className={`border-r-2 border-primary-400 px-1 py-0.5 text-xs font-medium text-primary-900 xs:text-sm ss:px-2 ss:py-1 ss:text-base ${
           currentPage <= 1
-            ? "bg-gray-300 text-gray-500 hover:cursor-not-allowed"
-            : "hover:bg-grayLighter"
+            ? "bg-primary-050 text-primary-300 hover:cursor-not-allowed"
+            : "hover:bg-primary-100"
         }`}
         onClick={() => changePage(currentPage - 1)}
         disabled={currentPage <= 1}
@@ -40,10 +40,10 @@ export const Pagination: FC<Props> = ({
       </button>
       {pageBtns}
       <button
-        className={`border border-gray-500 px-1 py-0.5 text-xs font-medium xs:text-sm ss:px-2 ss:py-1 ss:text-base ${
+        className={`px-1 py-0.5 text-xs font-medium text-primary-900 xs:text-sm ss:px-2 ss:py-1 ss:text-base ${
           currentPage == numOfPages
-            ? "bg-gray-300 text-gray-500 hover:cursor-not-allowed"
-            : "hover:bg-grayLighter"
+            ? "bg-primary-050 text-primary-300 hover:cursor-not-allowed"
+            : "hover:bg-primary-100"
         }`}
         onClick={() => changePage(currentPage + 1)}
         disabled={currentPage == numOfPages}

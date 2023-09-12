@@ -55,7 +55,7 @@ export const SignUp: FC = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/");
+      navigate("/login");
     }
   }, [isSuccess, navigate]);
 
@@ -64,45 +64,48 @@ export const SignUp: FC = () => {
       <h1 className="mb-3 text-center text-3xl font-bold">Sign Up</h1>
       <p className="mb-1 text-center text-sm">
         Already has an account?{" "}
-        <span className="italic text-linkColor hover:underline">
+        <span className="italic text-light-blue-vivid-900 hover:underline">
           <Link to="/login">Login</Link>
         </span>
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
           <TextInputField
-            fieldLabel={"Name"}
-            fieldType={"text"}
-            fieldValue={userData.name}
-            fieldName={"name"}
+            label={"Name"}
+            type={"text"}
+            value={userData.name}
+            name={"name"}
             placeholder={"Full Name"}
-            isRequired={true}
-            isDisabled={isLoading}
-            handleChange={handleChange}
+            required={true}
+            disabled={isLoading}
+            onChange={handleChange}
+            autoComplete="no"
           />
         </div>
         <div className="flex flex-col gap-1">
           <TextInputField
-            fieldLabel={"Email"}
-            fieldType={"email"}
-            fieldValue={userData.email}
-            fieldName={"email"}
+            label={"Email"}
+            type={"email"}
+            value={userData.email}
+            name={"email"}
             placeholder={"Email"}
-            isRequired={true}
-            isDisabled={isLoading}
-            handleChange={handleChange}
+            required={true}
+            disabled={isLoading}
+            onChange={handleChange}
+            autoComplete="no"
           />
         </div>
         <div className="flex flex-col gap-1">
           <TextInputField
-            fieldLabel={"Password"}
-            fieldType={"password"}
-            fieldValue={userData.password}
-            fieldName={"password"}
+            label={"Password"}
+            type={"password"}
+            value={userData.password}
+            name={"password"}
             placeholder={"Password"}
-            isRequired={true}
-            isDisabled={isLoading}
-            handleChange={handleChange}
+            required={true}
+            disabled={isLoading}
+            onChange={handleChange}
+            autoComplete="new-password"
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -116,7 +119,7 @@ export const SignUp: FC = () => {
               alt="Picture Photo"
             />
             <input
-              className="block w-full border border-secondary text-base text-textColor file:h-full file:w-full  file:border-none file:font-medium hover:border-2 hover:border-secondary hover:file:cursor-pointer focus:outline focus:outline-4 focus:outline-secondary "
+              className="block w-full rounded-lg text-base file:h-full file:w-full file:border-none file:font-medium file:text-inherit hover:ring-4 hover:ring-primary-500 hover:file:cursor-pointer"
               id="avatar"
               type="file"
               name="avatar"
@@ -131,14 +134,18 @@ export const SignUp: FC = () => {
           {isError &&
             isErrorWithData(error) &&
             isErrorWithMessage(error.data) && (
-              <p className="text-error font-semibold">{error?.data.message}</p>
+              <p className="text-error mb-1 text-sm font-semibold text-red-vivid-600">
+                {error?.data.message}
+              </p>
             )}
-          <SubmitButton fieldValue="Sign Up" isDisabled={isLoading} />
-          {isLoading && (
-            <div className="absolute left-1/2 top-2/4 -translate-x-1/2 -translate-y-1/2">
-              <SpinningAnim />
-            </div>
-          )}
+          <div className="relative">
+            <SubmitButton value="Sign Up" disabled={isLoading} />
+            {isLoading && (
+              <div className="absolute left-1/2 top-2/4 flex -translate-x-1/2 -translate-y-1/2">
+                <SpinningAnim />
+              </div>
+            )}
+          </div>
         </div>
       </form>
     </AuthBgWrapper>

@@ -9,6 +9,7 @@ import {
 } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
+import { TextInputField } from "../Inputs/TextInputField";
 
 type Props = {
   isSearchBarFocused: boolean;
@@ -59,34 +60,35 @@ export const SearchBar: FC<Props> = ({
   return (
     <>
       <form
-        className={`relative hidden h-full w-full self-center xs:!flex xs:h-fit ${
+        className={`relative hidden h-full w-full self-center overflow-hidden rounded-xl xs:!flex xs:h-fit ${
           isSearchBarFocused && "!flex"
         }`}
         ref={searchBarRef}
         onSubmit={handleSearch}
       >
-        <input
+        <TextInputField
           type="search"
-          className="w-full overflow-ellipsis !border-black p-1 pr-8 focus:bg-slate-100 focus:ring-[none]"
+          name="search bar"
+          className="w-full overflow-ellipsis rounded-xl bg-primary-100 p-1 pr-12 focus:bg-primary-200"
           placeholder="Search Products"
           value={searchText}
           autoFocus={true}
           onChange={(e) => setSearchText(e.target.value.trim())}
         />
         <button
-          className="absolute right-0 top-0 flex h-full items-center justify-center border border-black bg-background p-1 px-2 "
+          className="absolute right-0 top-0 flex h-full items-center justify-center bg-primary-100 p-1 px-3"
           type="submit"
         >
           <FaMagnifyingGlass size="16px" />
         </button>
       </form>
       <button
-        className={`right-0 ml-auto flex items-center justify-center border border-black bg-background p-2 xs:!hidden ${
+        className={`ml-auto flex h-full items-center justify-center rounded-lg bg-primary-100 p-2 xs:!hidden ${
           isSearchBarFocused && "hidden"
         }`}
         onClick={() => setIsSearchBarFocused(true)}
       >
-        <FaMagnifyingGlass size="16px" />
+        <FaMagnifyingGlass className="text-xl" />
       </button>
     </>
   );

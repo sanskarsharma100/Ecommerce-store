@@ -54,38 +54,35 @@ export const ResetPassword: FC = () => {
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 xs:gap-4">
         <div className="flex flex-col gap-1">
           <TextInputField
-            fieldLabel={"New Password"}
-            fieldType={"password"}
-            fieldValue={passwords.password}
-            fieldName={"password"}
+            label={"New Password"}
+            type={"password"}
+            value={passwords.password}
+            name={"password"}
             placeholder={"New Password"}
-            isRequired={true}
-            isDisabled={isLoading || isSuccess}
-            handleChange={handleChange}
+            required={true}
+            disabled={isLoading || isSuccess}
+            onChange={handleChange}
           />
         </div>
         <div className="flex flex-col gap-1">
           <TextInputField
-            fieldLabel={"Confirm Password"}
-            fieldType={"password"}
-            fieldValue={passwords.confirmPassword}
-            fieldName={"confirmPassword"}
+            label={"Confirm Password"}
+            type={"password"}
+            value={passwords.confirmPassword}
+            name={"confirmPassword"}
             placeholder={"Confirm Password"}
-            isRequired={true}
-            isDisabled={isLoading || isSuccess}
-            handleChange={handleChange}
+            required={true}
+            disabled={isLoading || isSuccess}
+            onChange={handleChange}
           />
         </div>
         <div className="relative mt-3 w-full">
           {isError &&
             isErrorWithData(error) &&
             isErrorWithMessage(error.data) && (
-              <p className="font-semibold text-error">{error?.data.message}</p>
+              <p className="text-error font-semibold">{error?.data.message}</p>
             )}
-          <SubmitButton
-            fieldValue={"Submit"}
-            isDisabled={isLoading || isSuccess}
-          />
+          <SubmitButton value={"Submit"} disabled={isLoading || isSuccess} />
           {(isLoading || isSuccess) && (
             <div className="absolute left-1/2 top-2/4 -translate-x-1/2 -translate-y-1/2">
               <SpinningAnim />

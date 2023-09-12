@@ -30,14 +30,14 @@ export const ForgotPassword: FC = () => {
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
           <TextInputField
-            fieldLabel={"Email"}
-            fieldType={"email"}
-            fieldValue={email}
-            fieldName={"email"}
+            label={"Email"}
+            type={"email"}
+            value={email}
+            name={"email"}
             placeholder={"Email"}
-            isRequired={true}
-            isDisabled={isLoading}
-            handleChange={handleChange}
+            required={true}
+            disabled={isLoading}
+            onChange={handleChange}
           />
         </div>
         <div className="relative mt-3 w-full">
@@ -46,7 +46,7 @@ export const ForgotPassword: FC = () => {
             isErrorWithMessage(error.data) && (
               <p className="text-error font-semibold">{error?.data.message}</p>
             )}
-          <SubmitButton fieldValue={"Submit"} isDisabled={isLoading} />
+          <SubmitButton value={"Submit"} disabled={isLoading} />
           {isLoading && (
             <div className="absolute left-1/2 top-2/4 -translate-x-1/2 -translate-y-1/2">
               <SpinningAnim />

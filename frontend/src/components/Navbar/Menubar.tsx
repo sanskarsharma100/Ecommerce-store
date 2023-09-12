@@ -1,15 +1,16 @@
 import { Ref, forwardRef, MouseEvent } from "react";
 import NoAvatar from "../../assets/images/NoAvatar.jpg";
 import { Link, NavLink } from "react-router-dom";
-import { IoCartOutline } from "react-icons/io5";
+import { FaAngleRight } from "react-icons/fa6";
 import { User } from "../../utils/types";
+import { ButtonPrimary } from "../Buttons/ButtonPrimary";
 
 type Props = {
   isOpen: boolean;
   navLinks: Array<{ name: string; link: string; icon?: string }>;
   isAuthenticated: boolean;
   user: User;
-  logoutUser: (_e: MouseEvent<HTMLButtonElement>) => void;
+  logoutUser: () => void;
 };
 
 export const Menubar = forwardRef(
@@ -19,65 +20,61 @@ export const Menubar = forwardRef(
   ) => {
     const menuItems = navLinks.map((item, i) => (
       <li key={i} className="font-semibold hover:cursor-pointer">
-        <NavLink
-          to={item.link}
-          end
-          className={({ isActive }) =>
-            isActive
-              ? "inline-block w-full max-w-xl bg-light p-2 uppercase text-accent"
-              : "inline-block w-full max-w-xl p-2 uppercase active:bg-light"
-          }
-        >
-          {item.icon ? <IoCartOutline className="text-3xl" /> : item.name}
-        </NavLink>
+        {!item.icon && (
+          <NavLink
+            to={item.link}
+            end
+            className={({ isActive }) =>
+              isActive
+                ? "block w-full rounded-lg bg-primary-300 p-2 text-sm uppercase text-primary-900 duration-300"
+                : "block w-full rounded-lg p-2 text-sm uppercase text-primary-900 duration-300 hover:bg-primary-200 active:bg-primary-200"
+            }
+          >
+            {item.name}
+          </NavLink>
+        )}
       </li>
     ));
 
     return (
       <aside
-        className={`absolute right-0 top-0 z-[9999] h-[100vh] w-10/12 overflow-y-hidden border-l-2 border-secondary bg-background shadow-cardShadow duration-500 xs:w-6/12 sm:!hidden ${
+        className={`absolute right-0 top-0 z-[9999] h-[100vh] w-10/12 overflow-y-hidden bg-primary-050 duration-500 xs:w-8/12 ss:w-6/12 sm:!hidden ${
           !isOpen ? "clip-circle-none" : "clip-circle-full"
         }`}
         ref={ref}
       >
-        <ul className="m-4 mt-20 flex flex-col gap-4 overflow-x-hidden text-left">
+        <div className="m-4 mt-20 flex flex-col gap-4 overflow-x-hidden text-left">
           {isAuthenticated && (
-            <li className="w-full bg-primary">
+            <div className="w-full overflow-hidden rounded-lg">
               <Link
-                className="group relative flex max-w-full items-center gap-2 border-x-2 border-t-2 border-secondary bg-background p-2 hover:cursor-pointer"
+                className="group relative flex max-w-full items-center gap-2 bg-primary-400 p-2 hover:cursor-pointer"
                 to="/account"
               >
-                <div className="absolute right-2 rotate-45 border-r-2 border-t-2 border-secondary p-1 duration-300 group-hover:right-1"></div>
                 <img
                   className="aspect-square w-12 max-w-fit rounded-full"
                   src={user.avatar.url ? user.avatar.url : NoAvatar}
                   alt="User Photo"
                 />
-                <div className="w-fit text-ellipsis text-left text-sm font-medium text-textColor">
-                  <p>{user.name}</p>
-                </div>
+                <span className="line-clamp-1 overflow-ellipsis text-left text-sm font-semibold text-primary-900">
+                  {user.name}
+                </span>
+                <FaAngleRight className="ml-auto pr-1 duration-300 group-hover:pr-0 group-active:pr-0" />
               </Link>
-              <button
-                className="hover:bg-secondary2 w-full overflow-hidden border-2 border-secondary bg-background p-1 text-sm font-medium tracking-wider text-textColor duration-300 hover:bg-accent hover:text-primary"
+              <ButtonPrimary
                 onClick={logoutUser}
-                role="button"
+                className="rounded-tl-none rounded-tr-none"
               >
                 Logout
-              </button>
-            </li>
+              </ButtonPrimary>
+            </div>
           )}
           {!isAuthenticated && (
-            <li className="m-auto h-fit w-full max-w-xs">
-              <Link
-                to="/login"
-                className="inline-block w-full max-w-xl overflow-hidden border-2 border-textColor p-2 text-center text-base font-medium tracking-wider text-textColor duration-300 hover:border-secondary hover:bg-accent hover:text-secondary"
-              >
-                Login/Signup
-              </Link>
-            </li>
+            <div className="m-auto h-fit w-full max-w-xs p-2">
+              <ButtonPrimary to="/login">Login / Signup</ButtonPrimary>
+            </div>
           )}
-          {menuItems}
-        </ul>
+          <ul className="flex flex-col gap-0.5">{menuItems}</ul>
+        </div>
       </aside>
     );
   }

@@ -1,14 +1,13 @@
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { useGetProductsQuery } from "../../services/productsApi";
-import { SpinningAnim } from "../Loaders/SpinningAnim";
 import { getProductPara, sortOptions } from "../../utils/types";
 import { Pagination } from "../Products/Pagination";
 import { SortBy } from "../Products/SortBy";
 import { Filters } from "./../Products/Filters";
-import iconCross from "../../assets/icons/iconCross.svg";
-import iconSettings from "../../assets/icons/iconSettings.svg";
 import { ProductCard } from "../Products/ProductCard";
 import { useLocation } from "react-router-dom";
+import { SpinningAnimDark } from "../Loaders/SpinningAnimDark";
+import { ButtonClose } from "../Buttons/ButtonClose";
 
 export const Products: FC = () => {
   const location = useLocation();
@@ -31,6 +30,7 @@ export const Products: FC = () => {
 
   const [selectedSort, setSelectedSort] = useState<string>("Relevance");
   const [showFilter, setShowFilter] = useState<boolean>(false);
+  const filterContainerRef = useRef<HTMLDivElement>(null);
 
   const {
     data: productsList,
@@ -82,27 +82,39 @@ export const Products: FC = () => {
         keyword: urlParams.get("keyword") || "",
       }));
     }
+    const handleOutsideClick = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (
+        filterContainerRef.current &&
+        !filterContainerRef.current.contains(target)
+      ) {
+        setShowFilter(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
   }, [queryPara.keyword, urlParams]);
 
   return (
     <div className="relative m-auto flex h-full min-h-[700px] pb-4">
       {showFilter && (
-        <div className="fixed z-30 min-h-screen w-screen bg-semiDarkOverlay xs:hidden"></div>
+        <div className="fixed z-30 min-h-screen w-screen bg-black/40 xs:hidden"></div>
       )}
       {(isFetching || isLoading) && (
-        <div className="fixed z-[51] flex h-full w-full items-center justify-center bg-semiLightOverlay">
-          <SpinningAnim size="5rem" width="8px" />
+        <div className="fixed z-[51] flex h-full w-full items-center justify-center bg-white/40">
+          <SpinningAnimDark size="5rem" width="8px" />
         </div>
       )}
       <div
-        className={`absolute z-50 h-full w-3/5 bg-[rgba(255,255,255,0.95)] xs:static xs:block xs:h-auto xs:w-60 xs:bg-background md:w-80 ${
+        className={`absolute z-50 h-full w-3/5 bg-primary-050 xs:static xs:block xs:h-auto xs:w-60 xs:bg-transparent md:w-80 ${
           !showFilter && "hidden"
         }`}
+        ref={filterContainerRef}
       >
-        <img
-          src={iconCross}
-          alt="close filter menu"
-          className="m-2 ml-auto w-6 p-0.5 duration-200 hover:cursor-pointer hover:border-[1px] hover:border-secondary xs:hidden"
+        <ButtonClose
+          className="m-2 ml-auto xs:hidden"
           onClick={() => setShowFilter(false)}
         />
         <Filters
@@ -114,19 +126,19 @@ export const Products: FC = () => {
       <div className="w-full xs:max-w-[90%] xs:px-4">
         {(productsList && productsList.pages) || isLoading || isFetching ? (
           <>
-            <section className="flex w-fit items-end p-2">
-              <button
-                className="mr-2 h-fit border border-secondary p-1 text-sm font-semibold duration-300 hover:cursor-pointer hover:bg-accent xs:hidden"
-                onClick={() => setShowFilter(!showFilter)}
-              >
-                <img src={iconSettings} alt="Open Filters" className="w-8" />
-              </button>
+            <section className="flex items-end gap-2 p-2 xs:pl-0">
               <div>
                 <SortBy
                   selectedSort={selectedSort}
                   sortProducts={sortProducts}
                 />
               </div>
+              <button
+                className="-m-0.5 w-fit select-none rounded-lg border-2 border-primary-900 px-2 py-0.5 text-sm font-semibold text-primary-900 duration-300 hover:cursor-pointer hover:ring-2 hover:ring-primary-500 active:ring-2 active:ring-primary-500 xs:hidden"
+                onClick={() => setShowFilter(true)}
+              >
+                Filters
+              </button>
             </section>
             <section className="m-auto">
               <div className="mt-2 grid grid-cols-2 xs:justify-between xs:gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 md:gap-4 lg:gap-6">
@@ -145,7 +157,7 @@ export const Products: FC = () => {
           </>
         ) : (
           <>
-            <div className="flex h-full w-full items-center justify-center text-3xl">
+            <div className="flex h-full w-full items-center justify-center text-3xl text-primary-900">
               No Products Found
             </div>
           </>

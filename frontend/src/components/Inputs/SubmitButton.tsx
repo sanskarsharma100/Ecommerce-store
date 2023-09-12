@@ -1,19 +1,19 @@
 import { FC } from "react";
 
 interface Props {
-  fieldValue: string;
-  isDisabled: boolean;
+  value: string;
+  disabled: boolean;
 }
 
-export const SubmitButton: FC<Props> = ({ fieldValue, isDisabled }) => {
+export const SubmitButton: FC<Props> = ({ value, disabled }) => {
   return (
     <>
       <input
-        className="button-1 relative w-full border border-secondary bg-accent p-2 text-base font-bold sm:text-lg"
-        value={isDisabled ? "" : fieldValue}
+        className="relative w-full rounded-lg bg-primary-800 p-2 text-base font-bold text-primary-050 duration-200 hover:cursor-pointer hover:bg-primary-900 active:ring-4 active:ring-primary-700 sm:text-lg"
+        value={disabled ? "" : value}
         type="submit"
         role="button"
-        disabled={isDisabled}
+        disabled={disabled}
       />
     </>
   );

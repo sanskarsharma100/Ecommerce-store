@@ -1,3 +1,14 @@
+export type Button = {
+  disabled?: boolean;
+  isLoading?: boolean;
+  onClick?: () => void;
+  type?: "submit" | "reset";
+  className?: string;
+  children: React.ReactNode;
+  to?: string;
+  href?: string;
+};
+
 export type User = {
   avatar: {
     public_id: string;

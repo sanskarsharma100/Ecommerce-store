@@ -8,7 +8,7 @@ type Props = {
 export const FooterLinks: FC<Props> = ({ title, links }) => {
   return (
     <div>
-      <p className="text-sm font-semibold uppercase text-white ss:text-base">
+      <p className="text-sm font-semibold uppercase text-primary-100 ss:text-base">
         {title}
       </p>
       <ul>
@@ -16,7 +16,7 @@ export const FooterLinks: FC<Props> = ({ title, links }) => {
           <li key={i}>
             <a
               href="#"
-              className="text-grayCustom text-xs font-light hover:underline ss:text-sm"
+              className="text-xs font-light text-primary-400 hover:underline ss:text-sm"
             >
               {link}
             </a>

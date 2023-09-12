@@ -1,46 +1,57 @@
 import { ChangeEventHandler, FC, useId } from "react";
 
 interface Props {
-  fieldLabel?: string;
-  fieldType: string;
-  fieldValue: string;
-  fieldName: string;
-  placeholder: string;
-  isDisabled?: boolean;
-  isRequired?: boolean;
-  handleChange: ChangeEventHandler<HTMLInputElement>;
+  label?: string;
+  type: string;
+  value: string;
+  name: string;
+  placeholder?: string;
+  autoComplete?: string;
+  disabled?: boolean;
+  required?: boolean;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  className?: string;
+  autoFocus?: boolean;
 }
 
 export const TextInputField: FC<Props> = ({
-  fieldLabel,
-  fieldType,
-  fieldValue,
-  fieldName,
+  label,
+  type,
+  value,
+  name,
   placeholder,
-  isDisabled = false,
-  isRequired = false,
-  handleChange,
+  autoComplete,
+  disabled = false,
+  required = false,
+  autoFocus,
+  onChange,
+  className,
 }) => {
   const id = useId();
 
   return (
     <>
-      {fieldLabel && (
+      {label && (
         <label htmlFor={id} className="text-base font-medium">
-          {fieldLabel}
+          {label}
         </label>
       )}
       <input
-        className="border border-secondary bg-background p-2 text-sm text-textColor focus:outline focus:outline-2"
+        className={
+          "rounded-lg !border-0 bg-primary-050 p-2 text-sm !outline-none focus:outline focus:outline-2 focus:ring-4 focus:ring-primary-500" +
+          " " +
+          className
+        }
         id={id}
-        type={fieldType}
-        value={fieldValue}
-        onChange={handleChange}
-        name={fieldName}
+        type={type}
+        value={value}
+        onChange={onChange}
+        name={name}
         placeholder={placeholder}
-        disabled={isDisabled}
-        required={isRequired}
-        autoComplete="on"
+        disabled={disabled}
+        required={required}
+        autoComplete={autoComplete}
+        autoFocus={autoFocus}
       />
     </>
   );

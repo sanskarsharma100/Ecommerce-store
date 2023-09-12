@@ -4,15 +4,17 @@ import { selectCurrentUser } from "../../features/User/userSlice";
 import { StringObject } from "../../utils/types";
 import iconEdit from "../../assets/icons/iconEdit.svg";
 import { HiCamera } from "react-icons/hi";
-
+import { isErrorWithData, isErrorWithMessage } from "../../services/helpers";
+import { SpinningAnim } from "./../Loaders/SpinningAnim";
+import { TextInputField } from "../Inputs/TextInputField";
+import { ButtonPrimary } from "./../Buttons/ButtonPrimary";
+import { ButtonSuccess } from "../Buttons/ButtonSuccess";
+import { ButtonWarning } from "../Buttons/ButtonWarning";
 import {
   useLazyLoadUserQuery,
   useUpdatePasswordMutation,
   useUpdateUserDetailsMutation,
 } from "../../services/userApi";
-import { isErrorWithData, isErrorWithMessage } from "../../services/helpers";
-import { SpinningAnim } from "./../Loaders/SpinningAnim";
-import { TextInputField2 } from "../Inputs/TextInputField2";
 
 export const UserAccount: FC = () => {
   const [isTouchscreen, setIsTouchscreen] = useState(false);
@@ -153,19 +155,18 @@ export const UserAccount: FC = () => {
 
   const userInfo = Object.keys(updatedUser).map((key) => {
     return (
-      <div className="flex flex-wrap items-center gap-1" key={key}>
+      <div className="flex flex-col" key={key}>
         <p className="font-medium capitalize">{[key]}:</p>
         {!isUserEdit ? (
-          <p className="overflow-clip overflow-ellipsis font-medium text-gray-700">
+          <p className="overflow-clip overflow-ellipsis font-semibold text-primary-700">
             {updatedUser[key]}
           </p>
         ) : (
-          <input
-            className="w-full border border-secondary px-1 py-0.5"
+          <TextInputField
             type="text"
             value={updatedUser[key]}
-            onChange={changeUserInfo}
             name={key}
+            onChange={changeUserInfo}
             disabled={isUserLoading}
           />
         )}
@@ -174,8 +175,8 @@ export const UserAccount: FC = () => {
   });
 
   return (
-    <div className="mt-4 min-h-[500px] font-inter">
-      <section className="m-2 border-2 border-gray-500 p-2 ss:m-auto ss:max-w-lg">
+    <div className="min-h-[500px] py-4 font-inter">
+      <section className="m-2 rounded-lg border-2 border-primary-400 bg-primary-100 p-2 text-primary-900 ss:m-auto ss:max-w-lg">
         <div>
           <label
             htmlFor="avatar"
@@ -191,14 +192,14 @@ export const UserAccount: FC = () => {
               }`}
             />
             {isUserLoading && (
-              <div className="absolute z-20 flex h-full w-full items-center justify-center rounded-full bg-semiDarkOverlay">
+              <div className="absolute z-20 flex h-full w-full items-center justify-center rounded-full bg-black/40">
                 <SpinningAnim />
               </div>
             )}
             <img
               src={user.avatar.url}
               alt="Profile Photo"
-              className="m-auto aspect-square w-40 rounded-full duration-200 group-hover:brightness-50"
+              className="m-auto aspect-square w-40 rounded-full ring-2 ring-primary-600 ring-offset-2 duration-200 group-hover:brightness-50"
             />
 
             {isTouchscreen && (
@@ -216,111 +217,118 @@ export const UserAccount: FC = () => {
           <div className="mt-4 flex flex-col gap-2">
             {userInfo}
             {!isUserEdit && (
-              <button
-                className="mt-2 border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-accent"
+              <ButtonPrimary
                 onClick={toggleUserEdit}
                 disabled={isUserLoading}
+                isLoading={isUserLoading}
               >
-                {isUserLoading ? <SpinningAnim size="20px" /> : "Edit Profile"}
-              </button>
+                Edit Profile
+              </ButtonPrimary>
             )}
             {isUserEdit && (
-              <div className="flex justify-between gap-1">
-                <button
-                  className="mt-2 w-full border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-success"
+              <div className="flex items-stretch gap-1">
+                <ButtonSuccess
                   onClick={updateUserInfo}
                   disabled={isUserLoading}
                 >
-                  {isUserLoading ? <SpinningAnim size="20px" /> : "Save"}
-                </button>
-                <button
-                  className="mt-2 w-full border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-warning"
+                  Save
+                </ButtonSuccess>
+                <ButtonWarning
                   onClick={() => {
                     toggleUserEdit();
                     resetUserInfo();
                   }}
                   disabled={isUserLoading}
                 >
-                  {isUserLoading ? <SpinningAnim size="20px" /> : "Cancel"}
-                </button>
+                  Cancel
+                </ButtonWarning>
               </div>
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="mt-2">
           {!isPasswordEdit && (
-            <button
-              className="mt-2 border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-accent"
+            <ButtonPrimary
               onClick={togglePasswordEdit}
               disabled={isPasswordLoading}
             >
-              {isPasswordLoading ? (
-                <SpinningAnim size="20px" />
-              ) : (
-                "Change Password"
-              )}
-            </button>
+              Change Password
+            </ButtonPrimary>
           )}
           {isPasswordEdit && (
-            <div className="flex justify-between gap-1">
-              <button
-                className="mt-2 w-full border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:bg-warning"
-                onClick={() => {
-                  togglePasswordEdit();
-                  resetPasswordFields();
-                }}
-              >
-                {isPasswordLoading ? <SpinningAnim size="20px" /> : "Cancel"}
-              </button>
-            </div>
-          )}
-          {isPasswordEdit && (
-            <form onSubmit={handlePasswordUpdate}>
-              <input
-                type="text"
-                name="email"
-                autoComplete="username email"
-                hidden
-              ></input>
-              <TextInputField2
-                fieldLabel="Old Password"
-                fieldType="password"
-                fieldValue={newPassword.oldPassword}
-                fieldName={"oldPassword"}
-                handleChange={changePassword}
-                isRequired={true}
-                autoComplete="current-password"
-                isDisabled={isPasswordLoading}
-              />
-              <TextInputField2
-                fieldLabel="New Password"
-                fieldType="password"
-                fieldValue={newPassword.newPassword}
-                fieldName={"newPassword"}
-                handleChange={changePassword}
-                isRequired={true}
-                autoComplete="new-password"
-                isDisabled={isPasswordLoading}
-              />
-              <TextInputField2
-                fieldLabel="Confirm Password"
-                fieldType="password"
-                fieldValue={newPassword.confirmPassword}
-                fieldName={"confirmPassword"}
-                handleChange={changePassword}
-                isRequired={true}
-                autoComplete="new-password"
-                isDisabled={isPasswordLoading}
-              />
-              <div className="mt-1 text-xs font-semibold text-warning">
+            <form
+              onSubmit={handlePasswordUpdate}
+              className="flex flex-col gap-1"
+            >
+              <div className="flex flex-col gap-2">
+                <div className="hidden">
+                  <input
+                    type="text"
+                    name="email"
+                    autoComplete="username email"
+                    hidden
+                  ></input>
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  <TextInputField
+                    label="Old Password"
+                    type="password"
+                    value={newPassword.oldPassword}
+                    name={"oldPassword"}
+                    onChange={changePassword}
+                    required={true}
+                    autoComplete="current-password"
+                    disabled={isPasswordLoading}
+                  />
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  <TextInputField
+                    label="New Password"
+                    type="password"
+                    value={newPassword.newPassword}
+                    name={"newPassword"}
+                    onChange={changePassword}
+                    required={true}
+                    autoComplete="new-password"
+                    disabled={isPasswordLoading}
+                  />
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  <TextInputField
+                    label="Confirm Password"
+                    type="password"
+                    value={newPassword.confirmPassword}
+                    name={"confirmPassword"}
+                    onChange={changePassword}
+                    required={true}
+                    autoComplete="new-password"
+                    disabled={isPasswordLoading}
+                  />
+                </div>
+              </div>
+              <div className="mt-1 text-xs font-semibold text-red-vivid-600">
                 {passwordErrMsg}
               </div>
-              <input
-                className="mt-1 w-full border-3 border-secondary px-2 py-1 text-sm font-semibold duration-200 hover:cursor-pointer hover:bg-success"
-                type="submit"
-                value="Update"
-                disabled={isPasswordLoading}
-              />
+              <div className="flex gap-1">
+                <ButtonSuccess
+                  type="submit"
+                  disabled={isPasswordLoading}
+                  isLoading={isPasswordLoading}
+                >
+                  Update
+                </ButtonSuccess>
+                <ButtonWarning
+                  onClick={() => {
+                    togglePasswordEdit();
+                    resetPasswordFields();
+                  }}
+                  type="reset"
+                  disabled={isPasswordLoading}
+                  isLoading={isPasswordLoading}
+                >
+                  Cancel
+                </ButtonWarning>
+              </div>
             </form>
           )}
           <div></div>

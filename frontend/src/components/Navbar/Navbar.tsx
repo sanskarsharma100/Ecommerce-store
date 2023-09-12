@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import logo from "../../assets/images/logo.svg";
 import { IoCartOutline } from "react-icons/io5";
 import { Link, NavLink, useLocation } from "react-router-dom";
@@ -8,6 +8,8 @@ import { useLazyLogoutUserQuery } from "../../services/userAuthApi";
 import { selectCurrentUser } from "../../features/User/userSlice";
 import { useAppSelector } from "../../app/hooks";
 import { SearchBar } from "./SearchBar";
+import { FaAngleDown } from "react-icons/fa6";
+import { ButtonPrimary } from "../Buttons/ButtonPrimary";
 
 export const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -17,13 +19,12 @@ export const Navbar: FC = () => {
   const location = useLocation();
   const menubarRef = useRef<HTMLElement>(null);
   const menuBtnRef = useRef<HTMLInputElement>(null);
-  const accountDropdownRef = useRef<HTMLInputElement>(null);
+  const accountDropdownRef = useRef<HTMLButtonElement>(null);
 
   const { isAuthenticated, user } = useAppSelector(selectCurrentUser);
   const [logoutUser] = useLazyLogoutUserQuery();
 
-  const logoutCurrentUser = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const logoutCurrentUser = () => {
     logoutUser();
   };
 
@@ -73,15 +74,17 @@ export const Navbar: FC = () => {
   const menuItems = navLinks.map((item, i) => (
     <li
       key={i}
-      className="flex h-full align-middle font-semibold hover:cursor-pointer"
+      className={`h-full align-middle font-semibold hover:cursor-pointer sm:flex ${
+        item.icon ? "flex" : "hidden"
+      }`}
     >
       <NavLink
         to={item.link}
         end
         className={({ isActive }) =>
           isActive
-            ? "flex w-full max-w-xl items-center justify-center bg-light px-2 text-sm uppercase text-accent duration-300"
-            : "flex w-full max-w-xl items-center justify-center px-2 text-sm uppercase duration-300 hover:bg-light"
+            ? "flex w-full max-w-xl items-center justify-center rounded-lg bg-primary-300 px-2 text-sm uppercase text-primary-900 duration-300"
+            : "flex w-full max-w-xl items-center justify-center rounded-lg px-2 text-sm uppercase text-primary-900 duration-300 hover:bg-primary-200"
         }
       >
         {item.icon ? <IoCartOutline className="text-2xl" /> : item.name}
@@ -99,9 +102,9 @@ export const Navbar: FC = () => {
   }
 
   return (
-    <header className="sticky top-0 z-[99999] m-auto bg-background font-inter shadow-navbar">
+    <header className="sticky top-0 z-[99999] m-auto border-b-3 border-b-primary-200 bg-primary-050 font-inter">
       {isOpen && (
-        <div className="fixed z-[9999] min-h-screen w-screen bg-semiDarkOverlay sm:hidden"></div>
+        <div className="fixed z-[9999] min-h-screen w-screen bg-black/40 sm:hidden"></div>
       )}
       <div className="relative m-auto flex justify-between md:max-w-[90%]">
         <NavLink to="/" className="m-2 flex items-center">
@@ -112,7 +115,7 @@ export const Navbar: FC = () => {
           />
         </NavLink>
         <div
-          className={`z-[9990] h-fit bg-background xs:flex xs:w-full xs:basis-[40%] xs:p-0 md:max-w-sm lg:max-w-md ${
+          className={`z-[9990] mr-2 h-fit xs:static xs:!flex xs:w-fit xs:p-0 md:max-w-sm lg:max-w-md ${
             isSearchBarFocused
               ? "absolute m-auto w-full p-2"
               : "my-auto ml-auto w-fit"
@@ -123,65 +126,69 @@ export const Navbar: FC = () => {
             setIsSearchBarFocused={setIsSearchBarFocused}
           />
         </div>
-        <ul className="hidden items-center gap-2 p-2 sm:flex">
+        <ul className="items-center gap-2 py-2 sm:flex sm:p-2">
           {menuItems}
-          <li className="relative flex h-full min-w-fit hover:cursor-pointer">
+          <li className="relative hidden h-full min-w-fit hover:cursor-pointer sm:flex">
             {isAuthenticated ? (
-              <NavLink
-                to="/account"
-                className={({ isActive }) =>
-                  isActive
-                    ? "flex items-center bg-light px-2 py-1.5 text-accent duration-300"
-                    : "flex items-center px-2 py-1.5 duration-300 hover:bg-light"
-                }
-              >
-                <div className="flex min-w-fit gap-1">
-                  <div className="flex items-center gap-1">
-                    <img
-                      src={user.avatar.url}
-                      alt="Profile Picture"
-                      className="w-8 rounded-full"
-                    />
-                    <div className="hidden md:block">
-                      <span className="line-clamp-1 overflow-ellipsis text-sm font-semibold">
-                        {user.name}
-                      </span>
+              <>
+                <button
+                  className={`flex items-center rounded-lg px-2 py-1.5 text-primary-900 duration-300 hover:bg-primary-200 ${
+                    isAccountDropdownOpen &&
+                    "bg-primary-300 ring-1 ring-primary-500"
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsAccountDropdownOpen(!isAccountDropdownOpen);
+                  }}
+                  ref={accountDropdownRef}
+                >
+                  <div className="flex min-w-fit gap-0.5">
+                    <div className="flex items-center gap-1">
+                      <img
+                        src={user.avatar.url}
+                        alt="Profile Picture"
+                        className="w-8 rounded-full ring-1 ring-primary-900"
+                      />
+                      <div className="hidden md:block">
+                        <span className="line-clamp-1 overflow-ellipsis text-sm font-semibold">
+                          {user.name}
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex h-full items-center justify-center">
+                        <FaAngleDown
+                          className={`duration-300 ${
+                            isAccountDropdownOpen && "rotate-180"
+                          }`}
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div ref={accountDropdownRef}>
-                    <button
-                      className="group flex h-full items-center justify-center self-auto px-1 hover:cursor-pointer"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setIsAccountDropdownOpen(!isAccountDropdownOpen);
-                      }}
-                    >
-                      <span
-                        className={`h-2 w-2 rotate-45 border-b-2 border-r-2 duration-300 group-hover:border-accent ${
-                          isAccountDropdownOpen
-                            ? "rotate-[225deg] border-accent"
-                            : "border-black"
-                        }`}
-                      ></span>
-                    </button>
-                    <button
-                      className={`absolute right-0 top-full mt-1 w-full border border-light bg-background py-1.5 text-black shadow-navbar duration-300 hover:bg-background-3 ${
-                        isAccountDropdownOpen ? "block" : "hidden"
-                      }`}
-                      onClick={logoutCurrentUser}
-                    >
-                      Logout
-                    </button>
-                  </div>
+                </button>
+                <div
+                  className={`absolute right-0 top-full w-[150%] overflow-hidden rounded-lg border-2 border-primary-400 bg-primary-100 text-center md:w-full ${
+                    isAccountDropdownOpen ? "block" : "hidden"
+                  }`}
+                >
+                  <Link
+                    to="/account"
+                    className={`w-full border-b border-inherit py-1.5 duration-300 hover:bg-primary-400 ${
+                      isAccountDropdownOpen ? "block" : "hidden"
+                    }`}
+                  >
+                    Account
+                  </Link>
+                  <button
+                    className={`w-full py-1.5 duration-300 hover:bg-primary-400`}
+                    onClick={logoutCurrentUser}
+                  >
+                    Logout
+                  </button>
                 </div>
-              </NavLink>
+              </>
             ) : (
-              <Link
-                to="/login"
-                className="flex w-full max-w-xl items-center justify-center overflow-hidden border-2 border-black px-2 py-0.5 text-center text-sm font-medium tracking-wider text-textColor duration-300 hover:bg-accent"
-              >
-                Login/Signup
-              </Link>
+              <ButtonPrimary to="/login">Login / Signup</ButtonPrimary>
             )}
           </li>
         </ul>

@@ -7,6 +7,7 @@ import { SpinningAnim } from "./../Loaders/SpinningAnim";
 import { useAppSelector } from "../../app/hooks";
 import { selectCurrentUser } from "../../features/User/userSlice";
 import { Link } from "react-router-dom";
+import { ButtonPrimary } from "../Buttons/ButtonPrimary";
 
 export const Cart: FC = () => {
   const {
@@ -32,12 +33,9 @@ export const Cart: FC = () => {
   return !isAuthenticated ? (
     <div>
       <div className="flex min-h-[500px] items-center justify-center">
-        <Link
-          to="/login"
-          className="flex w-fit items-center justify-center overflow-hidden border-2 border-black px-3 py-2 font-medium tracking-wider text-textColor duration-300 hover:bg-accent"
-        >
+        <ButtonPrimary to="/login" className="!w-fit px-4 py-3">
           Login to Continue
-        </Link>
+        </ButtonPrimary>
       </div>
     </div>
   ) : isCartLoading ? (
@@ -48,15 +46,15 @@ export const Cart: FC = () => {
     <div className="m-2 mt-5 min-h-[500px]">
       <div className="gap-2 ss:flex lg:gap-4 ">
         <section className="w-full">
-          <div className="flex flex-col gap-2">{products}</div>
-          <hr className="my-1 w-full" />
-          <div className="flex justify-between bg-background-3 p-2 text-sm ss:text-base ss:font-semibold">
+          <div className="flex flex-col gap-1">{products}</div>
+          <hr className="my-1 w-full border border-primary-500" />
+          <div className="flex justify-between rounded-lg bg-primary-200 p-2 text-sm text-primary-900 ss:text-base ss:font-semibold">
             <span>Subtotal:</span>
             <span className="font-medium">{convertToINR(cart.cartPrice)}</span>
           </div>
         </section>
         <div className="flex w-full flex-col gap-2 ss:basis-1/2 sm:basis-5/12 lg:basis-4/12 lg:gap-4">
-          <section className="mt-3 bg-background-3 p-2 ss:mt-0">
+          <section className="mt-3 rounded-lg bg-primary-200 p-2 font-medium text-primary-900 ss:mt-0">
             <div>
               <div className="flex justify-between text-xs lg:text-base">
                 <span>Subtotal:</span>
@@ -66,25 +64,23 @@ export const Cart: FC = () => {
                 <span>Shipping fee:</span>
                 <span>{convertToINR(99)}</span>
               </div>
-              <hr className="my-1 w-full border-black" />
+              <hr className="my-1 w-full border-primary-900" />
               <div className="flex justify-between font-bold sm:text-lg">
                 <span>Total:</span>
                 <span>{convertToINR(cart.cartPrice + 99)}</span>
               </div>
             </div>
           </section>
-          <button className="inline-block w-full max-w-xl overflow-hidden border-2 bg-accent p-2 text-center text-base font-extrabold tracking-wider text-textColor duration-300 hover:border-secondary hover:text-secondary">
-            Place Order
-          </button>
+          <ButtonPrimary>Place Order</ButtonPrimary>
         </div>
       </div>
     </div>
   ) : !cart || !cart.products.length ? (
-    <div className="flex min-h-[500px] items-center justify-center p-2 text-center text-2xl font-bold ss:text-3xl">
+    <div className="flex min-h-[500px] items-center justify-center p-2 text-center text-2xl font-bold text-primary-900 ss:text-3xl">
       No products in the cart
     </div>
   ) : isError && isErrorWithData(error) && isErrorWithMessage(error.data) ? (
-    <div className="text-error min-h-[500px] font-semibold">
+    <div className="text-error min-h-[500px] font-semibold text-red-vivid-600">
       {error?.data.message}
     </div>
   ) : (

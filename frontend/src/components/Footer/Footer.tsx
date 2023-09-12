@@ -47,7 +47,7 @@ export const Footer: FC = () => {
   ));
 
   return (
-    <footer className="bg-background-2 p-2 font-inter ss:mt-6 ss:px-6">
+    <footer className="bg-primary-900 p-2 font-inter ss:px-6">
       <div className="mt-2 flex flex-col gap-2 ss:flex-row">
         <div>
           <img
@@ -64,7 +64,7 @@ export const Footer: FC = () => {
           {socials}
         </ul>
       </div>
-      <div className="mt-4 text-center text-xs text-white ss:text-left">
+      <div className="mt-4 text-center text-xs text-primary-050 ss:text-left">
         <p>&#169; 2022 ShopeeFast Private Limited.</p>
       </div>
     </footer>
