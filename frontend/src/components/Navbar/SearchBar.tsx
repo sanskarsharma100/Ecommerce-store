@@ -69,7 +69,7 @@ export const SearchBar: FC<Props> = ({
         <TextInputField
           type="search"
           name="search bar"
-          className="w-full overflow-ellipsis rounded-xl bg-primary-100 p-1 pr-12 focus:bg-primary-200"
+          className="w-full overflow-ellipsis rounded-xl bg-primary-100 p-1 pr-12 font-medium text-primary-900 focus:bg-primary-200"
           placeholder="Search Products"
           value={searchText}
           autoFocus={true}
