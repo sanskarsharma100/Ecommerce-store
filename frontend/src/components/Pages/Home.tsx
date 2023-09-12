@@ -6,7 +6,7 @@ import { getProductPara } from "../../utils/types";
 import { ProductCard } from "../Products/ProductCard";
 import useSwipe from "../../hooks/useSwipe";
 import { SpinningAnim } from "../Loaders/SpinningAnim";
-import Jackets from "../../assets/categories/jackets.jpg";
+import Jackets from "../../assets/categories/Jackets.jpg";
 import Pants from "../../assets/categories/Pants.jpg";
 import Shirts from "../../assets/categories/Shirts.jpg";
 import Tshirts from "../../assets/categories/Tshirts.jpg";
