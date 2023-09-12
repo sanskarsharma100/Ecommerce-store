@@ -1,13 +1,15 @@
 import { FC, useEffect, useRef } from "react";
+import { getProductPara } from "../../utils/types";
+import { Link, createSearchParams, useSearchParams } from "react-router-dom";
 
 type Props = {
-  selectedSort: string;
-  sortProducts: (_sortBy: { label: string; value: string }) => void;
+  queryPara: getProductPara;
 };
 
-export const SortBy: FC<Props> = ({ selectedSort, sortProducts }) => {
+export const SortBy: FC<Props> = ({ queryPara }) => {
   const dropDownRef = useRef<HTMLDivElement>(null);
   const checkboxRef = useRef<HTMLInputElement>(null);
+  const [searchParams] = useSearchParams();
 
   const sortValues = [
     { label: "Relevance", value: "relevance" },
@@ -16,14 +18,26 @@ export const SortBy: FC<Props> = ({ selectedSort, sortProducts }) => {
     { label: "Ratings", value: "ratings" },
   ];
 
+  const selectedSort =
+    sortValues.find((sortValue) => sortValue.value == searchParams.get("sort"))
+      ?.label || sortValues[0].label;
+
   const sortByOptions = sortValues.map((item, i) => (
-    <li
+    <Link
+      to={`?${createSearchParams({
+        keyword: queryPara.keyword,
+        category: queryPara.category,
+        "price[gte]": String(queryPara.price[0]),
+        "price[lte]": String(queryPara.price[1]),
+        ratings: String(queryPara.ratings),
+        sort: item.value,
+        page: String(queryPara.currentPage),
+      })}`}
       key={i}
-      className="w-full border-b border-primary-400 px-2 py-1 text-sm duration-300 last:border-none hover:cursor-pointer hover:bg-primary-400 active:bg-primary-400"
-      onClick={() => sortProducts(item)}
+      className="block w-full border-b border-primary-400 px-2 py-1 text-sm duration-300 last:border-none hover:cursor-pointer hover:bg-primary-400 active:bg-primary-400"
     >
       {item.label}
-    </li>
+    </Link>
   ));
 
   useEffect(() => {

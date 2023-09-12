@@ -22,7 +22,6 @@ export const Products: FC = () => {
   const ratings = Number(searchParams.get("ratings")) || 0;
   const sort = (searchParams.get("sort") as sortOptions) || "relevance";
 
-  const [selectedSort, setSelectedSort] = useState<string>("Relevance");
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const filterContainerRef = useRef<HTMLDivElement>(null);
 
@@ -44,63 +43,6 @@ export const Products: FC = () => {
   } else {
     document.body.style.overflow = "auto";
   }
-
-  const changePage = (pageNum: number) => {
-    setSearchParams(
-      `${new URLSearchParams({
-        keyword: keyword,
-        category: category,
-        "price[gte]": String(price[0]),
-        "price[lte]": String(price[1]),
-        ratings: String(ratings),
-        sort: sort,
-        page: String(pageNum),
-      })}`
-    );
-  };
-
-  const updateCategoryPara = (categories: string) => {
-    setSearchParams(
-      `${new URLSearchParams({
-        keyword: keyword,
-        category: categories,
-        "price[gte]": String(price[0]),
-        "price[lte]": String(price[1]),
-        ratings: String(ratings),
-        sort: sort,
-        page: String(currentPage),
-      })}`
-    );
-  };
-
-  const updateRatingsPara = (FilteredRatings: number) => {
-    setSearchParams(
-      `${new URLSearchParams({
-        keyword: keyword,
-        category: category,
-        "price[gte]": String(price[0]),
-        "price[lte]": String(price[1]),
-        ratings: ratings == FilteredRatings ? "0" : String(FilteredRatings),
-        sort: sort,
-        page: String(currentPage),
-      })}`
-    );
-  };
-
-  const sortProducts = (sortBy: { label: string; value: string }) => {
-    setSelectedSort(sortBy.label);
-    setSearchParams(
-      `${new URLSearchParams({
-        keyword: keyword,
-        category: category,
-        "price[gte]": String(price[0]),
-        "price[lte]": String(price[1]),
-        ratings: String(ratings),
-        sort: sortBy.value,
-        page: String(currentPage),
-      })}`
-    );
-  };
 
   const products = productsList?.products.map((product) => (
     <ProductCard key={product._id} product={product} isLoading={isLoading} />
@@ -147,8 +89,6 @@ export const Products: FC = () => {
           onClick={() => setShowFilter(false)}
         />
         <Filters
-          updateCategoryPara={updateCategoryPara}
-          updateRatingsPara={updateRatingsPara}
           queryPara={{
             keyword,
             currentPage,
@@ -165,8 +105,14 @@ export const Products: FC = () => {
             <section className="flex items-end gap-2 p-2 xs:pl-0">
               <div>
                 <SortBy
-                  selectedSort={selectedSort}
-                  sortProducts={sortProducts}
+                  queryPara={{
+                    keyword,
+                    currentPage,
+                    price,
+                    category,
+                    ratings,
+                    sort,
+                  }}
                 />
               </div>
               <button
@@ -186,7 +132,14 @@ export const Products: FC = () => {
                 <Pagination
                   currentPage={currentPage}
                   numOfPages={productsList?.pages}
-                  changePage={changePage}
+                  queryPara={{
+                    keyword,
+                    currentPage,
+                    price,
+                    category,
+                    ratings,
+                    sort,
+                  }}
                 />
               </section>
             )}
