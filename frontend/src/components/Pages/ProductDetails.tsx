@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../../services/productsApi";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { RatingStar } from "./../RatingStar";

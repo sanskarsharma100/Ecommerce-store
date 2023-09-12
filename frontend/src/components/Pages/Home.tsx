@@ -69,9 +69,11 @@ export const Home: FC = () => {
     },
   ];
 
-  const products = productsList?.products.map((product) => (
-    <ProductCard key={product._id} product={product} isLoading={isLoading} />
-  ));
+  const products = productsList?.products
+    .slice(0, 4)
+    .map((product) => (
+      <ProductCard key={product._id} product={product} isLoading={isLoading} />
+    ));
 
   return (
     <div className="min-h-[400px] pb-20">
@@ -91,14 +93,14 @@ export const Home: FC = () => {
                 <SpinningAnim size="40px" width="6px" />
               </div>
             ) : (
-              <div className="flex justify-start gap-2 p-0.5 xs:my-1 xs:w-[3000px] xs:gap-6">
+              <div className="grid grid-cols-2 justify-items-center gap-2 p-0.5 xs:my-1 xs:gap-4 xs:gap-y-8 sm:grid-cols-4">
                 {products}
               </div>
             )}
           </div>
           <Link
             to="/products"
-            className="w-full text-center font-semibold tracking-wider text-light-blue-vivid-900 underline hover:underline xs:block ss:text-lg ss:no-underline"
+            className="w-full pt-3 text-center text-lg font-semibold tracking-wider text-light-blue-vivid-900 underline hover:underline xs:block ss:text-xl ss:no-underline"
           >
             View More
           </Link>

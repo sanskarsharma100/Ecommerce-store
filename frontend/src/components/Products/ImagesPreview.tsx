@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useState } from "react";
 import { ImageType } from "../../utils/types";
 import useSwipe from "../../hooks/useSwipe";
-import iconArrow from "../../assets/icons/iconArrow.svg";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 type Props = {
   pictures: [ImageType];
@@ -93,14 +93,14 @@ const ImagesPreview: FC<Props> = ({ pictures }) => {
           className="group absolute left-0 top-1/2 m-1 flex h-8 w-8 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full bg-white shadow-[0px_0px_10px_rgba(0,0,0,0.2)] duration-300"
           onClick={previousSlide}
         >
-          <img src={iconArrow} alt="Next Image" className="h-4 rotate-180" />
+          <FaAngleLeft className="m-auto text-lg" />
         </button>
         <button
           role="button"
-          className="group absolute right-0 top-1/2 m-1 flex h-8 w-8 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full bg-white shadow-[0px_0px_10px_rgba(0,0,0,0.2)] duration-300"
+          className="group absolute right-0 top-1/2 m-1 h-8 w-8 -translate-y-1/2 overflow-hidden rounded-full bg-white shadow-[0px_0px_10px_rgba(0,0,0,0.2)] duration-300"
           onClick={nextSlide}
         >
-          <img src={iconArrow} alt="Next Image" className="h-4" />
+          <FaAngleRight className="m-auto text-lg text-primary-900" />
         </button>
         <div className="absolute bottom-1 left-1/2 mt-1 flex w-fit -translate-x-1/2 justify-between gap-1 rounded-lg p-1">
           {dots}
