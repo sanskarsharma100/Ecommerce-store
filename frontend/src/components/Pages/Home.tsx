@@ -54,22 +54,22 @@ export const Home: FC = () => {
     {
       imgSrc: Tshirts,
       name: "T-shirts",
-      link: "http://localhost:5173/products?keyword=&category=T-Shirts&price%5Bgte%5D=0&price%5Blte%5D=1000000&ratings=0&sort=relevance&page=1",
+      link: "/products?keyword=&category=T-Shirts&price%5Bgte%5D=0&price%5Blte%5D=1000000&ratings=0&sort=relevance&page=1",
     },
     {
       imgSrc: Shirts,
       name: "Shirts",
-      link: "http://localhost:5173/products?keyword=&category=Shirts&price%5Bgte%5D=0&price%5Blte%5D=1000000&ratings=0&sort=relevance&page=1",
+      link: "/products?keyword=&category=Shirts&price%5Bgte%5D=0&price%5Blte%5D=1000000&ratings=0&sort=relevance&page=1",
     },
     {
       imgSrc: Jackets,
       name: "Jackets",
-      link: "http://localhost:5173/products?keyword=&category=Jackets&price%5Bgte%5D=0&price%5Blte%5D=1000000&ratings=0&sort=relevance&page=1",
+      link: "/products?keyword=&category=Jackets&price%5Bgte%5D=0&price%5Blte%5D=1000000&ratings=0&sort=relevance&page=1",
     },
     {
       imgSrc: Pants,
       name: "Pants",
-      link: "http://localhost:5173/products?keyword=&category=Pants&price%5Bgte%5D=0&price%5Blte%5D=1000000&ratings=0&sort=relevance&page=1",
+      link: "/products?keyword=&category=Pants&price%5Bgte%5D=0&price%5Blte%5D=1000000&ratings=0&sort=relevance&page=1",
     },
   ];
 
