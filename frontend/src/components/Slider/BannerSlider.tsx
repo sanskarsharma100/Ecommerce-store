@@ -64,7 +64,7 @@ const BannerSlider: FC<Props> = ({ pictures }) => {
         to={picture.link}
         style={{
           backgroundImage:
-            "linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4))," +
+            "linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2))," +
             `url(${picture.image})`,
           transform: `translateX(${-(currentIndex * 100)}%)`,
         }}

@@ -38,7 +38,7 @@ export const Menubar = forwardRef(
 
     return (
       <aside
-        className={`absolute right-0 top-0 z-[9999] h-[100vh] w-10/12 overflow-y-hidden bg-primary-050 duration-500 xs:w-8/12 ss:w-6/12 sm:!hidden ${
+        className={`absolute right-0 top-0 z-[9999] h-[100vh] w-4/5 overflow-y-hidden bg-primary-050 duration-500 xs:w-8/12 ss:w-6/12 sm:!hidden ${
           !isOpen ? "clip-circle-none" : "clip-circle-full"
         }`}
         ref={ref}
