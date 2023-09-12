@@ -50,7 +50,6 @@ export const Menubar = forwardRef(
                 className="group relative flex max-w-full items-center gap-2 bg-primary-400 p-2 hover:cursor-pointer"
                 to="/account"
               >
-                {/* <div className="absolute right-2 rotate-45 border-r-2 border-t-2 border-secondary p-1 duration-300 group-hover:right-1"></div> */}
                 <img
                   className="aspect-square w-12 max-w-fit rounded-full"
                   src={user.avatar.url ? user.avatar.url : NoAvatar}

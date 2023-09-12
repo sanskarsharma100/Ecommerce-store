@@ -74,7 +74,7 @@ export const Home: FC = () => {
   ));
 
   return (
-    <div className="min-h-[400px] pb-2">
+    <div className="min-h-[400px] pb-20">
       <BannerSlider pictures={banner} />
       <div className="mt-10 scroll-mt-16 p-2 ss:p-4" id="featured-products">
         <section className="mt-4 flex w-full flex-col items-center overflow-hidden xs:items-start">
@@ -122,7 +122,6 @@ export const Home: FC = () => {
               </Link>
             ))}
           </div>
-          <div></div>
         </section>
       </div>
     </div>

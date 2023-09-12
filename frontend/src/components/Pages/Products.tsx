@@ -100,15 +100,15 @@ export const Products: FC = () => {
   return (
     <div className="relative m-auto flex h-full min-h-[700px] pb-4">
       {showFilter && (
-        <div className="fixed z-30 min-h-screen w-screen bg-semiDarkOverlay xs:hidden"></div>
+        <div className="fixed z-30 min-h-screen w-screen bg-black/40 xs:hidden"></div>
       )}
       {(isFetching || isLoading) && (
-        <div className="fixed z-[51] flex h-full w-full items-center justify-center bg-semiLightOverlay">
+        <div className="fixed z-[51] flex h-full w-full items-center justify-center bg-white/40">
           <SpinningAnimDark size="5rem" width="8px" />
         </div>
       )}
       <div
-        className={`absolute z-50 h-full w-3/5 bg-primary-050 xs:static xs:block xs:h-auto xs:w-60 xs:bg-background xs:bg-transparent md:w-80 ${
+        className={`absolute z-50 h-full w-3/5 bg-primary-050 xs:static xs:block xs:h-auto xs:w-60 xs:bg-transparent md:w-80 ${
           !showFilter && "hidden"
         }`}
         ref={filterContainerRef}

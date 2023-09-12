@@ -192,7 +192,7 @@ export const UserAccount: FC = () => {
               }`}
             />
             {isUserLoading && (
-              <div className="absolute z-20 flex h-full w-full items-center justify-center rounded-full bg-semiDarkOverlay">
+              <div className="absolute z-20 flex h-full w-full items-center justify-center rounded-full bg-black/40">
                 <SpinningAnim />
               </div>
             )}
@@ -306,7 +306,7 @@ export const UserAccount: FC = () => {
                   />
                 </div>
               </div>
-              <div className="mt-1 text-xs font-semibold text-warning">
+              <div className="mt-1 text-xs font-semibold text-red-vivid-600">
                 {passwordErrMsg}
               </div>
               <div className="flex gap-1">

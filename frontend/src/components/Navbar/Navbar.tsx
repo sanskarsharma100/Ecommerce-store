@@ -102,9 +102,9 @@ export const Navbar: FC = () => {
   }
 
   return (
-    <header className="sticky top-0 z-[99999] m-auto bg-primary-050 font-inter shadow-navbar">
+    <header className="sticky top-0 z-[99999] m-auto border-b-3 border-b-primary-200 bg-primary-050 font-inter">
       {isOpen && (
-        <div className="fixed z-[9999] min-h-screen w-screen bg-semiDarkOverlay sm:hidden"></div>
+        <div className="fixed z-[9999] min-h-screen w-screen bg-black/40 sm:hidden"></div>
       )}
       <div className="relative m-auto flex justify-between md:max-w-[90%]">
         <NavLink to="/" className="m-2 flex items-center">

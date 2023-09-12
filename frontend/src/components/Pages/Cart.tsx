@@ -33,12 +33,9 @@ export const Cart: FC = () => {
   return !isAuthenticated ? (
     <div>
       <div className="flex min-h-[500px] items-center justify-center">
-        <Link
-          to="/login"
-          className="flex w-fit items-center justify-center overflow-hidden border-2 border-black px-3 py-2 font-medium tracking-wider text-textColor duration-300 hover:bg-accent"
-        >
+        <ButtonPrimary to="/login" className="!w-fit px-4 py-3">
           Login to Continue
-        </Link>
+        </ButtonPrimary>
       </div>
     </div>
   ) : isCartLoading ? (

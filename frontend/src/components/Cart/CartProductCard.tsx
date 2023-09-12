@@ -54,7 +54,7 @@ export const CartProductCard: FC<Props> = ({ product, isCartFetching }) => {
           isIncreaseQuantityLoading ||
           isDecreaseQuantityLoading ||
           isRemoveProductLoading) &&
-        "before:absolute before:bottom-0 before:right-0 before:top-0 before:z-[1] before:h-full before:w-full before:bg-semiLightOverlay before:content-['']"
+        "before:absolute before:bottom-0 before:right-0 before:top-0 before:z-[1] before:h-full before:w-full before:bg-white/40 before:content-['']"
       }`}
     >
       {(isCartFetching ||

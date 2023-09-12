@@ -55,7 +55,7 @@ export const SignUp: FC = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/");
+      navigate("/login");
     }
   }, [isSuccess, navigate]);
 
@@ -64,7 +64,7 @@ export const SignUp: FC = () => {
       <h1 className="mb-3 text-center text-3xl font-bold">Sign Up</h1>
       <p className="mb-1 text-center text-sm">
         Already has an account?{" "}
-        <span className="italic text-linkColor hover:underline">
+        <span className="italic text-light-blue-vivid-900 hover:underline">
           <Link to="/login">Login</Link>
         </span>
       </p>
