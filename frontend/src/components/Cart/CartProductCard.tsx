@@ -77,7 +77,7 @@ export const CartProductCard: FC<Props> = ({ product, isCartFetching }) => {
             <div>
               <Link
                 to={`/products/${productId}`}
-                className="text-sm font-medium text-primary-900 xs:text-base sm:text-lg"
+                className="text-sm font-medium capitalize text-primary-900 xs:text-base sm:text-lg"
               >
                 {data.product.name}
               </Link>
