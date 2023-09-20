@@ -21,10 +21,10 @@ export const ProductCard: FC<Props> = ({ product, isLoading }) => {
         </div>
       ) : (
         <>
-          <div className="flex h-full items-center justify-center xs:p-0">
+          <div className="xs:p-0">
             <img src={product.images[0].url} alt={product.name} />
           </div>
-          <div className="p-1 text-dynamicText">
+          <div className="flex h-full flex-col justify-between p-1 text-dynamicText">
             <p className="line-clamp-2 w-full overflow-hidden text-ellipsis font-medium capitalize text-primary-700">
               {product.name}
             </p>
