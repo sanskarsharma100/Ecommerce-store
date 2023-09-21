@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useGetProductDetailsQuery } from "../../services/productsApi";
 import { GoTrash } from "react-icons/go";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ import {
 import { convertToINR } from "../../utils/utils";
 import { SpinningAnim } from "./../Loaders/SpinningAnim";
 import { ButtonClose } from "./../Buttons/ButtonClose";
+import { SpinningAnimDark } from "../Loaders/SpinningAnimDark";
 
 type Product = {
   productId: string;
@@ -25,6 +26,7 @@ type Props = {
 
 export const CartProductCard: FC<Props> = ({ product, isCartFetching }) => {
   const { productId, quantity, totalPrice } = product;
+  const [isImgLoaded, setIsImageLoaded] = useState<boolean>(false);
   const { data } = useGetProductDetailsQuery(product.productId);
 
   const [increaseQuantity, { isLoading: isIncreaseQuantityLoading }] =
@@ -70,7 +72,17 @@ export const CartProductCard: FC<Props> = ({ product, isCartFetching }) => {
       />
       <div className="flex">
         <div className="max-w-[30%] xs:max-w-[20%] sm:w-[20%] sm:max-w-[15rem] lg:max-w-[12%]">
-          <img src={data.product.images[0].url} alt={data.product.name} />
+          <img
+            className={isImgLoaded ? "" : "hidden"}
+            src={data.product.images[0].url}
+            alt={data.product.name}
+            onLoad={() => setIsImageLoaded(true)}
+          />
+          {!isImgLoaded && (
+            <div className="flex h-[150px] items-center justify-center">
+              <SpinningAnimDark />
+            </div>
+          )}
         </div>
         <div className="ml-2 flex w-full flex-col justify-between">
           <div>

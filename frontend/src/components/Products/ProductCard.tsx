@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { productType } from "../../utils/types";
 import { convertToINR } from "../../utils/utils";
-import { SpinningAnim } from "../Loaders/SpinningAnim";
 import { Link } from "react-router-dom";
+import { SpinningAnimDark } from "../Loaders/SpinningAnimDark";
 
 type Props = {
   product: productType;
@@ -10,6 +10,8 @@ type Props = {
 };
 
 export const ProductCard: FC<Props> = ({ product, isLoading }) => {
+  const [isImgLoaded, setIsImageLoaded] = useState<boolean>(false);
+
   return (
     <Link
       to={`/products/${product._id}`}
@@ -17,12 +19,22 @@ export const ProductCard: FC<Props> = ({ product, isLoading }) => {
     >
       {isLoading ? (
         <div className="m-auto flex items-center justify-center">
-          <SpinningAnim />
+          <SpinningAnimDark />
         </div>
       ) : (
         <>
           <div className="xs:p-0">
-            <img src={product.images[0].url} alt={product.name} />
+            <img
+              className={isImgLoaded ? "" : "hidden"}
+              src={product.images[0].url}
+              alt={product.name}
+              onLoad={() => setIsImageLoaded(true)}
+            />
+            {!isImgLoaded && (
+              <div className="flex h-[250px] items-center justify-center">
+                <SpinningAnimDark />
+              </div>
+            )}
           </div>
           <div className="flex h-full flex-col justify-between p-1 text-dynamicText">
             <p className="line-clamp-2 w-full overflow-hidden text-ellipsis font-medium capitalize text-primary-700">
