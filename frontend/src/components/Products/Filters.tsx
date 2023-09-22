@@ -67,7 +67,7 @@ export const Filters: FC<Props> = ({ queryPara }) => {
         <input
           id={category._id}
           type="checkbox"
-          className="peer rounded-md border-2 bg-primary-050 text-primary-800 shadow-sm hover:cursor-pointer focus:ring-2 focus:ring-primary-700 focus:ring-offset-1"
+          className="peer rounded-md border-2 text-primary-800 shadow-sm hover:cursor-pointer focus:ring-2 focus:ring-primary-700 focus:ring-offset-1"
           readOnly
           name={category.name}
           checked={

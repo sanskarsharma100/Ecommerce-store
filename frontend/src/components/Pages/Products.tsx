@@ -79,7 +79,7 @@ export const Products: FC = () => {
         </div>
       )}
       <div
-        className={`absolute z-50 h-full w-3/5 bg-primary-050 xs:static xs:block xs:h-auto xs:w-60 xs:bg-transparent md:w-80 ${
+        className={`absolute z-50 h-full w-3/5 bg-background xs:static xs:block xs:h-auto xs:w-60 xs:bg-transparent md:w-80 ${
           !showFilter && "hidden"
         }`}
         ref={filterContainerRef}
@@ -116,7 +116,7 @@ export const Products: FC = () => {
                 />
               </div>
               <button
-                className="-m-0.5 w-fit select-none rounded-lg border-2 border-primary-900 px-2 py-0.5 text-sm font-semibold text-primary-900 duration-300 hover:cursor-pointer hover:ring-2 hover:ring-primary-500 active:ring-2 active:ring-primary-500 xs:hidden"
+                className="flex w-fit select-none items-center justify-center rounded-lg bg-primary-200 px-2.5 py-1.5 text-sm font-semibold text-primary-900 duration-300 hover:cursor-pointer hover:ring-2 hover:ring-primary-500 active:ring-2 active:ring-primary-500 xs:hidden"
                 onClick={() => setShowFilter(true)}
               >
                 Filters

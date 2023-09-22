@@ -67,13 +67,13 @@ export const SortBy: FC<Props> = ({ queryPara }) => {
         />
         <label
           htmlFor="sortByCheckbox"
-          className="w-full select-none rounded-lg border-2 border-primary-900 px-2 py-1 text-sm font-semibold text-primary-900 duration-300 focus-within:hidden hover:cursor-pointer hover:ring-2 hover:ring-primary-500 active:ring-2 active:ring-primary-500 peer-checked:ring-2 peer-checked:ring-primary-500"
+          className="flex w-full select-none items-center justify-center rounded-lg bg-primary-200 px-2.5 py-1.5 text-sm font-semibold text-primary-900 duration-300 focus-within:hidden hover:cursor-pointer hover:ring-2 hover:ring-primary-500 active:ring-2 active:ring-primary-500 peer-checked:ring-2 peer-checked:ring-primary-500"
         >
           {selectedSort}
         </label>
         <label
           htmlFor="sortByCheckbox"
-          className="absolute z-[999] mt-1 hidden overflow-hidden rounded-lg border-2 border-primary-400 bg-primary-100 font-medium peer-checked:block"
+          className="absolute z-[999] mt-1 hidden overflow-hidden rounded-lg border-2 border-primary-400 bg-primary-050 font-medium peer-checked:block"
         >
           <ul className="">{sortByOptions}</ul>
         </label>

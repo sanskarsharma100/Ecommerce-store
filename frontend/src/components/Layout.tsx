@@ -5,7 +5,7 @@ import { Footer } from "./Footer/Footer";
 
 export const Layout: FC = () => {
   return (
-    <main className="bg-primary-050 font-inter">
+    <main className="bg-background font-inter">
       <Navbar />
       <Outlet />
       <Footer />

@@ -102,7 +102,7 @@ export const Navbar: FC = () => {
   }
 
   return (
-    <header className="sticky top-0 z-[99999] m-auto border-b-3 border-b-primary-200 bg-primary-050 font-inter">
+    <header className="sticky top-0 z-[99999] m-auto border-b-3 border-b-primary-200 bg-background font-inter">
       {isOpen && (
         <div className="fixed z-[9999] min-h-screen w-screen bg-black/40 sm:hidden"></div>
       )}
