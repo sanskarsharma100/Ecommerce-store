@@ -86,10 +86,10 @@ export const CartProductCard: FC<Props> = ({ product, isCartFetching }) => {
         </div>
         <div className="ml-2 flex w-full flex-col justify-between">
           <div>
-            <div>
+            <div className="pr-10 ss:pr-0">
               <Link
                 to={`/products/${productId}`}
-                className="text-sm font-medium capitalize text-primary-900 xs:text-base sm:text-lg"
+                className="line-clamp-2 text-ellipsis text-sm font-medium capitalize text-primary-900 xs:text-base sm:text-lg"
               >
                 {data.product.name}
               </Link>

@@ -203,7 +203,7 @@ export const UserAccount: FC = () => {
             />
 
             {isTouchscreen && (
-              <HiCamera className="absolute bottom-2 right-2 rounded-full bg-accent p-1 text-3xl" />
+              <HiCamera className="absolute bottom-2 right-2 rounded-full bg-primary-900 p-1.5 text-3xl text-primary-100" />
             )}
           </label>
           <input
